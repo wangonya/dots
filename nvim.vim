@@ -1,18 +1,19 @@
 call plug#begin('~/.config/nvim/plugged')
-
-Plug 'tpope/vim-fugitive'
-
 Plug 'wakatime/vim-wakatime'
-
 Plug 'preservim/nerdtree'
-
 Plug 'ryanoasis/vim-devicons'
-
 Plug 'itchyny/lightline.vim'
-
 Plug 'mengelbrecht/lightline-bufferline'
-
+Plug 'mhinz/vim-startify'
+Plug 'sheerun/vim-polyglot'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
+
+colorscheme dracula
+
+" install coc stuff
+let g:coc_global_extensions = ['coc-json', 'coc-git']
 
 " don't need vi
 set nocompatible
@@ -76,9 +77,9 @@ map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " faster buffer switching
-map gn :bn<cr>
-map gp :bp<cr>
-map gd :bd<cr>
+map bn :bn<cr>
+map bp :bp<cr>
+map bd :bd<cr>
 
 " more natural splitting
 set splitbelow
@@ -98,13 +99,20 @@ set laststatus=2
 set showtabline=2
 set noshowmode
 let g:lightline = {
+      \ 'colorscheme': 'dracula',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \   'left': [ 
+      \        [ 'mode', 'paste' ],
+      \        [ 'git', 'readonly', 'filename', 'modified', 'status' ] 
+      \ ],
+      \ 'right':[
+      \     [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
+      \     [ 'blame' ]
+      \   ],
       \ },
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
-      \   'right': [ ['close'] ]
+      \   'right': [ [] ]
       \ },
       \ 'component_expand': {
       \   'buffers': 'lightline#bufferline#buffers'
@@ -113,11 +121,25 @@ let g:lightline = {
       \   'buffers': 'tabsel'
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
+      \   'blame': 'LightlineGitBlame',
+      \   'status': 'LightlineGitStatus',
       \ },
       \ }
 
-" vim fugitive bindings
-nmap <leader>gs :Gstatus<cr>
-nmap <leader>gc :Gcommit<cr>
-nmap <leader>gp :Gpush<cr>
+function! LightlineGitBlame() abort
+  let blame = get(b:, 'coc_git_blame', '')
+  " return blame
+  return winwidth(0) > 120 ? blame : ''
+endfunction
+
+function! LightlineGitStatus() abort
+  let status = get(g:, 'coc_git_status', '')
+  " return status
+  return winwidth(0) > 120 ? status : ''
+endfunction
+
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#show_number = 2
+
+" autosave on lose focus
+:au FocusLost * :wa

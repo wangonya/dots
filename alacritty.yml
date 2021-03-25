@@ -1,10 +1,5 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
-window:
-  padding:
-    x: 3
-    y: 2
-
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
