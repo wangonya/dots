@@ -135,7 +135,7 @@ endfunction
 function! LightlineGitStatus() abort
   let status = get(g:, 'coc_git_status', '')
   " return status
-  return winwidth(0) > 120 ? status : ''
+  return winwidth(0) > 150 ? status : ''
 endfunction
 
 let g:lightline#bufferline#enable_devicons = 1
@@ -143,3 +143,18 @@ let g:lightline#bufferline#show_number = 2
 
 " autosave on lose focus
 :au FocusLost * :wa
+
+" allow mouse
+set mouse=a
+
+" git
+" navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" navigate conflicts of current buffer
+nmap [c <Plug>(coc-git-prevconflict)
+nmap ]c <Plug>(coc-git-nextconflict)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap gc <Plug>(coc-git-commit)
