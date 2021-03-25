@@ -13,7 +13,7 @@ call plug#end()
 colorscheme dracula
 
 " install coc stuff
-let g:coc_global_extensions = ['coc-json', 'coc-git']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright']
 
 " don't need vi
 set nocompatible
@@ -77,9 +77,9 @@ map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " faster buffer switching
-map bn :bn<cr>
-map bp :bp<cr>
-map bd :bd<cr>
+map gn :bn<cr>
+map gp :bp<cr>
+map gd :bd<cr>
 
 " more natural splitting
 set splitbelow
@@ -158,3 +158,12 @@ nmap ]c <Plug>(coc-git-nextconflict)
 nmap gs <Plug>(coc-git-chunkinfo)
 " show commit contains current position
 nmap gc <Plug>(coc-git-commit)
+
+" autoclose brackets
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
