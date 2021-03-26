@@ -8,6 +8,8 @@ Plug 'mhinz/vim-startify'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'psf/black', { 'branch': 'stable' }
+Plug 'junegunn/goyo.vim'
 call plug#end()
 
 colorscheme dracula
@@ -57,7 +59,7 @@ nnoremap k gk
 inoremap jk <esc>
 
 " save with ,w
-map <leader>w :w!<CR>
+map <leader>w :wa<CR>
 
 " quit with ,q
 map <leader>q :q<CR>
@@ -80,6 +82,16 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 map gn :bn<cr>
 map gp :bp<cr>
 map gd :bd<cr>
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
 
 " more natural splitting
 set splitbelow
@@ -103,11 +115,11 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ 
       \        [ 'mode', 'paste' ],
-      \        [ 'git', 'readonly', 'filename', 'modified', 'status' ] 
+      \        [ 'git', 'readonly', 'filename', 'modified', 'status_branch' ] 
       \ ],
       \ 'right':[
       \     [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
-      \     [ 'blame' ]
+      \     [ 'status_changes', 'blame' ]
       \   ],
       \ },
       \ 'tabline': {
@@ -122,7 +134,8 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'blame': 'LightlineGitBlame',
-      \   'status': 'LightlineGitStatus',
+      \   'status_branch': 'LightlineGitStatusBranch',
+      \   'status_changes': 'LightlineGitStatusChanges',
       \ },
       \ }
 
@@ -132,10 +145,14 @@ function! LightlineGitBlame() abort
   return winwidth(0) > 120 ? blame : ''
 endfunction
 
-function! LightlineGitStatus() abort
-  let status = get(g:, 'coc_git_status', '')
-  " return status
-  return winwidth(0) > 150 ? status : ''
+function! LightlineGitStatusBranch() abort
+  let status_branch = get(g:, 'coc_git_status', '')
+  return winwidth(0) > 150 ? status_branch : ''
+endfunction
+
+function! LightlineGitStatusChanges() abort
+  let status_changes = get(b:, 'coc_git_status', '')
+  return winwidth(0) > 150 ? status_changes : ''
 endfunction
 
 let g:lightline#bufferline#enable_devicons = 1
@@ -167,3 +184,9 @@ inoremap [ []<left>
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
+
+" autoformat python on save
+autocmd BufWritePre *.py execute ':Black'
+
+" goyo
+nnoremap <Leader>g :Goyo<CR>
