@@ -19,6 +19,15 @@ echo "=== installing python stuff ==="
 pip3 install pylint yapf isort
 echo
 
+echo "=== setting up npm system wide install config ==="
+echo PATH="$HOME/.node_modules/bin:$PATH" >> ~/.profile
+echo export npm_config_prefix=~/.node_modules >> ~/.profile
+echo
+
+echo "=== installing npm stuff ==="
+npm i -g prettier
+echo
+
 echo "=== installing rust ==="
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 echo

@@ -10,6 +10,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'junegunn/goyo.vim'
+Plug 'prettier/vim-prettier'
 call plug#end()
 
 colorscheme dracula
@@ -187,6 +188,9 @@ inoremap {;<CR> {<CR>};<ESC>O
 
 " autoformat python on save
 autocmd BufWritePre *.py execute ':Black'
+
+" prettier
+let g:prettier#exec_cmd_path = "~/.node_modules/bin/prettier"
 
 " goyo
 nnoremap <Leader>g :Goyo<CR>
