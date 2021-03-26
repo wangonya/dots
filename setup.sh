@@ -3,7 +3,7 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S firefox chromium redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep
+sudo pacman -S firefox chromium redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -36,4 +36,7 @@ ln -sv ~/dots/nvim.vim ~/.config/nvim/init.vim
 
 chmod +x ~/dots/light.sh
 sudo ln -sv ~/dots/light.sh /etc/profile.d/light.sh
+
+mv ~/.i3/config ~/.i3/config.bkp
+ln -sv ~/dots/i3 ~/.i3/config
 echo
