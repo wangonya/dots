@@ -191,6 +191,7 @@ autocmd BufWritePre *.py execute ':Black'
 
 " prettier
 let g:prettier#exec_cmd_path = "~/.node_modules/bin/prettier"
+autocmd BufWritePre *.js,*.html,*.css,*.scss,*.md execute ':PrettierAsync'
 
 " goyo
 nnoremap <Leader>g :Goyo<CR>
