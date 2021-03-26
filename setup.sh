@@ -22,6 +22,7 @@ echo
 echo "=== setting up npm system wide install config ==="
 echo PATH="$HOME/.node_modules/bin:$PATH" >> ~/.profile
 echo export npm_config_prefix=~/.node_modules >> ~/.profile
+source ~/.profile
 echo
 
 echo "=== installing npm stuff ==="
@@ -32,8 +33,9 @@ echo "=== installing rust ==="
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 echo
 
-echo "=== installing oh-my-bash ==="
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+echo "=== installing vim plug ==="
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 echo
 
 echo "=== setting up dotfiles ==="
@@ -48,4 +50,8 @@ sudo ln -sv ~/dots/light.sh /etc/profile.d/light.sh
 
 mv ~/.i3/config ~/.i3/config.bkp
 ln -sv ~/dots/i3 ~/.i3/config
+echo
+
+echo "=== installing oh-my-bash ==="
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 echo
