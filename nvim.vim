@@ -11,6 +11,8 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'junegunn/goyo.vim'
 Plug 'prettier/vim-prettier'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 call plug#end()
 
 colorscheme dracula
