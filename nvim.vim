@@ -13,12 +13,15 @@ Plug 'junegunn/goyo.vim'
 Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 colorscheme dracula
 
 " install coc stuff
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-snippets']
 
 " don't need vi
 set nocompatible
@@ -71,6 +74,9 @@ map <leader>q :q<CR>
 map <leader>c "+y
 map <leader>x "+x
 map <leader>y "+gP
+
+" comment
+map <leader>m :Commentary<CR>
 
 " check wakatime with ,t
 map <leader>t :WakaTimeToday<CR>
@@ -197,3 +203,17 @@ autocmd BufWritePre *.js,*.html,*.css,*.scss,*.md execute ':PrettierAsync'
 
 " goyo
 nnoremap <Leader>g :Goyo<CR>
+
+" snippets
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
