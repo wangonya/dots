@@ -1,5 +1,5 @@
 # Path to your oh-my-bash installation.
-export OSH=/home/wangonya/.oh-my-bash
+export OSH=~/.oh-my-bash
 
 OSH_THEME="bakke"
 
