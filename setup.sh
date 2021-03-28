@@ -50,6 +50,11 @@ sudo ln -sv ~/dots/light.sh /etc/profile.d/light.sh
 
 mv ~/.i3/config ~/.i3/config.bkp
 ln -sv ~/dots/i3 ~/.i3/config
+
+cp /etc/i3status.conf ~/dots/
+ln -sv ~/dots/i3status.conf .i3status.conf
+
+chmod +x ~/dots/i3status-net-speed.sh
 echo
 
 echo "=== installing oh-my-bash ==="

@@ -324,7 +324,7 @@ bar {
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary
-#	tray_output eDP1
+	tray_output eDP1
 
 	bindsym button4 nop
 	bindsym button5 nop
@@ -343,6 +343,7 @@ bar {
         binding_mode       #16a085 #2C2C2C #F9FAF9
         urgent_workspace   #16a085 #FDF6E3 #E5201D
     }
+  status_command exec ~/dots/i3status-net-speed.sh
 }
 
 # hide/unhide i3status bar
