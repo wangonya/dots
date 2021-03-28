@@ -3,7 +3,7 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S firefox chromium redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter
+sudo pacman -S firefox chromium redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -52,11 +52,16 @@ mv ~/.i3/config ~/.i3/config.bkp
 ln -sv ~/dots/i3 ~/.i3/config
 
 cp /etc/i3status.conf ~/dots/
-ln -sv ~/dots/i3status.conf .i3status.conf
+ln -sv ~/dots/i3status.conf ~/.i3status.conf
 
 chmod +x ~/dots/i3status-net-speed.sh
 echo
 
 echo "=== installing oh-my-bash ==="
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+echo
+
+echo "=== updating bashrc ==="
+mv ~/.bashrc ~/.bashrc.bkp
+ln -sv ~/dots/bashrc ~/.bashrc
 echo
