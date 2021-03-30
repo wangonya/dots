@@ -8,7 +8,8 @@ Plug 'mhinz/vim-startify'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'psf/black', { 'branch': 'stable' }
+Plug 'tell-k/vim-autopep8'
+Plug 'fisadev/vim-isort'
 Plug 'junegunn/goyo.vim'
 Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-surround'
@@ -195,7 +196,10 @@ inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
 " autoformat python on save
-autocmd BufWritePre *.py execute ':Black'
+autocmd BufWritePre *.py execute ':Isort'
+let g:autopep8_on_save = 1
+let g:autopep8_disable_show_diff=1
+let g:autopep8_aggressive=1
 
 " prettier
 let g:prettier#exec_cmd_path = "~/.node_modules/bin/prettier"

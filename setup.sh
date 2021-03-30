@@ -16,7 +16,7 @@ pamac build nerd-fonts-jetbrains-mono
 echo
 
 echo "=== installing python stuff ==="
-pip3 install pylint yapf isort
+pip3 install pylint autopep8 isort
 echo
 
 echo "=== setting up npm system wide install config ==="
