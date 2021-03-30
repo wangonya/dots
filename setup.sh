@@ -3,7 +3,7 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S firefox chromium redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa
+sudo pacman -S firefox chromium redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -12,7 +12,7 @@ systemctl enable redis.service
 echo
 
 echo "=== installing aur stuff ==="
-pamac build nerd-fonts-jetbrains-mono
+pamac build nerd-fonts-jetbrains-mono insomnia-bin
 echo
 
 echo "=== installing python stuff ==="

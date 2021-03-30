@@ -46,4 +46,5 @@ alias night="xbacklight -set 1"
 alias mynvim="nvim ~/dots/nvim.vim"
 alias updt="sudo pacman -Syyu"
 alias py="python"
+alias python3='python'
 

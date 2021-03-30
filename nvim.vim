@@ -9,7 +9,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'tell-k/vim-autopep8'
-Plug 'fisadev/vim-isort'
 Plug 'junegunn/goyo.vim'
 Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-surround'
@@ -91,7 +90,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " faster buffer switching
 map gn :bn<cr>
 map gp :bp<cr>
-map gd :bd<cr>
+" map gd :bd<cr>
 nnoremap <Leader>1 :1b<CR>
 nnoremap <Leader>2 :2b<CR>
 nnoremap <Leader>3 :3b<CR>
@@ -196,7 +195,7 @@ inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
 " autoformat python on save
-autocmd BufWritePre *.py execute ':Isort'
+" autocmd BufWritePre *.py execute ':CocCommand python.sortImports'
 let g:autopep8_on_save = 1
 let g:autopep8_disable_show_diff=1
 let g:autopep8_aggressive=1
