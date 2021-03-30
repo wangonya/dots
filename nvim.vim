@@ -88,9 +88,10 @@ map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " faster buffer switching
-map gn :bn<cr>
-map gp :bp<cr>
+map gn :w\|:bn<cr>
+map gp :w\|:bp<cr>
 " map gd :bd<cr>
+
 nnoremap <Leader>1 :1b<CR>
 nnoremap <Leader>2 :2b<CR>
 nnoremap <Leader>3 :3b<CR>
