@@ -6,18 +6,20 @@ Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'mhinz/vim-startify'
 Plug 'sheerun/vim-polyglot'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'tell-k/vim-autopep8'
 Plug 'junegunn/goyo.vim'
 Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'dense-analysis/ale'
+Plug 'davidhalter/jedi-vim'
+Plug 'tweekmonster/django-plus.vim'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 colorscheme dracula
@@ -58,6 +60,9 @@ set showmatch
 " search
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
+
+" install coc stuff
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-snippets']
 
 " move vertically by visual line
 nnoremap j gj
@@ -147,16 +152,16 @@ let g:lightline = {
       \ 'active': {
       \   'left': [
       \        [ 'mode', 'paste' ],
-      \        [ 'gitbranch', 'readonly', 'filename', 'modified' ]
+      \        [ 'git', 'readonly', 'filename', 'modified', 'status_branch' ], 
       \ ],
       \ 'right':[
       \     [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
-      \     [ ]
+      \     [ 'status_changes', 'blame' ],
       \   ],
       \ },
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
-      \   'right': [ [] ]
+      \   'right': [ [] ],
       \ },
       \ 'component_expand': {
       \   'buffers': 'lightline#bufferline#buffers'
@@ -165,9 +170,27 @@ let g:lightline = {
       \   'buffers': 'tabsel'
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead',
+      \   'blame': 'LightlineGitBlame',
+      \   'status_branch': 'LightlineGitStatusBranch',
+      \   'status_changes': 'LightlineGitStatusChanges',
       \ },
       \ }
+
+function! LightlineGitBlame() abort
+  let blame = get(b:, 'coc_git_blame', '')
+  " return blame
+  return winwidth(0) > 120 ? blame : ''
+endfunction
+
+function! LightlineGitStatusBranch() abort
+  let status_branch = get(g:, 'coc_git_status', '')
+  return winwidth(0) > 150 ? status_branch : ''
+endfunction
+
+function! LightlineGitStatusChanges() abort
+  let status_changes = get(b:, 'coc_git_status', '')
+  return winwidth(0) > 150 ? status_changes : ''
+endfunction
 
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#show_number = 2
@@ -181,18 +204,16 @@ let g:lightline.component_raw = {'buffers': 1}
 set mouse=a
 
 " git
-nmap <leader>gs :Gstatus<cr>
-nmap <leader>gc :Gcommit<cr>
-nmap <leader>gp :Gpush<cr>
-
-" autoclose brackets
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
+" navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" navigate conflicts of current buffer
+nmap [c <Plug>(coc-git-prevconflict)
+nmap ]c <Plug>(coc-git-nextconflict)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap gc <Plug>(coc-git-commit)
 
 " prettier
 let g:prettier#exec_cmd_path = "~/.node_modules/bin/prettier"
@@ -201,43 +222,26 @@ autocmd BufWritePre *.js,*.html,*.css,*.scss,*.md execute ':PrettierAsync'
 " goyo
 nnoremap <Leader>g :Goyo<CR>
 
-" snippets / completion
-let g:deoplete#enable_at_startup = 1
-let g:ale_completion_autoimport = 1
-
-" ale fixers
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\   'python': ['autopep8'],
-\   'rust': ['rustfmt'],
-\}
-
-" ale linters
-let g:ale_linters = {
-\   'rust': ['rls'],
-\   'python': ['pylint'],
-\}
-let g:ale_virtualenv_dir_names = ['venv', 'env']
-
-" ale fix on save
-let g:ale_fix_on_save = 1
-
-" ale rust config
-let g:ale_rust_rls_config = {
-	\ 'rust': {
-		\ 'all_targets': 1,
-		\ 'build_on_save': 1,
-		\ 'clippy_preference': 'on'
-	\ }
-	\ }
-let g:ale_rust_rls_toolchain = ''
-let g:ale_rust_rls_executable = 'rust-analyzer'
-let g:ale_rust_cargo_include_features = 'clippy'
-
-" rust racer
-let g:racer_cmd = "~/.cargo/bin/racer"
-let g:racer_experimental_completer = 1
+" autoformat python on save
+" autocmd BufWritePre *.py execute ':CocCommand python.sortImports'
+let g:autopep8_on_save = 1
+let g:autopep8_disable_show_diff=1
+let g:autopep8_aggressive=1
 
 " use vcs as root dir
 let g:startify_change_to_vcs_root = 1
+
+" snippets
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+let g:jedi#completions_enabled = 0
