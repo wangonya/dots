@@ -48,3 +48,4 @@ alias updt="sudo pacman -Syyu"
 alias py="python"
 alias python3='python'
 
+alias jhr="cd ~/jenga-hr-api && source .env"
