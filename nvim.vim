@@ -20,6 +20,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'davidhalter/jedi-vim'
 Plug 'tweekmonster/django-plus.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'kassio/neoterm'
 call plug#end()
 
 colorscheme dracula
@@ -90,6 +93,7 @@ map <leader>t :WakaTimeToday<CR>
 
 " toggle nerdtree
 map <C-n> :NERDTreeToggle<CR>
+nmap <C-f> :NERDTreeFind<CR>
 
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -97,6 +101,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " faster buffer switching
 map gn :bn<cr>
 map gp :bp<cr>
+noremap <C-w> :bd<Cr>
 nmap <Leader>1 <Plug>lightline#bufferline#go(1)
 nmap <Leader>2 <Plug>lightline#bufferline#go(2)
 nmap <Leader>3 <Plug>lightline#bufferline#go(3)
@@ -117,7 +122,6 @@ nmap <Leader>c7 <Plug>lightline#bufferline#delete(7)
 nmap <Leader>c8 <Plug>lightline#bufferline#delete(8)
 nmap <Leader>c9 <Plug>lightline#bufferline#delete(9)
 nmap <Leader>c0 <Plug>lightline#bufferline#delete(10)
-" map gd :bd<cr>
 
 nnoremap <Leader>1 :1b<CR>
 nnoremap <Leader>2 :2b<CR>
@@ -245,3 +249,8 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 let g:jedi#completions_enabled = 0
+
+" terminal
+let g:neoterm_default_mod = 'botright'
+let g:neoterm_autoinsert = 1
+nnoremap <C-t> :Ttoggle resize=15<CR>

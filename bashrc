@@ -49,3 +49,4 @@ alias py="python"
 alias python3='python'
 
 alias jhr="cd ~/jenga-hr-api && source .env"
+alias gcm="git commit -m"
