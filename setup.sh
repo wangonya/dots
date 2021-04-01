@@ -68,3 +68,5 @@ echo "=== updating bashrc ==="
 mv ~/.bashrc ~/.bashrc.bkp
 ln -sv ~/dots/bashrc ~/.bashrc
 echo
+
+# pamac build bcwc-pcie-git && sudo modprobe facetimehd - for webcam driver if on mac
