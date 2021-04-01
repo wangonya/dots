@@ -3,7 +3,7 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S firefox chromium redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol
+sudo pacman -S firefox chromium redshift nodejs npm yarn python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol bat
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -12,7 +12,7 @@ systemctl enable redis.service
 echo
 
 echo "=== installing aur stuff ==="
-pamac build nerd-fonts-jetbrains-mono insomnia-bin
+pamac build nerd-fonts-jetbrains-mono insomnia-bin neovim-nightly-bin
 echo
 
 echo "=== installing python stuff ==="
@@ -44,12 +44,16 @@ ln -sv ~/dots/alacritty.yml ~/.config/alacritty/alacritty.yml
 
 mkdir -p ~/.config/nvim
 ln -sv ~/dots/nvim.vim ~/.config/nvim/init.vim
+ln -sv ~/dots/coc-settings.json ~/.config/nvim/coc-settings.json
 
 chmod +x ~/dots/light.sh
 sudo ln -sv ~/dots/light.sh /etc/profile.d/light.sh
 
 mv ~/.i3/config ~/.i3/config.bkp
 ln -sv ~/dots/i3 ~/.i3/config
+
+mv .dmenurc .dmenurc.bak
+ln -sv ~/dots/dmenurc .dmenurc
 
 ln -sv ~/dots/i3status.conf ~/.i3status.conf
 

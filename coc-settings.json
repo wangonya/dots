@@ -1,0 +1,20 @@
+{
+	"explorer.width": 30,
+	"explorer.file.showHiddenFiles": true,
+	"explorer.icon.enableNerdfont": true,
+	"explorer.keyMappings.global": {
+		/* some mapping adapted from nerdtree */
+		"s": "open:vsplit",
+		"mm": "rename",
+		"mc": "copyFile",
+		"C": "copyFile",
+		"md": "delete",
+		"D": "delete",
+		"ma": "addFile",
+		"mA": "addDirectory"
+	},
+	"diagnostic.errorSign": "● ",
+	"diagnostic.warningSign": "● ",
+	"diagnostic.infoSign": "● ",
+	"diagnostic.hintSign": "● "
+}

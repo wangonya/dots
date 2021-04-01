@@ -1,9 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'wakatime/vim-wakatime'
-Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
 Plug 'mhinz/vim-startify'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -16,13 +12,15 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'davidhalter/jedi-vim'
 Plug 'tweekmonster/django-plus.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'kassio/neoterm'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'akinsho/nvim-bufferline.lua'
+Plug 'glepnir/spaceline.vim'
 call plug#end()
 
 colorscheme dracula
@@ -65,7 +63,7 @@ set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 
 " install coc stuff
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-snippets']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-snippets', 'coc-explorer']
 
 " move vertically by visual line
 nnoremap j gj
@@ -91,12 +89,8 @@ map <leader>m :Commentary<CR>
 " check wakatime with ,t
 map <leader>t :WakaTimeToday<CR>
 
-" toggle nerdtree
-map <C-n> :NERDTreeToggle<CR>
-nmap <C-f> :NERDTreeFind<CR>
-
-" close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" toggle file explorer
+map <C-e> :CocCommand explorer<CR>
 
 " faster buffer switching
 map gn :bn<cr>
@@ -147,59 +141,13 @@ nnoremap <C-H> <C-W><C-H>
 " display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
 
-" set statusline / tabline
-set laststatus=2
-set showtabline=2
+" statusline
 set noshowmode
-let g:lightline = {
-      \ 'colorscheme': 'dracula',
-      \ 'active': {
-      \   'left': [
-      \        [ 'mode', 'paste' ],
-      \        [ 'git', 'readonly', 'filename', 'modified', 'status_branch' ], 
-      \ ],
-      \ 'right':[
-      \     [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
-      \     [ 'status_changes', 'blame' ],
-      \   ],
-      \ },
-      \ 'tabline': {
-      \   'left': [ ['buffers'] ],
-      \   'right': [ [] ],
-      \ },
-      \ 'component_expand': {
-      \   'buffers': 'lightline#bufferline#buffers'
-      \ },
-      \ 'component_type': {
-      \   'buffers': 'tabsel'
-      \ },
-      \ 'component_function': {
-      \   'blame': 'LightlineGitBlame',
-      \   'status_branch': 'LightlineGitStatusBranch',
-      \   'status_changes': 'LightlineGitStatusChanges',
-      \ },
-      \ }
-
-function! LightlineGitBlame() abort
-  let blame = get(b:, 'coc_git_blame', '')
-  " return blame
-  return winwidth(0) > 120 ? blame : ''
-endfunction
-
-function! LightlineGitStatusBranch() abort
-  let status_branch = get(g:, 'coc_git_status', '')
-  return winwidth(0) > 150 ? status_branch : ''
-endfunction
-
-function! LightlineGitStatusChanges() abort
-  let status_changes = get(b:, 'coc_git_status', '')
-  return winwidth(0) > 150 ? status_changes : ''
-endfunction
-
-let g:lightline#bufferline#enable_devicons = 1
-let g:lightline#bufferline#show_number = 2
-let g:lightline#bufferline#clickable = 1
-let g:lightline.component_raw = {'buffers': 1}
+let g:spaceline_colorscheme = 'dracula'
+let g:spaceline_seperate_style = 'curve'
+let g:spaceline_git_branch_icon = '⎇  '
+let g:spaceline_diagnostic_errorsign = '✗ '
+let g:spaceline_diagnostic_warnsign = '⚠ '
 
 " autosave on lose focus
 :au FocusLost * :wa
@@ -221,7 +169,7 @@ nmap gc <Plug>(coc-git-commit)
 
 " prettier
 let g:prettier#exec_cmd_path = "~/.node_modules/bin/prettier"
-autocmd BufWritePre *.js,*.html,*.css,*.scss,*.md execute ':PrettierAsync'
+autocmd BufWritePre *.js,*.html,*.css,*.scss,*.md,*.json execute ':PrettierAsync'
 
 " goyo
 nnoremap <Leader>g :Goyo<CR>
@@ -254,3 +202,24 @@ let g:jedi#completions_enabled = 0
 let g:neoterm_default_mod = 'botright'
 let g:neoterm_autoinsert = 1
 nnoremap <C-t> :Ttoggle resize=15<CR>
+
+" jump to the last position when reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
+
+" allow jsonc comments
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" bufferline
+set termguicolors
+lua <<EOF 
+require'bufferline'.setup{
+  options = {
+    view = "multiwindow",
+    diagnostic = "nvim_lsp",
+    mappings = true,
+    separator_style = "thin",
+  }
+}
