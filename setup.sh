@@ -16,7 +16,7 @@ pamac build nerd-fonts-jetbrains-mono insomnia-bin neovim-nightly-bin
 echo
 
 echo "=== installing python stuff ==="
-pip3 install pylint autopep8 isort
+pip3 install pylint autopep8 isort flake8
 echo
 
 echo "=== setting up npm system wide install config ==="
