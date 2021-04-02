@@ -47,6 +47,8 @@ alias mynvim="nvim ~/dots/nvim.vim"
 alias updt="sudo pacman -Syyu"
 alias py="python"
 alias python3='python'
+alias gcm="git commit -m"
+alias less="bat"
+alias dt="cd ~/dots"
 
 alias jhr="cd ~/jenga-hr-api && source .env"
-alias gcm="git commit -m"
