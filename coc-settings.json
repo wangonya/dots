@@ -20,5 +20,8 @@
 	"diagnostic.hintSign": "● ",
 
 	// coc-pyright
-	"python.linting.flake8Enabled": true
+	"python.linting.flake8Enabled": true,
+
+	// git
+	"git.addGBlameToVirtualText": true
 }
