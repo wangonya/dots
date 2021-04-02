@@ -1,6 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'wakatime/vim-wakatime'
-Plug 'mhinz/vim-startify'
+" Plug 'mhinz/vim-startify'
+Plug 'glepnir/dashboard-nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -212,6 +213,26 @@ endif
 " allow jsonc comments
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
+" dashboard
+let g:dashboard_default_executive = 'fzf'
+nmap <Leader>ss :<C-u>SessionSave<CR>
+nmap <Leader>sl :<C-u>SessionLoad<CR>
+nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
+nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
+nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
+nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
+nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
+nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
+let g:dashboard_custom_shortcut={
+\ 'last_session'       : ', s l',
+\ 'find_history'       : ', f h',
+\ 'find_file'          : ', f f',
+\ 'new_file'           : ', c n',
+\ 'change_colorscheme' : ', t c',
+\ 'find_word'          : ', f a',
+\ 'book_marks'         : ', f b',
+\ }
+
 " bufferline
 set termguicolors
 lua <<EOF 
@@ -221,5 +242,6 @@ require'bufferline'.setup{
     diagnostic = "nvim_lsp",
     mappings = true,
     separator_style = "thin",
+    numbers = "ordinal",
   }
 }
