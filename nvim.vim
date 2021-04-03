@@ -24,6 +24,12 @@ Plug 'akinsho/nvim-bufferline.lua'
 Plug 'glepnir/spaceline.vim'
 call plug#end()
 
+" autoinstall missing plugins
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
+
 colorscheme dracula
 
 " don't need vi
