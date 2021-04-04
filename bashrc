@@ -1,7 +1,7 @@
 # Path to your oh-my-bash installation.
 export OSH=~/.oh-my-bash
 
-OSH_THEME="bakke"
+OSH_THEME="zork"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -54,3 +54,4 @@ alias prj="cd ~/projects"
 alias r="ranger"
 
 alias jhr="cd ~/jenga-hr-api && source .env"
+
