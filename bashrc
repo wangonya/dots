@@ -51,5 +51,6 @@ alias gcm="git commit -m"
 alias less="bat"
 alias dt="cd ~/dots"
 alias prj="cd ~/projects"
+alias r="ranger"
 
 alias jhr="cd ~/jenga-hr-api && source .env"
