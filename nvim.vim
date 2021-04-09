@@ -70,7 +70,7 @@ set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 
 " install coc stuff
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-snippets', 'coc-explorer', 'coc-rust-analyzer']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-snippets', 'coc-explorer']
 
 " move vertically by visual line
 nnoremap j gj
@@ -161,6 +161,10 @@ let g:spaceline_diagnostic_warnsign = '⚠ '
 
 " allow mouse
 set mouse=a
+
+" line wraps
+set nowrap
+autocmd FileType * setlocal textwidth=78
 
 " git
 " navigate chunks of current buffer
