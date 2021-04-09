@@ -22,6 +22,7 @@ Plug 'kassio/neoterm'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'glepnir/spaceline.vim'
+Plug 'qpkorr/vim-bufkill'
 call plug#end()
 
 " autoinstall missing plugins
@@ -50,8 +51,8 @@ set visualbell
 " encoding
 set encoding=utf-8
 
-" always set spell on for .md files
-autocmd BufRead,BufNewFile *.md setlocal spell
+" always set spell on for .md,txt,mdx,rst files
+autocmd BufRead,BufNewFile *.md,*.mdx,*.txt,*.rst setlocal spell
 
 " show command in bottom bar
 set showcmd
@@ -71,10 +72,6 @@ set hlsearch            " highlight matches
 
 " install coc stuff
 let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-snippets', 'coc-explorer']
-
-" move vertically by visual line
-nnoremap j gj
-nnoremap k gk
 
 " jk is escape
 inoremap jk <esc>
@@ -102,7 +99,7 @@ map <C-e> :CocCommand explorer<CR>
 " faster buffer switching
 map gn :bn<cr>
 map gp :bp<cr>
-noremap <C-w> :bd<Cr>
+noremap <C-w> :BD<Cr>
 nmap <Leader>1 <Plug>lightline#bufferline#go(1)
 nmap <Leader>2 <Plug>lightline#bufferline#go(2)
 nmap <Leader>3 <Plug>lightline#bufferline#go(3)
@@ -123,17 +120,6 @@ nmap <Leader>c7 <Plug>lightline#bufferline#delete(7)
 nmap <Leader>c8 <Plug>lightline#bufferline#delete(8)
 nmap <Leader>c9 <Plug>lightline#bufferline#delete(9)
 nmap <Leader>c0 <Plug>lightline#bufferline#delete(10)
-
-nnoremap <Leader>1 :1b<CR>
-nnoremap <Leader>2 :2b<CR>
-nnoremap <Leader>3 :3b<CR>
-nnoremap <Leader>4 :4b<CR>
-nnoremap <Leader>5 :5b<CR>
-nnoremap <Leader>6 :6b<CR>
-nnoremap <Leader>7 :7b<CR>
-nnoremap <Leader>8 :8b<CR>
-nnoremap <Leader>9 :9b<CR>
-nnoremap <Leader>0 :10b<CR>
 
 " more natural splitting
 set splitbelow
@@ -163,7 +149,6 @@ let g:spaceline_diagnostic_warnsign = '⚠ '
 set mouse=a
 
 " line wraps
-set nowrap
 autocmd FileType * setlocal textwidth=78
 
 " git
@@ -188,8 +173,8 @@ nnoremap <Leader>g :Goyo<CR>
 " autoformat python on save
 " autocmd BufWritePre *.py execute ':CocCommand python.sortImports'
 let g:autopep8_on_save = 1
-let g:autopep8_disable_show_diff=1
-let g:autopep8_aggressive=1
+let g:autopep8_disable_show_diff=0
+let g:autopep8_aggressive=2
 
 " use vcs as root dir
 let g:startify_change_to_vcs_root = 1
