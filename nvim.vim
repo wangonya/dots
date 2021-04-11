@@ -162,6 +162,10 @@ nmap ]c <Plug>(coc-git-nextconflict)
 nmap gs <Plug>(coc-git-chunkinfo)
 " show commit contains current position
 nmap gc <Plug>(coc-git-commit)
+" fold unchanged
+nmap <Leader>zf <Plug>(coc-git-fold-unchanged)
+" undo chunk
+nmap <Leader>zu <Plug>(coc-git-chunk-undo)
 
 " prettier
 let g:prettier#exec_cmd_path = "~/.node_modules/bin/prettier"
@@ -171,13 +175,10 @@ autocmd BufWritePre *.js,*.html,*.css,*.scss,*.md,*.json execute ':PrettierAsync
 nnoremap <Leader>g :Goyo<CR>
 
 " autoformat python on save
-" autocmd BufWritePre *.py execute ':CocCommand python.sortImports'
+autocmd BufWritePre *.py execute ':CocCommand python.organizeimports'
 let g:autopep8_on_save = 1
 let g:autopep8_disable_show_diff=0
 let g:autopep8_aggressive=2
-
-" use vcs as root dir
-let g:startify_change_to_vcs_root = 1
 
 " snippets
 inoremap <silent><expr> <TAB>
