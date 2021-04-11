@@ -29,10 +29,6 @@ echo "=== installing npm stuff ==="
 npm i -g prettier
 echo
 
-echo "=== installing rust ==="
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-echo
-
 echo "=== installing vim plug ==="
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -67,6 +63,10 @@ echo
 echo "=== updating bashrc ==="
 mv ~/.bashrc ~/.bashrc.bkp
 ln -sv ~/dots/bashrc ~/.bashrc
+echo
+
+echo "=== setting up git configs"
+git config --global init.defaultBranch main
 echo
 
 # pamac build bcwc-pcie-git && sudo modprobe facetimehd - for webcam driver if on mac
