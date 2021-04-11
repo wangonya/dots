@@ -39,6 +39,10 @@ else
   export EDITOR='nvim'
 fi
 
+export PATH=$HOME/.poetry/bin:$PATH
+CURRENT_YEAR=$(date '+%Y')
+export LEDGER_FILE=~/ledger/money/$CURRENT_YEAR.journal
+
 alias mybash="nvim ~/.bashrc"
 alias myi3="nvim ~/.i3/config"
 alias nv="nvim"
@@ -53,6 +57,10 @@ alias dt="cd ~/dots"
 alias prj="cd ~/projects"
 alias r="ranger"
 alias gp="gpsup"
+alias ha="hledger accounts"
+alias hb="hledger balance"
+alias hbs="hledger bs"
+alias hr="hledger register"
 
 alias jhr="cd ~/jenga-hr-api && source .env"
 

@@ -1,6 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'wakatime/vim-wakatime'
-" Plug 'mhinz/vim-startify'
 Plug 'glepnir/dashboard-nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -23,6 +22,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'glepnir/spaceline.vim'
 Plug 'qpkorr/vim-bufkill'
+Plug 'petobens/poet-v'
 call plug#end()
 
 " autoinstall missing plugins
@@ -148,9 +148,6 @@ let g:spaceline_diagnostic_warnsign = '⚠ '
 " allow mouse
 set mouse=a
 
-" line wraps
-autocmd FileType * setlocal textwidth=78
-
 " git
 " navigate chunks of current buffer
 nmap [g <Plug>(coc-git-prevchunk)
@@ -179,6 +176,10 @@ autocmd BufWritePre *.py execute ':CocCommand python.organizeimports'
 let g:autopep8_on_save = 1
 let g:autopep8_disable_show_diff=0
 let g:autopep8_aggressive=2
+
+" poetry env
+let g:poetv_auto_activate = 1
+let g:poetv_executables = ['poetry']
 
 " snippets
 inoremap <silent><expr> <TAB>
