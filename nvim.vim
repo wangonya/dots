@@ -172,7 +172,7 @@ autocmd BufWritePre *.js,*.html,*.css,*.scss,*.md,*.json execute ':PrettierAsync
 nnoremap <Leader>g :Goyo<CR>
 
 " autoformat python on save
-autocmd BufWritePre *.py execute ':CocCommand python.organizeimports'
+" autocmd BufWritePre *.py execute ':CocCommand python.organizeImports'
 let g:autopep8_on_save = 1
 let g:autopep8_disable_show_diff=0
 let g:autopep8_aggressive=2
