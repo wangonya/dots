@@ -136,9 +136,11 @@ set list listchars=tab:»·,trail:·,nbsp:·
 
 " statusline
 set noshowmode
-let g:spaceline_colorscheme = 'dracula'
+" let g:spaceline_colorscheme = 'dracula'
 let g:spaceline_seperate_style = 'curve'
-let g:spaceline_git_branch_icon = '⎇  '
+let g:spaceline_git_branch_icon = "\uE0A0 "
+let g:spaceline_diff_tool = 'coc-git'
+let g:spaceline_custom_diff_icon = [' ',' ',' ']
 let g:spaceline_diagnostic_errorsign = '✗ '
 let g:spaceline_diagnostic_warnsign = '⚠ '
 
@@ -159,10 +161,6 @@ nmap ]c <Plug>(coc-git-nextconflict)
 nmap gs <Plug>(coc-git-chunkinfo)
 " show commit contains current position
 nmap gc <Plug>(coc-git-commit)
-" fold unchanged
-nmap <Leader>zf <Plug>(coc-git-fold-unchanged)
-" undo chunk
-nmap <Leader>zu <Plug>(coc-git-chunk-undo)
 
 " prettier
 let g:prettier#exec_cmd_path = "~/.node_modules/bin/prettier"

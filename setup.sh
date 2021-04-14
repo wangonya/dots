@@ -3,7 +3,8 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S firefox chromium redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol flameshot bat hugo
+sudo pacman -S firefox redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol flameshot bat hugo
+sudo pacman -Rns palemoon-bin
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -17,6 +18,10 @@ echo
 
 echo "=== installing python stuff ==="
 pip3 install pylint autopep8 isort flake8 ipython ipdb
+echo
+
+echo "=== installing rust ==="
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 echo
 
 echo "=== installing poetry ==="
