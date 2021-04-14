@@ -71,7 +71,7 @@ set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 
 " install coc stuff
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-snippets', 'coc-explorer']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-snippets', 'coc-explorer', ]
 
 " jk is escape
 inoremap jk <esc>
