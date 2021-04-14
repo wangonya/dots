@@ -19,6 +19,10 @@ echo "=== installing python stuff ==="
 pip3 install pylint autopep8 isort flake8 ipython ipdb
 echo
 
+echo "=== installing poetry ==="
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+echo
+
 echo "=== setting up npm system wide install config ==="
 echo PATH="$HOME/.node_modules/bin:$PATH" >> ~/.profile
 echo export npm_config_prefix=~/.node_modules >> ~/.profile

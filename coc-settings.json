@@ -21,6 +21,7 @@
 
 	// coc-pyright
 	"python.linting.flake8Enabled": true,
+	"pyright.completion.snippetSupport": false,
 
 	// git
 	"git.addGBlameToVirtualText": true
