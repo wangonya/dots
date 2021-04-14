@@ -42,6 +42,8 @@ fi
 export PATH=$HOME/.poetry/bin:$PATH
 CURRENT_YEAR=$(date '+%Y')
 export LEDGER_FILE=~/ledger/money/$CURRENT_YEAR.journal
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
 
 alias mybash="nvim ~/.bashrc"
 alias myi3="nvim ~/.i3/config"
