@@ -136,6 +136,7 @@ nnoremap <C-H> <C-W><C-H>
 set list listchars=tab:»·,trail:·,nbsp:·
 
 " statusline
+set laststatus=2
 set noshowmode
 " let g:spaceline_colorscheme = 'dracula'
 let g:spaceline_seperate_style = 'curve'
@@ -228,6 +229,9 @@ let g:dashboard_custom_shortcut={
 \ 'find_word'          : ', f a',
 \ 'book_marks'         : ', f b',
 \ }
+
+" add vista to statusline
+nmap <leader>v :Vista!!<cr>
 
 " bufferline
 set termguicolors
