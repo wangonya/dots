@@ -23,6 +23,7 @@ Plug 'akinsho/nvim-bufferline.lua'
 Plug 'glepnir/spaceline.vim'
 Plug 'qpkorr/vim-bufkill'
 Plug 'petobens/poet-v'
+Plug 'liuchengxu/vista.vim'
 call plug#end()
 
 " autoinstall missing plugins
