@@ -24,6 +24,7 @@ Plug 'glepnir/spaceline.vim'
 Plug 'qpkorr/vim-bufkill'
 Plug 'petobens/poet-v'
 Plug 'liuchengxu/vista.vim'
+Plug 'fisadev/vim-isort'
 call plug#end()
 
 " autoinstall missing plugins
@@ -72,7 +73,7 @@ set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 
 " install coc stuff
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-snippets', 'coc-explorer', ]
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-snippets', 'coc-explorer', 'coc-pyright']
 
 " jk is escape
 inoremap jk <esc>
@@ -172,28 +173,28 @@ autocmd BufWritePre *.js,*.html,*.css,*.scss,*.md,*.json execute ':PrettierAsync
 nnoremap <Leader>g :Goyo<CR>
 
 " autoformat python on save
-" autocmd BufWritePre *.py execute ':CocCommand python.organizeImports'
+autocmd BufWritePre *.py execute ':Isort'
 let g:autopep8_on_save = 1
-let g:autopep8_disable_show_diff=0
 let g:autopep8_aggressive=2
+let g:autopep8_disable_show_diff=1
 
 " poetry env
 let g:poetv_auto_activate = 1
 let g:poetv_executables = ['poetry']
 
 " snippets
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
 
-let g:coc_snippet_next = '<tab>'
+" let g:coc_snippet_next = '<tab>'
 let g:jedi#completions_enabled = 0
 
 " terminal
