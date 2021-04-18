@@ -3,7 +3,7 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S firefox redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol flameshot bat hugo ctags
+sudo pacman -S firefox redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol flameshot bat hugo ctags unzip
 sudo pacman -Rns palemoon-bin
 echo
 
@@ -47,9 +47,10 @@ echo "=== setting up dotfiles ==="
 mkdir -p ~/.config/alacritty
 ln -sv ~/dots/alacritty.yml ~/.config/alacritty/alacritty.yml
 
-mkdir -p ~/.config/nvim
-ln -sv ~/dots/nvim.vim ~/.config/nvim/init.vim
-ln -sv ~/dots/coc-settings.json ~/.config/nvim/coc-settings.json
+# mkdir -p ~/.config/nvim
+# ln -sv ~/dots/nvim.vim ~/.config/nvim/init.vim
+# ln -sv ~/dots/coc-settings.json ~/.config/nvim/coc-settings.json
+ln -sv ~/dots/nvim .config/
 
 chmod +x ~/dots/light.sh
 sudo ln -sv ~/dots/light.sh /etc/profile.d/light.sh
