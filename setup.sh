@@ -47,13 +47,9 @@ echo "=== setting up dotfiles ==="
 mkdir -p ~/.config/alacritty
 ln -sv ~/dots/alacritty.yml ~/.config/alacritty/alacritty.yml
 
-# mkdir -p ~/.config/nvim
-# ln -sv ~/dots/nvim.vim ~/.config/nvim/init.vim
-# ln -sv ~/dots/coc-settings.json ~/.config/nvim/coc-settings.json
+git clone https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ln -sv ~/dots/nvim .config/
-
-chmod +x ~/dots/light.sh
-sudo ln -sv ~/dots/light.sh /etc/profile.d/light.sh
 
 mv ~/.i3/config ~/.i3/config.bkp
 ln -sv ~/dots/i3 ~/.i3/config

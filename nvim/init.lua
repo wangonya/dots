@@ -23,11 +23,6 @@ g.mapleader = " "
 --------------------------------------------------------------
 
 -------------------- plugins -------------------------------
--- Auto install packer.nvim if not exists
-local install_path = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-    execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
-end
 cmd [[packadd packer.nvim]]
 cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 require("packer").startup(
@@ -40,19 +35,12 @@ require("packer").startup(
         }
         use {"neovim/nvim-lspconfig"}
         use {"hrsh7th/nvim-compe"}
-        use {"tzachar/compe-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-compe"}
         use {"wakatime/vim-wakatime"}
         use {"dracula/vim", as = "dracula"}
         use {"nvim-treesitter/nvim-treesitter"}
         use {"hrsh7th/vim-vsnip", requires = "hrsh7th/vim-vsnip-integ"}
         use {"kyazdani42/nvim-tree.lua"}
-        use {
-            "glepnir/galaxyline.nvim",
-            branch = "main",
-            config = function()
-                require "my_statusline"
-            end
-        }
+        use {"glepnir/galaxyline.nvim", branch = "main"}
         use {"lukas-reineke/format.nvim"}
         use {"glepnir/dashboard-nvim"}
         use {"airblade/vim-gitgutter"}
@@ -244,7 +232,6 @@ require "compe".setup {
         vsnip = true,
         nvim_lsp = true,
         nvim_lua = true,
-        tabnine = true
     }
 }
 
@@ -308,9 +295,9 @@ local section = gl.section
 local vcs = require("galaxyline.provider_vcs")
 
 local colors = {
-    bg = "NONE",
+    bg = "#202328",
     fg = "#81A1C1",
-    line_bg = "NONE",
+    line_bg = "#202328",
     lbg = "#3B4252",
     fg_green = "#8FBCBB",
     yellow = "#f1fa8c",
