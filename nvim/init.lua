@@ -275,12 +275,6 @@ ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 --------------------------------------------------------------
 
 
--------------------- terminal ---------------------------
-g.neoterm_default_mod = 'botright'
-g.neoterm_autoinsert = 1
---------------------------------------------------------------
-
-
 -------------------- rainbow brackets ---------------------------
 require'nvim-treesitter.configs'.setup {
   rainbow = {
@@ -293,11 +287,9 @@ require'nvim-treesitter.configs'.setup {
 
 -------------------- file explorer ---------------------------
 g.nvim_tree_follow = 1
-g.nvim_tree_git_hl = 1
-g.nvim_tree_lsp_diagnostics = 0
 g.nvim_tree_icons = {
      git = {
-       unstaged = "● "
+       unstaged = "~"
      }
  }
 --------------------------------------------------------------
@@ -327,16 +319,16 @@ local colors = {
   line_bg = "NONE",
   lbg = "#3B4252",
   fg_green = "#8FBCBB",
-  yellow = "#EBCB8B",
-  cyan = "#A3BE8C",
+  yellow = "#f1fa8c",
+  cyan = "#8be9fd",
   darkblue = "#81A1C1",
-  green = "#8FBCBB",
-  orange = "#D08770",
-  purple = "#B48EAD",
+  green = "#50fa7b",
+  orange = "#ffb86c",
+  purple = "#bd93f9",
   magenta = "#BF616A",
   gray = "#616E88",
   blue = "#5E81AC",
-  red = "#BF616A"
+  red = "#ff5555"
 }
 
 local buffer_not_empty = function()
