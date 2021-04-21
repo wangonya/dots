@@ -64,6 +64,8 @@ ln -sv ~/dots/dmenurc .dmenurc
 ln -sv ~/dots/i3status.conf ~/.i3status.conf
 
 chmod +x ~/dots/i3status-net-speed.sh
+
+git clone https://github.com/wangonya/zathura ~/.config/zathura/
 echo
 
 echo "=== installing oh-my-bash ==="

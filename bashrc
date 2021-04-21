@@ -64,4 +64,3 @@ alias hbs="hledger bs"
 alias hr="hledger register"
 
 alias jhr="cd ~/jenga-hr-api && source .env"
-
