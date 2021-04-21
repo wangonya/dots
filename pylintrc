@@ -1,0 +1,25 @@
+[MASTER]
+init-hook=
+    try: import pylint_venv
+    except ImportError: pass
+    else: pylint_venv.inithook()
+
+disable=
+    C0114,
+    C0115,
+    C0116
+
+ignore = migrations
+good-names=i,j,k,e,n
+load-plugins = pylint_django
+
+[SIMILARITIES]
+
+# Minimum lines number of a similarity.
+min-similarity-lines=4
+
+# Ignore comments when computing similarities.
+ignore-comments=yes
+
+# Ignore docstrings when computing similarities.
+ignore-docstrings=yes

@@ -42,6 +42,7 @@ fi
 export PATH=$HOME/.poetry/bin:$PATH
 CURRENT_YEAR=$(date '+%Y')
 export LEDGER_FILE=~/ledger/money/$CURRENT_YEAR.journal
+export PYLINTRC=~/dots/pylintrc
 
 alias mybash="nvim ~/.bashrc"
 alias myi3="nvim ~/.i3/config"
