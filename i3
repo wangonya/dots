@@ -291,7 +291,7 @@ exec_always --no-startup-id unclutter &
 # Change the variable name at the place you want to match the color
 # of your terminal like this:
 # [example]
-# If you want your bar to have the same background color as your 
+# If you want your bar to have the same background color as your
 # terminal background change the line 362 from:
 # background #14191D
 # to:
@@ -341,7 +341,7 @@ bar {
       urgent_workspace   #FF5555 #FF5555 #F8F8F2
       binding_mode       #FF5555 #FF5555 #F8F8F2
     }
-  status_command exec ~/dots/i3status-net-speed.sh
+  # status_command exec ~/dots/i3status-net-speed.sh
 }
 
 # hide/unhide i3status bar
@@ -373,7 +373,7 @@ gaps outer -2
 # Smart gaps (gaps used if only more than one container on the workspace)
 smart_gaps on
 
-# Smart borders (draw borders around container only if it is not the only container on this workspace) 
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
 smart_borders on
 
