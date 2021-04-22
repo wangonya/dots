@@ -38,7 +38,6 @@ require("packer").startup(
         use {"wakatime/vim-wakatime"}
         use {"dracula/vim", as = "dracula"}
         use {"nvim-treesitter/nvim-treesitter"}
-        use {"hrsh7th/vim-vsnip", requires = "hrsh7th/vim-vsnip-integ"}
         use {"kyazdani42/nvim-tree.lua"}
         use {"glepnir/galaxyline.nvim", branch = "main"}
         use {"lukas-reineke/format.nvim"}
@@ -48,6 +47,9 @@ require("packer").startup(
         use {"p00f/nvim-ts-rainbow"}
         use {"jiangmiao/auto-pairs"}
         use {"akinsho/nvim-toggleterm.lua"}
+        use {"wellle/context.vim"}
+        use {"SirVer/ultisnips"}
+        use {"honza/vim-snippets"}
     end
 )
 --------------------------------------------------------------
@@ -105,7 +107,7 @@ opt("b", "expandtab", true) -- Use spaces instead of tabs
 opt("b", "shiftwidth", 4) -- Size of an indent
 opt("b", "smartindent", true) -- Insert indents automatically
 opt("b", "tabstop", 4) -- Number of spaces tabs count for
-opt("o", "completeopt", "menuone,noinsert,noselect") -- Completion options
+opt("o", "completeopt", "menuone,noselect") -- Completion options
 opt("o", "hidden", true) -- Enable modified buffers in background
 opt("o", "ignorecase", true) -- Ignore case
 opt("o", "joinspaces", false) -- No double spaces with join after a dot
@@ -194,6 +196,13 @@ vim.fn.sign_define("LspDiagnosticsSignInformation", {text = " "})
 vim.fn.sign_define("LspDiagnosticsSignHint", {text = " "})
 --------------------------------------------------------------
 
+
+-------------------- snippets -------------------------------
+g.UltiSnipsExpandTrigger="<tab>"
+g.UltiSnipsJumpForwardTrigger="<c-b>"
+g.UltiSnipsJumpBackwardTrigger="<c-z>"
+--------------------------------------------------------------
+
 ---------------------- autoformat ---------------------------------
 require "format".setup {
     ["*"] = {
@@ -229,28 +238,12 @@ require "compe".setup {
     source = {
         path = true,
         buffer = true,
-        vsnip = true,
         nvim_lsp = true,
         nvim_lua = true,
+        ultisnips = true,
     }
 }
 
-local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-_G.s_tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-p>"
-    elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-        return t "<Plug>(vsnip-jump-prev)"
-    else
-        return t "<S-Tab>"
-    end
-end
-
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 --------------------------------------------------------------
 
 -------------------- tree-sitter ---------------------------
