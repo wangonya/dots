@@ -75,6 +75,8 @@ echo
 
 echo "=== setting up git configs"
 git config --global init.defaultBranch main
+ln -sv ~/dots/gitignore ~/.gitignore
+git config --global core.excludesfile ~/.gitignore
 echo
 
 # pamac build bcwc-pcie-git && sudo modprobe facetimehd - for webcam driver if on mac
