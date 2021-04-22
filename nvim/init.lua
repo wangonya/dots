@@ -47,7 +47,6 @@ require("packer").startup(
         use {"p00f/nvim-ts-rainbow"}
         use {"jiangmiao/auto-pairs"}
         use {"akinsho/nvim-toggleterm.lua"}
-        use {"wellle/context.vim"}
         use {"SirVer/ultisnips"}
         use {"honza/vim-snippets"}
     end
