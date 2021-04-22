@@ -11,7 +11,7 @@ disable=
 
 ignore = migrations
 good-names=i,j,k,e,n
-load-plugins = pylint_django
+load-plugins = pylint_django,pylint_pytest
 
 [SIMILARITIES]
 
