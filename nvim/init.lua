@@ -78,7 +78,7 @@ map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 
 -- file explorer
 map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>")
-map("n", "<leader>r", "<cmd>NvimTreeRefresh<cr>")
+map("n", "<leader>tr", "<cmd>NvimTreeRefresh<cr>")
 
 -- dashboard
 map("n", "<Leader>ss", "<cmd>SessionSave<cr>")
