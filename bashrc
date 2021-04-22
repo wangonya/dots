@@ -45,10 +45,11 @@ export LEDGER_FILE=~/ledger/money/$CURRENT_YEAR.journal
 export PYLINTRC=~/dots/pylintrc
 
 alias mybash="nvim ~/.bashrc"
+alias mybashs="source ~/.bashrc"
 alias myi3="nvim ~/.i3/config"
 alias nv="nvim"
 alias night="xbacklight -set 1"
-alias mynvim="nvim ~/dots/nvim.vim"
+alias mynvim="nvim ~/dots/nvim/init.lua"
 alias updt="sudo pacman -Syyu"
 alias py="python"
 alias python3='python'
