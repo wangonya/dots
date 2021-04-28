@@ -13,6 +13,9 @@ ignore = migrations
 good-names=i,j,k,e,n
 load-plugins = pylint_django,pylint_pytest,pylint_celery
 
+# Use multiple processes to speed up Pylint.
+jobs=5
+
 [SIMILARITIES]
 
 # Minimum lines number of a similarity.
