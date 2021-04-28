@@ -112,16 +112,18 @@ opt("o", "hidden", true) -- Enable modified buffers in background
 opt("o", "ignorecase", true) -- Ignore case
 opt("o", "joinspaces", false) -- No double spaces with join after a dot
 opt("o", "mouse", "a") -- Allow mouse
-opt("o", "updatetime", 100) -- Allow mouse
+opt("o", "updatetime", 100)
 opt("o", "shiftround", true) -- Round indent
 opt("o", "smartcase", true) -- Don't ignore case with capitals
 opt("o", "splitbelow", true) -- Put new windows below current
 opt("o", "splitright", true) -- Put new windows right of current
+opt("o", "showmode", false)
+opt("w", "list", true)
+opt("w", "listchars", "tab:»·,trail:·,nbsp:·")
 opt("o", "termguicolors", true) -- True color support
 opt("o", "wildmode", "list:longest") -- Command-line completion mode
 opt("o", "wildmenu", true)
 opt("o", "background", "dark")
-opt("w", "list", true) -- Show some invisible characters (tabs...)
 opt("w", "number", true) -- Print line number
 opt("w", "relativenumber", true) -- Relative line numbers
 cmd "au TextYankPost * lua vim.highlight.on_yank {on_visual = false}" -- highlight on yank
@@ -180,7 +182,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 require "lspconfig".pyls.setup {
-    on_attach = on_attach_vim,
     settings = {
         pyls = {
             plugins = {
@@ -248,18 +249,18 @@ require "compe".setup {
 --------------------------------------------------------------
 
 -------------------- tree-sitter ---------------------------
-local ts = require "nvim-treesitter.configs"
-ts.setup {ensure_installed = "maintained", highlight = {enable = true}}
---------------------------------------------------------------
-
--------------------- rainbow brackets ---------------------------
-require "nvim-treesitter.configs".setup {
-    rainbow = {
-        enable = true,
-        extended_mode = true -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-    }
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true
+  },
+  rainbow = {
+      enable = true,
+      extended_mode = true -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+  },
 }
 --------------------------------------------------------------
+
 
 -------------------- file explorer ---------------------------
 g.nvim_tree_follow = 1
