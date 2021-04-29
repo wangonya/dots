@@ -50,6 +50,7 @@ require("packer").startup(
         use {"SirVer/ultisnips"}
         use {"honza/vim-snippets"}
         use {"f-person/git-blame.nvim"}
+        use 'glepnir/lspsaga.nvim'
     end
 )
 --------------------------------------------------------------
@@ -91,14 +92,6 @@ map("n", "<Leader>tc", "<cmd>DashboardChangeColorscheme<cr>")
 map("n", "<Leader>fa", "<cmd>DashboardFindWord<cr>")
 map("n", "<Leader>fb", "<cmd>DashboardJumpMark<cr>")
 map("n", "<Leader>cn", "<cmd>DashboardNewFile<cr>")
-
--- lsp
-map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>")
-map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
-map("n", "<leader>af", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
 --------------------------------------------------------------
 
 -------------------- options -------------------------------
@@ -117,7 +110,6 @@ opt("o", "shiftround", true) -- Round indent
 opt("o", "smartcase", true) -- Don't ignore case with capitals
 opt("o", "splitbelow", true) -- Put new windows below current
 opt("o", "splitright", true) -- Put new windows right of current
-opt("o", "showmode", false)
 opt("w", "list", true)
 opt("w", "listchars", "tab:»·,trail:·,nbsp:·")
 opt("o", "termguicolors", true) -- True color support
@@ -134,6 +126,7 @@ cmd "au FocusLost * :wa" -- autosave on lose focus
 cmd [[au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
 --------------------------------------------------------------
 
+
 ---------------------- dashboard ---------------------------------
 g.dashboard_default_executive = "telescope"
 --------------------------------------------------------------
@@ -142,6 +135,7 @@ g.dashboard_default_executive = "telescope"
 ---------------------- git blame ---------------------------------
 g.gitblame_date_format = '%r'
 --------------------------------------------------------------
+
 
 ---------------------- terminal ---------------------------------
 require "toggleterm".setup {
@@ -181,15 +175,9 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     }
 }
 
-require "lspconfig".pyls.setup {
-    settings = {
-        pyls = {
-            plugins = {
-                pylint = {enabled = true}
-            }
-        }
-    }
-}
+require "lspconfig".pyright.setup({
+    capabilities = capabilities
+})
 
 -- diagnostic signs
 vim.fn.sign_define("LspDiagnosticsSignError", {text = "✗ "})
@@ -204,6 +192,12 @@ g.UltiSnipsExpandTrigger="<tab>"
 g.UltiSnipsJumpForwardTrigger="<c-b>"
 g.UltiSnipsJumpBackwardTrigger="<c-z>"
 --------------------------------------------------------------
+
+
+---------------------- lspsaga ---------------------------------
+require 'lspsaga'.init_lsp_saga()
+--------------------------------------------------------------
+
 
 ---------------------- autoformat ---------------------------------
 require "format".setup {

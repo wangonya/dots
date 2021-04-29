@@ -1,2 +1,5 @@
 .DS_Store
 mysettings.py
+packer_compiled.vim
+pyrightconfig.json
+typings/
