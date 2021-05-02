@@ -63,9 +63,9 @@ map("n", "<leader>q", "<cmd>q<cr>") -- quit
 map("n", "<leader>t", "<cmd>WakaTimeToday<CR>") -- wakatime
 
 -- copy cut paste
-map("v", "<leader>c", '<cmd>"+y<cr>')
-map("v", "<leader>x", '<cmd>"+x<cr>')
-map("v", "<leader>y", '<cmd>"+gP<cr>')
+map("v", "<C-c>", [["+y]])
+map("v", "<C-x>", [["+x]])
+map("v", "<C-p>", [["+gP]])
 
 -- moving between splits
 map("n", "<C-J>", "<C-W><C-J>")
@@ -164,6 +164,7 @@ require "toggleterm".setup {
 }
 --------------------------------------------------------------
 
+
 ---------------------- lsp ---------------------------------
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -175,9 +176,17 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     }
 }
 
-require "lspconfig".pyright.setup({
-    capabilities = capabilities
-})
+
+require "lspconfig".pyls.setup {
+    settings = {
+        pyls = {
+            plugins = {
+                pylint = {enabled = true}
+            }
+        }
+    }
+}
+require "lspconfig".pyright.setup{}
 
 -- diagnostic signs
 vim.fn.sign_define("LspDiagnosticsSignError", {text = "✗ "})
