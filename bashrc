@@ -40,6 +40,7 @@ else
 fi
 
 export PATH=$HOME/.poetry/bin:$PATH
+export PATH=$HOME/.luarocks/bin:$PATH
 CURRENT_YEAR=$(date '+%Y')
 export LEDGER_FILE=~/ledger/money/$CURRENT_YEAR.journal
 export PYLINTRC=~/dots/pylintrc

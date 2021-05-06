@@ -3,7 +3,7 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S firefox redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol flameshot bat hugo ctags unzip
+sudo pacman -S firefox redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol flameshot bat hugo ctags unzip cmake lua luarocks
 sudo pacman -Rns palemoon-bin
 echo
 
@@ -77,6 +77,23 @@ echo "=== setting up git configs"
 git config --global init.defaultBranch main
 ln -sv ~/dots/gitignore ~/.gitignore
 git config --global core.excludesfile ~/.gitignore
+echo
+
+
+echo "=== setting up lua"
+git clone https://github.com/sumneko/lua-language-server
+cd lua-language-server
+git submodule update --init --recursive
+
+cd 3rd/luamake
+compile/install.sh
+cd ../..
+./3rd/luamake/luamake rebuild
+
+mkdir .cache/nvim/lspconfig/sumneko_lua
+cp lua-language-server .cache/nvim/lspconfig/sumneko_lua -r
+
+luarocks install --server=https://luarocks.org/dev luaformatter
 echo
 
 # pamac build bcwc-pcie-git && sudo modprobe facetimehd - for webcam driver if on mac
