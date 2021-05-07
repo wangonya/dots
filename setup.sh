@@ -13,7 +13,7 @@ systemctl enable redis.service
 echo
 
 echo "=== installing aur stuff ==="
-pamac build nerd-fonts-jetbrains-mono insomnia-bin neovim-nightly-bin
+pamac build nerd-fonts-jetbrains-mono insomnia-bin neovim-nightly-bin clojure-lsp-bin
 echo
 
 echo "=== installing python stuff ==="

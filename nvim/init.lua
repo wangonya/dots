@@ -234,6 +234,9 @@ require'lspconfig'.sumneko_lua.setup {
   },
 }
 
+-- clojure
+require'lspconfig'.clojure_lsp.setup{}
+
 -- diagnostic signs
 vim.fn.sign_define("LspDiagnosticsSignError", {text = "✗ "})
 vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "!"})
