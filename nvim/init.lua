@@ -51,6 +51,8 @@ require("packer").startup(
         use {"honza/vim-snippets"}
         use {"f-person/git-blame.nvim"}
         use 'glepnir/lspsaga.nvim'
+        use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+        use 'norcalli/nvim-colorizer.lua'
     end
 )
 --------------------------------------------------------------
@@ -95,7 +97,8 @@ map("n", "<Leader>cn", "<cmd>DashboardNewFile<cr>")
 --------------------------------------------------------------
 
 -------------------- options -------------------------------
-cmd "colorscheme dracula"
+-- cmd "colorscheme dracula"
+cmd "colorscheme gruvbox"
 opt("b", "expandtab", true) -- Use spaces instead of tabs
 opt("b", "shiftwidth", 4) -- Size of an indent
 opt("b", "smartindent", true) -- Insert indents automatically
@@ -338,6 +341,11 @@ require "bufferline".setup {
 }
 --------------------------------------------------------------
 
+
+---------------------- colorizer ---------------------------------
+require'colorizer'.setup()
+--------------------------------------------------------------
+
 -------------------- statusline -------------------------------
 local gl = require("galaxyline")
 local condition = require("galaxyline.condition")
@@ -345,21 +353,21 @@ local section = gl.section
 local vcs = require("galaxyline.provider_vcs")
 
 local colors = {
-    bg = "#202328",
-    fg = "#81A1C1",
-    line_bg = "#202328",
-    lbg = "#3B4252",
+    bg = "#282828",
+    fg = "#fbf1c7",
+    line_bg = "#282828",
+    lbg = "#202328",
     fg_green = "#8FBCBB",
-    yellow = "#f1fa8c",
-    cyan = "#8be9fd",
-    darkblue = "#81A1C1",
-    green = "#50fa7b",
+    yellow = "#50fa7b",
+    cyan = "#bd93f9",
+    darkblue = "#f1fa8c",
+    green = "#ff5555",
     orange = "#ffb86c",
-    purple = "#bd93f9",
+    purple = "#81A1C1",
     magenta = "#BF616A",
     gray = "#616E88",
     blue = "#5E81AC",
-    red = "#ff5555"
+    red = "#3B4252"
 }
 
 local buffer_not_empty = function()
