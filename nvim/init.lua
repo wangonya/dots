@@ -130,6 +130,12 @@ cmd [[au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1
 --------------------------------------------------------------
 
 
+---------------------- gruvbox ---------------------------------
+g.gruvbox_contrast_dark = "hard"
+g.gruvbox_sign_column = "bg0"
+--------------------------------------------------------------
+
+
 ---------------------- dashboard ---------------------------------
 g.dashboard_default_executive = "telescope"
 --------------------------------------------------------------
@@ -358,16 +364,16 @@ local colors = {
     line_bg = "#282828",
     lbg = "#202328",
     fg_green = "#8FBCBB",
-    yellow = "#50fa7b",
+    yellow = "#f1fa8c",
     cyan = "#bd93f9",
     darkblue = "#f1fa8c",
-    green = "#ff5555",
+    green = "#50fa7b",
     orange = "#ffb86c",
     purple = "#81A1C1",
     magenta = "#BF616A",
     gray = "#616E88",
     blue = "#5E81AC",
-    red = "#3B4252"
+    red = "#ff5555"
 }
 
 local buffer_not_empty = function()
