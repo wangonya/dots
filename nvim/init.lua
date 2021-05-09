@@ -6,55 +6,53 @@ local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
 
 local function opt(scope, key, value)
     scopes[scope][key] = value
-    if scope ~= "o" then
-        scopes["o"][key] = value
-    end
+    if scope ~= "o" then scopes["o"][key] = value end
 end
 
 local function map(mode, lhs, rhs, opts)
     local options = {noremap = true}
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
+    if opts then options = vim.tbl_extend("force", options, opts) end
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 g.mapleader = " "
+g.maplocalleader = ","
 --------------------------------------------------------------
 
 -------------------- plugins -------------------------------
 cmd [[packadd packer.nvim]]
 cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
-require("packer").startup(
-    function()
-        use {"wbthomason/packer.nvim", opt = true}
-        use {"akinsho/nvim-bufferline.lua", requires = "kyazdani42/nvim-web-devicons"}
-        use {
-            "nvim-telescope/telescope.nvim",
-            requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
-        }
-        use {"neovim/nvim-lspconfig"}
-        use {"hrsh7th/nvim-compe"}
-        use {"wakatime/vim-wakatime"}
-        use {"dracula/vim", as = "dracula"}
-        use {"nvim-treesitter/nvim-treesitter"}
-        use {"kyazdani42/nvim-tree.lua"}
-        use {"glepnir/galaxyline.nvim", branch = "main"}
-        use {"lukas-reineke/format.nvim"}
-        use {"glepnir/dashboard-nvim"}
-        use {"airblade/vim-gitgutter"}
-        use {"b3nj5m1n/kommentary"}
-        use {"p00f/nvim-ts-rainbow"}
-        use {"jiangmiao/auto-pairs"}
-        use {"akinsho/nvim-toggleterm.lua"}
-        use {"SirVer/ultisnips"}
-        use {"honza/vim-snippets"}
-        use {"f-person/git-blame.nvim"}
-        use 'glepnir/lspsaga.nvim'
-        use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
-        use 'norcalli/nvim-colorizer.lua'
-    end
-)
+require("packer").startup(function()
+    use {"wbthomason/packer.nvim", opt = true}
+    use {
+        "akinsho/nvim-bufferline.lua",
+        requires = "kyazdani42/nvim-web-devicons"
+    }
+    use {
+        "nvim-telescope/telescope.nvim",
+        requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
+    }
+    use {"neovim/nvim-lspconfig"}
+    use {"hrsh7th/nvim-compe"}
+    use {"wakatime/vim-wakatime"}
+    use {"nvim-treesitter/nvim-treesitter"}
+    use {"kyazdani42/nvim-tree.lua"}
+    use {"glepnir/galaxyline.nvim", branch = "main"}
+    use {"lukas-reineke/format.nvim"}
+    use {"glepnir/dashboard-nvim"}
+    use {"airblade/vim-gitgutter"}
+    use {"b3nj5m1n/kommentary"}
+    use {"p00f/nvim-ts-rainbow"}
+    use {"jiangmiao/auto-pairs"}
+    use {"akinsho/nvim-toggleterm.lua"}
+    use {"SirVer/ultisnips"}
+    use {"honza/vim-snippets"}
+    use {"f-person/git-blame.nvim"}
+    use 'glepnir/lspsaga.nvim'
+    use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+    use 'norcalli/nvim-colorizer.lua'
+    use {'Olical/conjure', tag = 'v4.18.0'}
+end)
 --------------------------------------------------------------
 
 -------------------- key mappings -------------------------------
@@ -97,7 +95,6 @@ map("n", "<Leader>cn", "<cmd>DashboardNewFile<cr>")
 --------------------------------------------------------------
 
 -------------------- options -------------------------------
--- cmd "colorscheme dracula"
 cmd "colorscheme gruvbox"
 opt("b", "expandtab", true) -- Use spaces instead of tabs
 opt("b", "shiftwidth", 4) -- Size of an indent
@@ -129,25 +126,21 @@ cmd "au FocusLost * :wa" -- autosave on lose focus
 cmd [[au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
 --------------------------------------------------------------
 
-
 ---------------------- gruvbox ---------------------------------
 g.gruvbox_contrast_dark = "hard"
 g.gruvbox_sign_column = "bg0"
 --------------------------------------------------------------
 
-
 ---------------------- dashboard ---------------------------------
 g.dashboard_default_executive = "telescope"
 --------------------------------------------------------------
-
 
 ---------------------- git blame ---------------------------------
 g.gitblame_date_format = '%r'
 --------------------------------------------------------------
 
-
 ---------------------- terminal ---------------------------------
-require "toggleterm".setup {
+require"toggleterm".setup {
     size = 10,
     open_mapping = [[<c-\>]],
     hide_numbers = true, -- hide the number column in toggleterm buffers
@@ -165,86 +158,70 @@ require "toggleterm".setup {
         width = 75,
         height = 17,
         winblend = 3,
-        highlights = {
-            border = "Normal",
-            background = "Normal"
-        }
+        highlights = {border = "Normal", background = "Normal"}
     }
 }
 --------------------------------------------------------------
 
-
 ---------------------- lsp ---------------------------------
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-        "documentation",
-        "detail",
-        "additionalTextEdits"
-    }
-}
+capabilities.textDocument.completion.completionItem.resolveSupport =
+    {properties = {"documentation", "detail", "additionalTextEdits"}}
 
-
-require "lspconfig".pyls.setup {
-    settings = {
-        pyls = {
-            plugins = {
-                pylint = {enabled = true}
-            }
-        }
-    }
+require"lspconfig".pyls.setup {
+    settings = {pyls = {plugins = {pylint = {enabled = true}}}}
 }
-require "lspconfig".pyright.setup{}
+require"lspconfig".pyright.setup {}
 
 -- lua lsp
 
 local system_name
 if vim.fn.has("mac") == 1 then
-  system_name = "macOS"
+    system_name = "macOS"
 elseif vim.fn.has("unix") == 1 then
-  system_name = "Linux"
+    system_name = "Linux"
 elseif vim.fn.has('win32') == 1 then
-  system_name = "Windows"
+    system_name = "Windows"
 else
-  print("Unsupported system for sumneko")
+    print("Unsupported system for sumneko")
 end
 
 -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
-local sumneko_root_path = vim.fn.stdpath('cache')..'/lspconfig/sumneko_lua/lua-language-server'
-local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
+local sumneko_root_path = vim.fn.stdpath('cache') ..
+                              '/lspconfig/sumneko_lua/lua-language-server'
+local sumneko_binary = sumneko_root_path .. "/bin/" .. system_name ..
+                           "/lua-language-server"
 
 require'lspconfig'.sumneko_lua.setup {
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = vim.split(package.path, ';'),
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-        },
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+                -- Setup your lua path
+                path = vim.split(package.path, ';')
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {'vim'}
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+                }
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {enable = false}
+        }
+    }
 }
 
 -- clojure
-require'lspconfig'.clojure_lsp.setup{}
+require'lspconfig'.clojure_lsp.setup {}
 
 -- diagnostic signs
 vim.fn.sign_define("LspDiagnosticsSignError", {text = "✗ "})
@@ -253,31 +230,28 @@ vim.fn.sign_define("LspDiagnosticsSignInformation", {text = " "})
 vim.fn.sign_define("LspDiagnosticsSignHint", {text = " "})
 --------------------------------------------------------------
 
-
 -------------------- snippets -------------------------------
-g.UltiSnipsExpandTrigger="<tab>"
-g.UltiSnipsJumpForwardTrigger="<c-b>"
-g.UltiSnipsJumpBackwardTrigger="<c-z>"
+g.UltiSnipsExpandTrigger = "<tab>"
+g.UltiSnipsJumpForwardTrigger = "<c-b>"
+g.UltiSnipsJumpBackwardTrigger = "<c-z>"
 --------------------------------------------------------------
-
 
 ---------------------- lspsaga ---------------------------------
-require 'lspsaga'.init_lsp_saga()
+require'lspsaga'.init_lsp_saga()
 --------------------------------------------------------------
 
+---------------------- conjure ---------------------------------
+
+--------------------------------------------------------------
 
 ---------------------- autoformat ---------------------------------
-require "format".setup {
+require"format".setup {
     ["*"] = {
         {cmd = {"sed -i 's/[ \t]*$//'"}} -- remove trailing whitespace
     },
-    python = {
-        {cmd = {"autopep8 --in-place -a -a -a"}},
-        {cmd = {"isort"}}
-    },
-    lua = {
-        {cmd = {"lua-format -i"}}
-    }
+    python = {{cmd = {"autopep8 --in-place -a -a -a"}}, {cmd = {"isort"}}},
+    lua = {{cmd = {"lua-format -i"}}},
+    clojure = {{cmd = {"lein cljfmt fix"}}}
 }
 vim.api.nvim_exec([[
 augroup FormatAutogroup
@@ -288,7 +262,7 @@ augroup END
 --------------------------------------------------------------
 
 ---------------------- completions --------------------------
-require "compe".setup {
+require"compe".setup {
     enabled = true,
     autocomplete = true,
     debug = false,
@@ -306,7 +280,7 @@ require "compe".setup {
         buffer = true,
         nvim_lsp = true,
         nvim_lua = true,
-        ultisnips = true,
+        ultisnips = true
     }
 }
 
@@ -314,29 +288,22 @@ require "compe".setup {
 
 -------------------- tree-sitter ---------------------------
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true
-  },
-  rainbow = {
-      enable = true,
-      extended_mode = true -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-  },
-}
---------------------------------------------------------------
-
-
--------------------- file explorer ---------------------------
-g.nvim_tree_follow = 1
-g.nvim_tree_icons = {
-    git = {
-        unstaged = "~"
+    ensure_installed = "maintained",
+    highlight = {enable = true},
+    rainbow = {
+        enable = true,
+        extended_mode = true -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
     }
 }
 --------------------------------------------------------------
 
+-------------------- file explorer ---------------------------
+g.nvim_tree_follow = 1
+g.nvim_tree_icons = {git = {unstaged = "~"}}
+--------------------------------------------------------------
+
 -------------------- bufferline -------------------------------
-require "bufferline".setup {
+require"bufferline".setup {
     options = {
         view = "multiwindow",
         diagnostic = "nvim_lsp",
@@ -346,7 +313,6 @@ require "bufferline".setup {
     }
 }
 --------------------------------------------------------------
-
 
 ---------------------- colorizer ---------------------------------
 require'colorizer'.setup()
@@ -377,9 +343,7 @@ local colors = {
 }
 
 local buffer_not_empty = function()
-    if fn.empty(fn.expand("%:t")) ~= 1 then
-        return true
-    end
+    if fn.empty(fn.expand("%:t")) ~= 1 then return true end
     return false
 end
 
@@ -388,9 +352,7 @@ gl.short_line_list = {"NvimTree", "vista", "dbui", "packer"}
 section.left[1] = {
     FirstElement = {
         -- provider = function() return '▊ ' end,
-        provider = function()
-            return "  "
-        end,
+        provider = function() return "  " end,
         highlight = {colors.blue, colors.line_bg}
     }
 }
@@ -430,15 +392,16 @@ section.left[3] = {
     FileIcon = {
         provider = "FileIcon",
         condition = buffer_not_empty,
-        highlight = {require("galaxyline.provider_fileinfo").get_file_icon_color, colors.line_bg}
+        highlight = {
+            require("galaxyline.provider_fileinfo").get_file_icon_color,
+            colors.line_bg
+        }
     }
 }
 section.left[4] = {
     FileName = {
         -- provider = "FileName",
-        provider = function()
-            return fn.expand("%:F")
-        end,
+        provider = function() return fn.expand("%:F") end,
         condition = buffer_not_empty,
         separator = " ",
         separator_highlight = {colors.purple, colors.bg},
@@ -448,9 +411,7 @@ section.left[4] = {
 
 section.right[1] = {
     GitIcon = {
-        provider = function()
-            return " "
-        end,
+        provider = function() return " " end,
         condition = vcs.check_git_workspace,
         highlight = {colors.orange, colors.line_bg}
     }
@@ -467,9 +428,7 @@ section.right[5] = {
 
 local checkwidth = function()
     local squeeze_width = fn.winwidth(0) / 2
-    if squeeze_width > 40 then
-        return true
-    end
+    if squeeze_width > 40 then return true end
     return false
 end
 
@@ -561,9 +520,7 @@ section.short_line_left[2] = {
             local fileinfo = require("galaxyline.provider_fileinfo")
             local fname = fileinfo.get_current_file_name()
             for _, v in ipairs(gl.short_line_list) do
-                if v == vim.bo.filetype then
-                    return ""
-                end
+                if v == vim.bo.filetype then return "" end
             end
             return fname
         end,
@@ -573,10 +530,7 @@ section.short_line_left[2] = {
 }
 
 section.short_line_right[1] = {
-    BufferIcon = {
-        provider = "BufferIcon",
-        highlight = {colors.fg, colors.lbg}
-    }
+    BufferIcon = {provider = "BufferIcon", highlight = {colors.fg, colors.lbg}}
 }
 --------------------------------------------------------------
 
