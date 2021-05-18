@@ -39,7 +39,6 @@ require("packer").startup(function()
     use {"kyazdani42/nvim-tree.lua"}
     use {"glepnir/galaxyline.nvim", branch = "main"}
     use {"lukas-reineke/format.nvim"}
-    use {"glepnir/dashboard-nvim"}
     use {"airblade/vim-gitgutter"}
     use {"b3nj5m1n/kommentary"}
     use {"p00f/nvim-ts-rainbow"}
@@ -49,10 +48,16 @@ require("packer").startup(function()
     use {"honza/vim-snippets"}
     use {"f-person/git-blame.nvim"}
     use 'glepnir/lspsaga.nvim'
-    use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
     use 'norcalli/nvim-colorizer.lua'
     use {'Olical/conjure', tag = 'v4.18.0'}
+    use 'psliwka/vim-smoothie'
+    use 'shaunsingh/moonlight.nvim'
+    use 'glepnir/dashboard-nvim'
 end)
+--------------------------------------------------------------
+
+-------------------- colorscheme -------------------------------
+require('moonlight').set()
 --------------------------------------------------------------
 
 -------------------- key mappings -------------------------------
@@ -83,19 +88,12 @@ map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>")
 map("n", "<leader>tr", "<cmd>NvimTreeRefresh<cr>")
 
--- dashboard
+-- session
 map("n", "<Leader>ss", "<cmd>SessionSave<cr>")
 map("n", "<Leader>sl", "<cmd>SessionLoad<cr>")
-map("n", "<Leader>fh", "<cmd>DashboardFindHistory<cr>")
-map("n", "<Leader>ff", "<cmd>DashboardFindFile<cr>")
-map("n", "<Leader>tc", "<cmd>DashboardChangeColorscheme<cr>")
-map("n", "<Leader>fa", "<cmd>DashboardFindWord<cr>")
-map("n", "<Leader>fb", "<cmd>DashboardJumpMark<cr>")
-map("n", "<Leader>cn", "<cmd>DashboardNewFile<cr>")
 --------------------------------------------------------------
 
 -------------------- options -------------------------------
-cmd "colorscheme gruvbox"
 opt("b", "expandtab", true) -- Use spaces instead of tabs
 opt("b", "shiftwidth", 4) -- Size of an indent
 opt("b", "smartindent", true) -- Insert indents automatically
@@ -126,18 +124,13 @@ cmd "au FocusLost * :wa" -- autosave on lose focus
 cmd [[au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
 --------------------------------------------------------------
 
----------------------- gruvbox ---------------------------------
-g.gruvbox_contrast_dark = "hard"
-g.gruvbox_sign_column = "bg0"
---------------------------------------------------------------
+---------------------- git blame ---------------------------------
+g.gitblame_date_format = '%r'
+------------------------------------------------------------------
 
 ---------------------- dashboard ---------------------------------
 g.dashboard_default_executive = "telescope"
---------------------------------------------------------------
-
----------------------- git blame ---------------------------------
-g.gitblame_date_format = '%r'
---------------------------------------------------------------
+------------------------------------------------------------------
 
 ---------------------- terminal ---------------------------------
 require"toggleterm".setup {
@@ -172,7 +165,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport =
 require"lspconfig".pyls.setup {
     settings = {pyls = {plugins = {pylint = {enabled = true}}}}
 }
-require"lspconfig".pyright.setup {}
+-- require"lspconfig".pyright.setup {}
 
 -- lua lsp
 
@@ -224,10 +217,13 @@ require'lspconfig'.sumneko_lua.setup {
 require'lspconfig'.clojure_lsp.setup {}
 
 -- diagnostic signs
-vim.fn.sign_define("LspDiagnosticsSignError", {text = "✗ "})
-vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "!"})
-vim.fn.sign_define("LspDiagnosticsSignInformation", {text = " "})
-vim.fn.sign_define("LspDiagnosticsSignHint", {text = " "})
+vim.lsp.handlers["textDocument/publishDiagnostics"] =
+    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = {
+            prefix = " " -- change this to whatever you want your diagnostic icons to be
+        }
+    })
+
 --------------------------------------------------------------
 
 -------------------- snippets -------------------------------
@@ -237,7 +233,12 @@ g.UltiSnipsJumpBackwardTrigger = "<c-z>"
 --------------------------------------------------------------
 
 ---------------------- lspsaga ---------------------------------
-require'lspsaga'.init_lsp_saga()
+require'lspsaga'.init_lsp_saga({
+    error_sign = "",
+    warn_sign = "",
+    hint_sign = " ",
+    infor_sign = " "
+})
 --------------------------------------------------------------
 
 ---------------------- conjure ---------------------------------
@@ -325,20 +326,20 @@ local section = gl.section
 local vcs = require("galaxyline.provider_vcs")
 
 local colors = {
-    bg = "#282828",
-    fg = "#fbf1c7",
-    line_bg = "#282828",
-    lbg = "#202328",
-    fg_green = "#8FBCBB",
-    yellow = "#f1fa8c",
-    cyan = "#bd93f9",
+    bg = "#1B1E2B",
+    fg = "#e4f3fa",
+    line_bg = "#1B1E2B",
+    lbg = "#1B1E2B",
+    fg_green = "#2df4c0",
+    yellow = "#ffc777",
+    cyan = "#b994f1",
     darkblue = "#f1fa8c",
-    green = "#50fa7b",
-    orange = "#ffb86c",
-    purple = "#81A1C1",
+    green = "#2df4c0",
+    orange = "#f67f81",
+    purple = "#b4a4f4",
     magenta = "#BF616A",
-    gray = "#616E88",
-    blue = "#5E81AC",
+    gray = "#a1abe0",
+    blue = "#04d1f9",
     red = "#ff5555"
 }
 
@@ -470,7 +471,7 @@ section.right[8] = {
     DiagnosticError = {
         provider = "DiagnosticError",
         separator = " ",
-        icon = "✗ ",
+        icon = " ",
         highlight = {colors.red, colors.line_bg},
         separator_highlight = {colors.bg, colors.bg}
     }
@@ -479,7 +480,7 @@ section.right[9] = {
     DiagnosticWarn = {
         provider = "DiagnosticWarn",
         -- separator = " ",
-        icon = "!",
+        icon = " ",
         highlight = {colors.yellow, colors.line_bg},
         separator_highlight = {colors.bg, colors.bg}
     }
@@ -489,7 +490,7 @@ section.right[10] = {
     DiagnosticInfo = {
         -- separator = " ",
         provider = "DiagnosticInfo",
-        icon = " ",
+        icon = " ",
         highlight = {colors.green, colors.line_bg},
         separator_highlight = {colors.bg, colors.bg}
     }
@@ -499,7 +500,7 @@ section.right[11] = {
     DiagnosticHint = {
         provider = "DiagnosticHint",
         -- separator = " ",
-        icon = " ",
+        icon = " ",
         highlight = {colors.blue, colors.line_bg},
         separator_highlight = {colors.bg, colors.bg}
     }
