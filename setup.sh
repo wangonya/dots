@@ -49,7 +49,7 @@ ln -sv ~/dots/alacritty.yml ~/.config/alacritty/alacritty.yml
 
 git clone https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-ln -sv ~/dots/nvim .config/
+ln -sv ~/dots/nvim ~/.config/
 
 mv ~/.i3/config ~/.i3/config.bkp
 ln -sv ~/dots/i3 ~/.i3/config

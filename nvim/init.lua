@@ -103,6 +103,7 @@ opt("o", "hidden", true) -- Enable modified buffers in background
 opt("o", "ignorecase", true) -- Ignore case
 opt("o", "joinspaces", false) -- No double spaces with join after a dot
 opt("o", "mouse", "a") -- Allow mouse
+opt("o", "signcolumn", "yes")
 opt("o", "updatetime", 100)
 opt("o", "shiftround", true) -- Round indent
 opt("o", "smartcase", true) -- Don't ignore case with capitals
@@ -113,7 +114,6 @@ opt("w", "listchars", "tab:»·,trail:·,nbsp:·")
 opt("o", "termguicolors", true) -- True color support
 opt("o", "wildmode", "list:longest") -- Command-line completion mode
 opt("o", "wildmenu", true)
-opt("o", "background", "dark")
 opt("w", "number", true) -- Print line number
 opt("w", "relativenumber", true) -- Relative line numbers
 cmd "au TextYankPost * lua vim.highlight.on_yank {on_visual = false}" -- highlight on yank
@@ -166,52 +166,6 @@ require"lspconfig".pyls.setup {
     settings = {pyls = {plugins = {pylint = {enabled = true}}}}
 }
 -- require"lspconfig".pyright.setup {}
-
--- lua lsp
-
-local system_name
-if vim.fn.has("mac") == 1 then
-    system_name = "macOS"
-elseif vim.fn.has("unix") == 1 then
-    system_name = "Linux"
-elseif vim.fn.has('win32') == 1 then
-    system_name = "Windows"
-else
-    print("Unsupported system for sumneko")
-end
-
--- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
-local sumneko_root_path = vim.fn.stdpath('cache') ..
-                              '/lspconfig/sumneko_lua/lua-language-server'
-local sumneko_binary = sumneko_root_path .. "/bin/" .. system_name ..
-                           "/lua-language-server"
-
-require'lspconfig'.sumneko_lua.setup {
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-    settings = {
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
-                -- Setup your lua path
-                path = vim.split(package.path, ';')
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = {'vim'}
-            },
-            workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = {
-                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-                }
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {enable = false}
-        }
-    }
-}
 
 -- clojure
 require'lspconfig'.clojure_lsp.setup {}
