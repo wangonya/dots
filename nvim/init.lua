@@ -57,6 +57,7 @@ end)
 --------------------------------------------------------------
 
 -------------------- colorscheme -------------------------------
+g.moonlight_borders = true
 require('moonlight').set()
 --------------------------------------------------------------
 
@@ -171,7 +172,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport =
 require"lspconfig".pyls.setup {
     settings = {pyls = {plugins = {pylint = {enabled = true}}}}
 }
--- require"lspconfig".pyright.setup {}
+require"lspconfig".pyright.setup {}
 
 -- clojure
 require'lspconfig'.clojure_lsp.setup {}
@@ -196,8 +197,8 @@ g.UltiSnipsJumpBackwardTrigger = "<c-z>"
 require'lspsaga'.init_lsp_saga({
     error_sign = "",
     warn_sign = "",
-    hint_sign = " ",
-    infor_sign = " "
+    hint_sign = " ",
+    infor_sign = " "
 })
 --------------------------------------------------------------
 
