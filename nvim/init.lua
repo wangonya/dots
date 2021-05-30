@@ -42,7 +42,7 @@ require("packer").startup(function()
     use {"airblade/vim-gitgutter"}
     use {"b3nj5m1n/kommentary"}
     use {"p00f/nvim-ts-rainbow"}
-    use {"jiangmiao/auto-pairs"}
+    -- use {"jiangmiao/auto-pairs"}
     use {"akinsho/nvim-toggleterm.lua"}
     use {"SirVer/ultisnips"}
     use {"honza/vim-snippets"}
@@ -52,7 +52,9 @@ require("packer").startup(function()
     use {'Olical/conjure', tag = 'v4.18.0'}
     use 'psliwka/vim-smoothie'
     use 'shaunsingh/moonlight.nvim'
-    use 'glepnir/dashboard-nvim'
+    use 'romgrk/nvim-treesitter-context'
+    use 'bhurlow/vim-parinfer'
+    use 'rmagatti/auto-session'
 end)
 --------------------------------------------------------------
 
@@ -90,8 +92,8 @@ map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>")
 map("n", "<leader>tr", "<cmd>NvimTreeRefresh<cr>")
 
 -- session
-map("n", "<Leader>ss", "<cmd>SessionSave<cr>")
-map("n", "<Leader>sl", "<cmd>SessionLoad<cr>")
+map("n", "<Leader>ss", "<cmd>SaveSession<cr>")
+map("n", "<Leader>sl", "<cmd>RestoreSession<cr>")
 --------------------------------------------------------------
 
 -------------------- options -------------------------------
@@ -135,8 +137,16 @@ g.gitgutter_grep = 'rg'
 g.gitblame_date_format = '%r'
 ------------------------------------------------------------------
 
----------------------- dashboard ---------------------------------
-g.dashboard_default_executive = "telescope"
+---------------------- session ---------------------------------
+-- g.dashboard_default_executive = "telescope"
+require('auto-session').setup({
+  log_level = 'info',
+  auto_session_enable_last_session = false,
+  auto_session_enabled = true,
+  auto_save_enabled = nil,
+  auto_restore_enabled = nil,
+  auto_session_suppress_dirs = nil
+})
 ------------------------------------------------------------------
 
 ---------------------- terminal ---------------------------------
@@ -213,7 +223,7 @@ require"format".setup {
     },
     python = {{cmd = {"autopep8 --in-place -a -a -a"}}, {cmd = {"isort"}}},
     lua = {{cmd = {"lua-format -i"}}},
-    clojure = {{cmd = {"lein cljfmt fix"}}}
+    -- clojure = {{cmd = {"lein cljfmt fix"}}}
 }
 vim.api.nvim_exec([[
 augroup FormatAutogroup
