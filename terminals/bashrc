@@ -41,11 +41,10 @@ fi
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.luarocks/bin:$PATH
-export PATH=$HOME/.emacs.d/bin/doom:$PATH
 
 CURRENT_YEAR=$(date '+%Y')
-export LEDGER_FILE=~/ledger/money/$CURRENT_YEAR.journal
-export PYLINTRC=~/dots/python/pylintrc
+export LEDGER_FILE="~/ledger/money/$CURRENT_YEAR.journal"
+export PYLINTRC="~/dots/python/pylintrc"
 
 alias mybash="nvim ~/.bashrc"
 alias mybashs="source ~/.bashrc"
@@ -69,7 +68,8 @@ alias hbs="hledger bs"
 alias hr="hledger register"
 alias em="emacs"
 alias emt="emacs -nw"
+alias doom="~/.emacs.d/bin/doom"
 
 alias jhr="cd ~/projects/jenga-hr-api && source .env"
 
-unclutter &
+# unclutter &

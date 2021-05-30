@@ -95,4 +95,12 @@ cp lua-language-server .cache/nvim/lspconfig/sumneko_lua -r
 luarocks install --server=https://luarocks.org/dev luaformatter
 echo
 
+
+echo "=== setting up emacs ==="
+[ -d ~/.emacs.d ] && mv ~/.emacs.d ~/.emacs.d-bak
+git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+ln -sv ~/dots/emacs/doom.d/ .doom.d
+echo
+
 # pamac build bcwc-pcie-git && sudo modprobe facetimehd - for webcam driver if on mac
