@@ -47,6 +47,7 @@ dex -a -s /etc/xdg/autostart/:~/.config/autostart/
 picom -CGb &
 # Network Applet
 nm-applet --indicator &
-
 # Cursor
 xsetroot -cursor_name left_ptr &
+
+unclutter &
