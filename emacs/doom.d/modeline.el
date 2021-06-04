@@ -1,4 +1,4 @@
-;;; ../dots/emacs/doom.d/modeline.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/modeline.el -*- lexical-binding: t; -*-
 
 ;; Custom mode line setup
 

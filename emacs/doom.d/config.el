@@ -1,3 +1,5 @@
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+
 (load-file "~/dots/emacs/doom.d/modeline.el")
 
 (setq user-full-name "Kinyanjui Wangonya"
