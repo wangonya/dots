@@ -7,9 +7,13 @@
 
 (setq doom-theme 'doom-moonlight)
 
-(setq doom-font (font-spec :family "JetBrainsMono" :size 14)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMono" :size 13 :weight 'light)
-      ivy-posframe-font (font-spec :family "JetBrainsMono" :size 13 :weight 'light))
+
+(if IS-MAC (setq doom-font (font-spec :family "JetBrains Mono" :size 14)
+                doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 13 :weight 'light)
+                ivy-posframe-font (font-spec :family "JetBrains Mono" :size 13 :weight 'light))
+  (setq doom-font (font-spec :family "JetBrainsMono" :size 14)
+                doom-variable-pitch-font (font-spec :family "JetBrainsMono" :size 13 :weight 'light)
+                ivy-posframe-font (font-spec :family "JetBrainsMono" :size 13 :weight 'light)))
 
 (setq org-directory "~/org/")
 
