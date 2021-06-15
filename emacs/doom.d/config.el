@@ -21,3 +21,9 @@
 ;; ignore venv from lsp watcher
 (with-eval-after-load 'lsp-mode
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\venv\\'"))
+
+;; isort on save
+(add-hook 'before-save-hook 'py-isort-before-save)
+
+;; auto revert buffer after save to reload lsp
+(add-hook 'after-save-hook 'revert-buffer)
