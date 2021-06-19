@@ -16,7 +16,8 @@ pamac build nerd-fonts-jetbrains-mono insomnia-bin neovim-nightly-bin clojure-ls
 echo
 
 echo "=== installing python stuff ==="
-pip3 install pylint autopep8 isort flake8 ipython ipdb
+pip install pylint isort flake8 ipython ipdb black
+pip install 'python-lsp-server[all]'
 echo
 
 echo "=== installing rust ==="
@@ -28,13 +29,13 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
 echo
 
 echo "=== setting up npm system wide install config ==="
-echo PATH="$HOME/.node_modules/bin:$PATH" >> ~/.profile
-echo export npm_config_prefix=~/.node_modules >> ~/.profile
+echo PATH="$HOME/.node_modules/bin:$PATH" >>~/.profile
+echo export npm_config_prefix=~/.node_modules >>~/.profile
 source ~/.profile
 echo
 
 echo "=== installing npm stuff ==="
-npm i -g prettier
+npm i -g prettier node-cljfmt
 echo
 
 echo "=== installing vim plug ==="
@@ -46,8 +47,7 @@ echo "=== setting up dotfiles ==="
 mkdir -p ~/.config/alacritty
 ln -sv ~/dots/alacritty.yml ~/.config/alacritty/alacritty.yml
 
-git clone https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ln -sv ~/dots/nvim ~/.config/
 
 mv ~/.i3/config ~/.i3/config.bkp
@@ -60,7 +60,7 @@ ln -sv ~/dots/i3status.conf ~/.i3status.conf
 
 chmod +x ~/dots/i3status-net-speed.sh
 
-git clone https://github.com/wangonya/zathura ~/.config/zathura/
+ln -sv ~/dots/python/flake8 ~/.config/flake8
 echo
 
 echo "=== installing oh-my-bash ==="
@@ -78,7 +78,6 @@ ln -sv ~/dots/gitignore ~/.gitignore
 git config --global core.excludesfile ~/.gitignore
 echo
 
-
 echo "=== setting up lua"
 git clone https://github.com/sumneko/lua-language-server
 cd lua-language-server
@@ -94,7 +93,6 @@ cp lua-language-server .cache/nvim/lspconfig/sumneko_lua -r
 
 luarocks install --server=https://luarocks.org/dev luaformatter
 echo
-
 
 echo "=== setting up emacs ==="
 [ -d ~/.emacs.d ] && mv ~/.emacs.d ~/.emacs.d-bak

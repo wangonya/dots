@@ -1,6 +1,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-(load-file "~/dots/emacs/doom.d/modeline.el")
+(load-file "~/dots/emacs/doom.d/mood-line.el")
+(mood-line-mode)
 
 (setq user-full-name "Kinyanjui Wangonya"
       user-mail-address "kwangonya@gmail.com")
@@ -19,6 +20,13 @@
 
 (setq display-line-numbers-type 'nil)
 
+;; treesitter
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
 ;; enable time tracking
 (global-wakatime-mode)
 
@@ -26,7 +34,7 @@
 (with-eval-after-load 'lsp-mode
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\venv\\'"))
 
-;; isort on save
+;; python isort on save
 (add-hook 'before-save-hook 'py-isort-before-save)
 
 ;; auto revert buffer after save to reload lsp

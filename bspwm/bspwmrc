@@ -2,8 +2,8 @@
 
 pgrep -x sxhkd >/dev/null || sxhkd &
 
-bspc monitor HDMI2 -d I II
-bspc monitor eDP1 -d III IV V
+bspc monitor HDMI2 -d I
+bspc monitor eDP1 -d II III
 
 bspc config border_width 1
 bspc config window_gap 5
@@ -14,8 +14,7 @@ bspc config gapless_monocle true
 bspc config pointer_follows_focus true
 bspc config focus_follows_pointer true
 
-bspc rule -a firefox desktop='^3'
-bspc rule -a kitty state=floating
+bspc rule -a firefox desktop='^2'
 bspc rule -a Emacs state=tiled
 bspc rule -a Emacs desktop='^1'
 
