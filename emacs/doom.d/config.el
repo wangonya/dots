@@ -1,13 +1,9 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-(load-file "~/dots/emacs/doom.d/mood-line.el")
-(mood-line-mode)
-
 (setq user-full-name "Kinyanjui Wangonya"
       user-mail-address "kwangonya@gmail.com")
 
 (setq doom-theme 'doom-moonlight)
-
 
 (if IS-MAC (setq doom-font (font-spec :family "JetBrains Mono" :size 14)
                 doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 13 :weight 'light)
@@ -19,6 +15,12 @@
 (setq org-directory "~/org/")
 
 (setq display-line-numbers-type 'nil)
+
+;; clean up modeline
+(after! doom-modeline
+  (remove-hook 'doom-modeline-mode-hook #'size-indication-mode) ; filesize in modeline
+  (remove-hook 'doom-modeline-mode-hook #'column-number-mode)   ; cursor column in modeline
+  (setq doom-modeline-buffer-encoding nil))
 
 ;; treesitter
 (use-package! tree-sitter
@@ -39,6 +41,11 @@
 
 ;; auto revert buffer after save to reload lsp
 (add-hook 'after-save-hook 'revert-buffer)
+
+;; python docs
+(add-hook 'python-mode-hook (lambda ()
+                                  (require 'sphinx-doc)
+                                  (sphinx-doc-mode t)))
 
 ;; presentations
 (global-set-key (kbd "<f8>") 'org-tree-slide-mode)
