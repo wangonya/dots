@@ -21,6 +21,8 @@
   (remove-hook 'doom-modeline-mode-hook #'size-indication-mode) ; filesize in modeline
   (remove-hook 'doom-modeline-mode-hook #'column-number-mode)   ; cursor column in modeline
   (setq doom-modeline-buffer-encoding nil))
+(setq doom-modeline-buffer-file-name-style 'truncate-with-project)
+(setq doom-modeline-icon nil)
 
 ;; treesitter
 (use-package! tree-sitter
@@ -40,7 +42,19 @@
 (add-hook 'before-save-hook 'py-isort-before-save)
 
 ;; auto revert buffer after save to reload lsp
-(add-hook 'after-save-hook 'revert-buffer)
+;; (add-hook 'after-save-hook 'revert-buffer)
+(remove-hook 'doom-first-buffer-hook #'ws-butler-global-mode)
+
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+
+(use-package python-black
+  :demand t
+  :after python
+  :hook (python-mode . python-black-on-save-mode-enable-dwim))
 
 ;; python docs
 (add-hook 'python-mode-hook (lambda ()
@@ -62,18 +76,35 @@
 
 (defun presentation-setup ()
 
-  ;; Display images inline
-  (org-display-inline-images) ;; Can also use org-startup-with-inline-images
-
   ;; Scale the text.  The next line is for basic scaling:
-  (setq text-scale-mode-amount 3)
-  (text-scale-mode 1))
+  (setq text-scale-mode-amount 2)
+  (text-scale-mode 1)
+
+  ;; activate zen mode
+  (+zen/toggle 1)
+
+  ;; change face for meta lines
+  (set-face-attribute 'org-meta-line nil :height 0.8 :slant 'normal))
 
 (defun presentation-end ()
 
-  ;; Turn off text scale mode (or use the next line if you didn't use text-scale-mode)
-  (text-scale-mode 0))
+  ;; activate zen mode
+  (+zen/toggle 0)
+
+ ;; Turn off text scale mode (or use the next line if you didn't use text-scale-mode)
+ (text-scale-mode 0))
 
 (add-hook 'org-tree-slide-play-hook 'presentation-setup)
 (add-hook 'org-tree-slide-stop-hook 'presentation-end)
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+
+;; autosave on lose focus
+(add-function :after after-focus-change-function
+              (lambda () (save-some-buffers t)))
+
+;; better splits
+(setq evil-vsplit-window-right t
+      evil-split-window-below t)
+
+;; org images
+(setq org-startup-with-inline-images t)

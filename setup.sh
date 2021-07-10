@@ -3,7 +3,7 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S firefox redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol flameshot bat hugo ctags unzip cmake lua luarocks clojure leiningen jdk-openjdk rlwrap fd emacs shfmt
+sudo pacman -S firefox redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol flameshot bat hugo ctags unzip clojure leiningen jdk-openjdk rlwrap fd emacs shfmt go go-tools gopls elixir texlive-core
 echo
 
 echo "=== starting and enabling systemd services ==="

@@ -10,3 +10,6 @@
 
 (package! tree-sitter)
 (package! tree-sitter-langs)
+
+(package! lsp-pyright)
+(package! python-black)
