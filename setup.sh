@@ -3,7 +3,7 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S firefox redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol flameshot bat hugo ctags unzip clojure leiningen jdk-openjdk rlwrap fd emacs shfmt go go-tools gopls elixir texlive-core
+sudo pacman -S firefox redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol flameshot bat hugo ctags unzip clojure leiningen jdk-openjdk rlwrap fd emacs shfmt go go-tools gopls elixir texlive-core texlive-latexextra
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -12,16 +12,11 @@ systemctl enable redis.service
 echo
 
 echo "=== installing aur stuff ==="
-pamac build nerd-fonts-jetbrains-mono insomnia-bin neovim-nightly-bin clojure-lsp-bin
+pamac build nerd-fonts-jetbrains-mono insomnia-bin mongodb-bin mongodb-tools-bin
 echo
 
 echo "=== installing python stuff ==="
-pip install pylint isort flake8 ipython ipdb black
-pip install 'python-lsp-server[all]'
-echo
-
-echo "=== installing rust ==="
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+pip install pylint isort flake8 ipython ipdb black pipenv
 echo
 
 echo "=== installing poetry ==="
@@ -35,20 +30,12 @@ source ~/.profile
 echo
 
 echo "=== installing npm stuff ==="
-npm i -g prettier node-cljfmt
-echo
-
-echo "=== installing vim plug ==="
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+npm i -g prettier
 echo
 
 echo "=== setting up dotfiles ==="
 mkdir -p ~/.config/alacritty
 ln -sv ~/dots/alacritty.yml ~/.config/alacritty/alacritty.yml
-
-git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-ln -sv ~/dots/nvim ~/.config/
 
 mv ~/.i3/config ~/.i3/config.bkp
 ln -sv ~/dots/i3 ~/.i3/config
@@ -78,22 +65,6 @@ ln -sv ~/dots/gitignore ~/.gitignore
 git config --global core.excludesfile ~/.gitignore
 echo
 
-echo "=== setting up lua"
-git clone https://github.com/sumneko/lua-language-server
-cd lua-language-server
-git submodule update --init --recursive
-
-cd 3rd/luamake
-compile/install.sh
-cd ../..
-./3rd/luamake/luamake rebuild
-
-mkdir .cache/nvim/lspconfig/sumneko_lua
-cp lua-language-server .cache/nvim/lspconfig/sumneko_lua -r
-
-luarocks install --server=https://luarocks.org/dev luaformatter
-echo
-
 echo "=== setting up emacs ==="
 [ -d ~/.emacs.d ] && mv ~/.emacs.d ~/.emacs.d-bak
 git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
@@ -101,4 +72,11 @@ git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 ln -sv ~/dots/emacs/doom.d/ .doom.d
 echo
 
+echo "=== setting up emacs ==="
+systemctl start mongodb.service
+systemctl enable mongodb.service
+echo
+
 # pamac build bcwc-pcie-git && sudo modprobe facetimehd - for webcam driver if on mac
+#
+#setup postgres
