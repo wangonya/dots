@@ -13,3 +13,5 @@
 
 (package! lsp-pyright)
 (package! python-black)
+
+(package! django-mode)
