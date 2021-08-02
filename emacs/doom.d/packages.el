@@ -14,4 +14,4 @@
 (package! lsp-pyright)
 (package! python-black)
 
-(package! django-mode)
+(package! pony-mode)
