@@ -3,7 +3,7 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S firefox redshift nodejs npm yarn neovim python-neovim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter pulseaudio pulseaudio-alsa pavucontrol flameshot bat hugo ctags unzip clojure leiningen jdk-openjdk rlwrap fd emacs shfmt go go-tools gopls elixir texlive-core texlive-latexextra tidy
+sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis kitty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra tidy ttf-jetbrains-mono python-pip pyenv
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -12,15 +12,11 @@ systemctl enable redis.service
 echo
 
 echo "=== installing aur stuff ==="
-pamac build nerd-fonts-jetbrains-mono insomnia-bin mongodb-bin mongodb-tools-bin
+yay -S insomnia-bin spotify beekeeper-studio-bin
 echo
 
 echo "=== installing python stuff ==="
-pip install pylint isort flake8 ipython ipdb black pipenv
-echo
-
-echo "=== installing poetry ==="
-curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+pip3 install pylint isort ipython ipdb black pipenv wakatime
 echo
 
 echo "=== setting up npm system wide install config ==="
@@ -30,33 +26,20 @@ source ~/.profile
 echo
 
 echo "=== installing npm stuff ==="
-npm i -g prettier
+npm i -g prettier pyright
 echo
 
 echo "=== setting up dotfiles ==="
-mkdir -p ~/.config/alacritty
-ln -sv ~/dots/alacritty.yml ~/.config/alacritty/alacritty.yml
+mv ~/.config/bspwm/ ~/.config/bspwm.bak
+ln -sv ~/dots/bspwm/ ~/.config/bspwm
 
-mv ~/.i3/config ~/.i3/config.bkp
-ln -sv ~/dots/i3 ~/.i3/config
+mv ~/.config/polybar/ ~/.config/polybar.bak
+ln -sv ~/dots/polybar/ ~/.config/polybar
 
-mv .dmenurc .dmenurc.bak
-ln -sv ~/dots/dmenurc .dmenurc
+mv ~/.config/sxhkd/ ~/.config/sxhkd.bak
+ln -sv ~/dots/sxhkd/ ~/.config/sxhkd
 
-ln -sv ~/dots/i3status.conf ~/.i3status.conf
-
-chmod +x ~/dots/i3status-net-speed.sh
-
-ln -sv ~/dots/python/flake8 ~/.config/flake8
-echo
-
-echo "=== installing oh-my-bash ==="
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-echo
-
-echo "=== updating bashrc ==="
-mv ~/.bashrc ~/.bashrc.bkp
-ln -sv ~/dots/bashrc ~/.bashrc
+cp ~/dots/terminals/kitty.conf ~/.config/kitty/
 echo
 
 echo "=== setting up git configs"
@@ -69,14 +52,8 @@ echo "=== setting up emacs ==="
 [ -d ~/.emacs.d ] && mv ~/.emacs.d ~/.emacs.d-bak
 git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 ~/.emacs.d/bin/doom install
-ln -sv ~/dots/emacs/doom.d/ .doom.d
+[ -d ~/.doom.d ] && mv ~/.doom.d ~/.doom.d-bak
+ln -sv ~/dots/emacs/doom.d/ ~/.doom.d
 echo
 
-echo "=== setting up emacs ==="
-systemctl start mongodb.service
-systemctl enable mongodb.service
-echo
-
-# pamac build bcwc-pcie-git && sudo modprobe facetimehd - for webcam driver if on mac
-#
 #setup postgres

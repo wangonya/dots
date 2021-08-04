@@ -6,11 +6,9 @@
 (setq doom-theme 'doom-moonlight)
 
 (if IS-MAC (setq doom-font (font-spec :family "JetBrains Mono" :size 14)
-                doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 13 :weight 'light)
-                ivy-posframe-font (font-spec :family "JetBrains Mono" :size 13 :weight 'light))
+                ivy-posframe-font (font-spec :family "JetBrains Mono" :size 12 :weight 'light))
   (setq doom-font (font-spec :family "JetBrainsMono" :size 14)
-                doom-variable-pitch-font (font-spec :family "JetBrainsMono" :size 13 :weight 'light)
-                ivy-posframe-font (font-spec :family "JetBrainsMono" :size 13 :weight 'light)))
+                ivy-posframe-font (font-spec :family "JetBrainsMono" :size 12 :weight 'light)))
 
 (setq org-directory "~/org/")
 
@@ -33,6 +31,7 @@
 
 ;; enable time tracking
 (global-wakatime-mode)
+(setq wakatime-cli-path "/home/kelvin/.local/bin/wakatime")
 
 ;; ignore venv from lsp watcher
 (with-eval-after-load 'lsp-mode
@@ -50,11 +49,6 @@
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp))))  ; or lsp-deferred
-
-(use-package python-black
-  :demand t
-  :after python
-  :hook (python-mode . python-black-on-save-mode-enable-dwim))
 
 ;; python docs
 (add-hook 'python-mode-hook (lambda ()

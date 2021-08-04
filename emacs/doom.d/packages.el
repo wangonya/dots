@@ -12,6 +12,5 @@
 (package! tree-sitter-langs)
 
 (package! lsp-pyright)
-(package! python-black)
 
 (package! pony-mode)
