@@ -3,6 +3,10 @@
 (setq user-full-name "Kinyanjui Wangonya"
       user-mail-address "kwangonya@gmail.com")
 
+;; set path from shell
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 (setq doom-theme 'doom-moonlight)
 
 (if IS-MAC (setq doom-font (font-spec :family "JetBrains Mono" :size 14)
@@ -22,38 +26,31 @@
 (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
 (setq doom-modeline-icon nil)
 
-;; treesitter
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
 ;; enable time tracking
 (global-wakatime-mode)
-(setq wakatime-cli-path "/home/kelvin/.local/bin/wakatime")
 
 ;; ignore venv from lsp watcher
 (with-eval-after-load 'lsp-mode
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\venv\\'"))
 
+;; python auto detect venv
+(defun pyvenv-autoload ()
+          (interactive)
+          "auto activate venv directory if exists"
+          (f-traverse-upwards (lambda (path)
+              (let ((venv-path (f-expand "venv" path)))
+              (when (f-exists? venv-path)
+                (pyvenv-activate venv-path))))))
+(add-hook 'python-mode-hook 'pyvenv-autoload)
+
 ;; python isort on save
 (add-hook 'before-save-hook 'py-isort-before-save)
-
-;; auto revert buffer after save to reload lsp
-;; (add-hook 'after-save-hook 'revert-buffer)
-(remove-hook 'doom-first-buffer-hook #'ws-butler-global-mode)
 
 (use-package lsp-pyright
   :ensure t
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp))))  ; or lsp-deferred
-
-;; python docs
-(add-hook 'python-mode-hook (lambda ()
-                                  (require 'sphinx-doc)
-                                  (sphinx-doc-mode t)))
 
 ;; presentations
 (global-set-key (kbd "<f8>") 'org-tree-slide-mode)
@@ -102,6 +99,3 @@
 
 ;; org images
 (setq org-startup-with-inline-images t)
-
-;; django
-(require 'pony-mode)
