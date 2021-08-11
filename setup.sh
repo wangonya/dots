@@ -3,7 +3,7 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis kitty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra tidy ttf-jetbrains-mono python-pip pyenv
+sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis kitty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra tidy ttf-jetbrains-mono python-pip
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -12,7 +12,7 @@ systemctl enable redis.service
 echo
 
 echo "=== installing aur stuff ==="
-yay -S insomnia-bin spotify beekeeper-studio-bin
+yay -S insomnia-bin spotify beekeeper-studio-bin bash-git-prompt
 echo
 
 echo "=== installing python stuff ==="
@@ -40,6 +40,8 @@ mv ~/.config/sxhkd/ ~/.config/sxhkd.bak
 ln -sv ~/dots/sxhkd/ ~/.config/sxhkd
 
 cp ~/dots/terminals/kitty.conf ~/.config/kitty/
+
+echo "source ~/dots/terminals/bashrc" >>~/.bashrc
 echo
 
 echo "=== setting up git configs"

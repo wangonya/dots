@@ -18,6 +18,13 @@
 
 (setq display-line-numbers-type 'nil)
 
+;; treesitter
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
 ;; clean up modeline
 (after! doom-modeline
   (remove-hook 'doom-modeline-mode-hook #'size-indication-mode) ; filesize in modeline
@@ -46,11 +53,11 @@
 ;; python isort on save
 (add-hook 'before-save-hook 'py-isort-before-save)
 
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))  ; or lsp-deferred
+;; (use-package lsp-pyright
+;;   :ensure t
+;;   :hook (python-mode . (lambda ()
+;;                           (require 'lsp-pyright)
+;;                           (lsp))))  ; or lsp-deferred
 
 ;; presentations
 (global-set-key (kbd "<f8>") 'org-tree-slide-mode)

@@ -7,7 +7,8 @@ init-hook=
 disable=
     C0114,
     C0115,
-    C0116
+    C0116,
+    C0301 
 
 ignore = migrations
 good-names=i,j,k,e,n

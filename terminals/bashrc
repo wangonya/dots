@@ -1,61 +1,31 @@
-# Path to your oh-my-bash installation.
-export OSH=~/.oh-my-bash
-
-OSH_THEME="zork"
-
-# Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="true"
-
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Which completions would you like to load? (completions can be found in ~/.oh-my-bash/completions/*)
-completions=(
-  git
-  composer
-  ssh
-)
-
-# Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
-aliases=(
-  general
-)
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
-plugins=(
-  git
-  bashmarks
-)
-
-source $OSH/oh-my-bash.sh
+# git prompt
+if [ -f /usr/lib/bash-git-prompt/gitprompt.sh ]; then
+    # To only show the git prompt in or under a repository directory
+    # GIT_PROMPT_ONLY_IN_REPO=1
+    # To use upstream's default theme
+    # GIT_PROMPT_THEME=Default
+    # To use upstream's default theme, modified by arch maintainer
+    GIT_PROMPT_THEME=Default_Arch
+    source /usr/lib/bash-git-prompt/gitprompt.sh
+fi
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='nvim'
+  export EDITOR='vim'
 fi
 
 export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/.luarocks/bin:$PATH
 
-CURRENT_YEAR=$(date '+%Y')
-export LEDGER_FILE="~/ledger/money/$CURRENT_YEAR.journal"
 export PYLINTRC="~/dots/python/pylintrc"
-export DOOMDIR="~/.doom.d"
 
-alias mybash="nvim ~/.bashrc"
+alias mybash="vim ~/.bashrc"
 alias mybashs="source ~/.bashrc"
-alias myi3="nvim ~/.i3/config"
-alias nv="nvim"
-alias night="xbacklight -set 1"
-alias mynvim="nvim ~/dots/nvim/init.lua"
+alias myi3="vim ~/.i3/config"
 alias updt="sudo pacman -Syyu"
-alias py="python"
-alias python3='python'
+alias py="python3"
+alias python3='python3'
 alias gcm="git commit -m"
 alias less="bat"
 alias dt="cd ~/dots"
@@ -63,10 +33,6 @@ alias prj="cd ~/projects"
 alias r="ranger"
 alias gp="gpsup"
 alias gpl="ggpull"
-alias ha="hledger accounts"
-alias hb="hledger balance"
-alias hbs="hledger bs"
-alias hr="hledger register"
 alias em="emacs"
 alias emt="emacs -nw"
 alias doom="~/.emacs.d/bin/doom"
