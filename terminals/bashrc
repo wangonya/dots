@@ -1,10 +1,6 @@
 # git prompt
 if [ -f /usr/lib/bash-git-prompt/gitprompt.sh ]; then
-    # To only show the git prompt in or under a repository directory
-    # GIT_PROMPT_ONLY_IN_REPO=1
-    # To use upstream's default theme
-    # GIT_PROMPT_THEME=Default
-    # To use upstream's default theme, modified by arch maintainer
+    GIT_PROMPT_ONLY_IN_REPO=1
     GIT_PROMPT_THEME=Default_Arch
     source /usr/lib/bash-git-prompt/gitprompt.sh
 fi
@@ -31,8 +27,11 @@ alias less="bat"
 alias dt="cd ~/dots"
 alias prj="cd ~/projects"
 alias r="ranger"
-alias gp="gpsup"
-alias gpl="ggpull"
+alias ga="git add"
+alias gs="git status"
+alias gd="git diff"
+alias gp="git push -u origin HEAD"
+alias gpl="git pull origin"
 alias em="emacs"
 alias emt="emacs -nw"
 alias doom="~/.emacs.d/bin/doom"
