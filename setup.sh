@@ -3,7 +3,7 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis kitty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra tidy ttf-jetbrains-mono python-pip
+sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra tidy ttf-jetbrains-mono python-pip
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -39,7 +39,10 @@ ln -sv ~/dots/polybar/ ~/.config/polybar
 mv ~/.config/sxhkd/ ~/.config/sxhkd.bak
 ln -sv ~/dots/sxhkd/ ~/.config/sxhkd
 
-cp ~/dots/terminals/kitty.conf ~/.config/kitty/
+ln -sv ~/dots/terminals/alacritty.yml ~/.alacritty.yml
+
+git clone https://github.com/wangonya/NvChad.git ~/.config/nvim
+nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
 echo "source ~/dots/terminals/bashrc" >>~/.bashrc
 echo
