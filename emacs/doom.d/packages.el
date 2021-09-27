@@ -8,7 +8,7 @@
 (package! org-tree-slide)
 (package! org-superstar)
 
-;; (package! lsp-pyright)
-
 (package! tree-sitter)
 (package! tree-sitter-langs)
+
+(package! yasnippet-snippets)

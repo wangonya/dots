@@ -51,7 +51,7 @@
 (add-hook 'python-mode-hook 'pyvenv-autoload)
 
 ;; python isort on save
-(add-hook 'before-save-hook 'py-isort-before-save)
+;;(add-hook 'before-save-hook 'py-isort-before-save)
 
 ;; (use-package lsp-pyright
 ;;   :ensure t

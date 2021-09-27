@@ -33,7 +33,13 @@ require("packer").startup(function()
         requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
     }
     use {"neovim/nvim-lspconfig"}
-    use {"hrsh7th/nvim-compe"}
+    use {
+	  "hrsh7th/nvim-cmp",
+	  requires = {
+	    "hrsh7th/vim-vsnip",
+	    "hrsh7th/cmp-buffer",
+	  }
+	}
     use {"wakatime/vim-wakatime"}
     use {"nvim-treesitter/nvim-treesitter"}
     use {"kyazdani42/nvim-tree.lua"}
@@ -42,18 +48,14 @@ require("packer").startup(function()
     use {"airblade/vim-gitgutter"}
     use {"b3nj5m1n/kommentary"}
     use {"p00f/nvim-ts-rainbow"}
-    -- use {"jiangmiao/auto-pairs"}
+    use {"jiangmiao/auto-pairs"}
     use {"akinsho/nvim-toggleterm.lua"}
-    use {"SirVer/ultisnips"}
-    use {"honza/vim-snippets"}
     use {"f-person/git-blame.nvim"}
     use 'glepnir/lspsaga.nvim'
     use 'norcalli/nvim-colorizer.lua'
-    use {'Olical/conjure', tag = 'v4.18.0'}
     use 'psliwka/vim-smoothie'
     use 'shaunsingh/moonlight.nvim'
     use 'romgrk/nvim-treesitter-context'
-    use 'bhurlow/vim-parinfer'
     use 'rmagatti/auto-session'
 end)
 --------------------------------------------------------------
@@ -179,13 +181,10 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport =
     {properties = {"documentation", "detail", "additionalTextEdits"}}
 
-require"lspconfig".pyls.setup {
+--[[ require"lspconfig".pyls.setup {
     settings = {pyls = {plugins = {pylint = {enabled = true}}}}
-}
+} ]]
 require"lspconfig".pyright.setup {}
-
--- clojure
-require'lspconfig'.clojure_lsp.setup {}
 
 -- diagnostic signs
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
@@ -198,9 +197,9 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 --------------------------------------------------------------
 
 -------------------- snippets -------------------------------
-g.UltiSnipsExpandTrigger = "<tab>"
-g.UltiSnipsJumpForwardTrigger = "<c-b>"
-g.UltiSnipsJumpBackwardTrigger = "<c-z>"
+--g.UltiSnipsExpandTrigger = "<tab>"
+--g.UltiSnipsJumpForwardTrigger = "<c-b>"
+--g.UltiSnipsJumpBackwardTrigger = "<c-z>"
 --------------------------------------------------------------
 
 ---------------------- lspsaga ---------------------------------
@@ -212,10 +211,6 @@ require'lspsaga'.init_lsp_saga({
 })
 --------------------------------------------------------------
 
----------------------- conjure ---------------------------------
-
---------------------------------------------------------------
-
 ---------------------- autoformat ---------------------------------
 require"format".setup {
     ["*"] = {
@@ -223,7 +218,6 @@ require"format".setup {
     },
     python = {{cmd = {"autopep8 --in-place -a -a -a"}}, {cmd = {"isort"}}},
     lua = {{cmd = {"lua-format -i"}}},
-    -- clojure = {{cmd = {"lein cljfmt fix"}}}
 }
 vim.api.nvim_exec([[
 augroup FormatAutogroup
@@ -234,27 +228,6 @@ augroup END
 --------------------------------------------------------------
 
 ---------------------- completions --------------------------
-require"compe".setup {
-    enabled = true,
-    autocomplete = true,
-    debug = false,
-    min_length = 1,
-    preselect = "enable",
-    throttle_time = 80,
-    source_timeout = 200,
-    incomplete_delay = 400,
-    max_abbr_width = 100,
-    max_kind_width = 100,
-    max_menu_width = 100,
-    documentation = false,
-    source = {
-        path = true,
-        buffer = true,
-        nvim_lsp = true,
-        nvim_lua = true,
-        ultisnips = true
-    }
-}
 
 --------------------------------------------------------------
 
@@ -279,7 +252,6 @@ require"bufferline".setup {
     options = {
         view = "multiwindow",
         diagnostic = "nvim_lsp",
-        mappings = true,
         separator_style = "thin",
         numbers = "ordinal"
     }

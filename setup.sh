@@ -16,7 +16,7 @@ yay -S insomnia-bin spotify beekeeper-studio-bin bash-git-prompt
 echo
 
 echo "=== installing python stuff ==="
-pip3 install pylint isort ipython ipdb black pipenv wakatime
+pip3 install pylint isort black wakatime
 echo
 
 echo "=== setting up npm system wide install config ==="
