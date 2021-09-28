@@ -26,7 +26,7 @@ source ~/.profile
 echo
 
 echo "=== installing npm stuff ==="
-npm i -g prettier pyright
+npm i -g prettier pyright bash-language-server
 echo
 
 echo "=== setting up dotfiles ==="
