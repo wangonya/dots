@@ -41,6 +41,9 @@ ln -sv ~/dots/sxhkd/ ~/.config/sxhkd
 
 ln -sv ~/dots/terminals/alacritty.yml ~/.alacritty.yml
 
+mv .dmenurc .dmenurc.bak 
+ln -sv ~/dots/menus/dmenurc ~/.dmenurc
+
 git clone https://github.com/wangonya/NvChad.git ~/.config/nvim
 nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
