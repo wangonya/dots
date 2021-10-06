@@ -317,24 +317,14 @@ set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
+# Theme colors
+set $bg-color            #191c21
+set $inactive-bg-color   #191c21
+set $text-color          #979CAC
+set $inactive-text-color #3e4451
+set $urgent-bg-color     #E53935
+
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
-set $base00 #101218
-set $base01 #2e3440
-set $base02 #252936
-set $base03 #5e81ac  
-set $base04 #C0C5CE
-set $base05 #d1d4e0
-set $base06 #C9CCDB
-set $base07 #ffffff
-set $base08 #ee829f
-set $base09 #f99170
-set $base0A #ffefcc
-set $base0B #a5ffe1
-set $base0C #97e0ff
-set $base0D #97bbf7
-set $base0E #c0b7f9
-set $base0F #fcc09e
-#its neon blue #4666FF
 
 bar {
   height 20
@@ -353,32 +343,28 @@ bar {
 	strip_workspace_numbers yes
 
     colors {
-            separator  $base01
-            background $base01
-            statusline #81a1c1
+            separator  $inactive-bg-color
+            background $bg-color
+            statusline $text-color
               
-            #                   border  background text
-            focused_workspace  $base01 $base01    #81a1c1 
-            active_workspace   $base01 $base02    $base03
-            inactive_workspace $base01 $base01    #4c566a
-            urgent_workspace   $base01 $base01    $base08
-            binding_mode       $base01 #81a1c1    #2e3440
+            #                  border                   background              text
+            focused_workspace  $bg-color                $bg-color               $text-color 
+            active_workspace   $bg-color                $bg-color               $text-color
+            inactive_workspace $inactive-bg-color       $inactive-bg-color      $inactive-text-color
+            urgent_workspace   $urgent-bg-color         $urgent-bg-color        $text-color
+            binding_mode       $bg-color                $bg-color               $text-color 
     }
   # status_command exec ~/dots/i3status-net-speed.sh
 }
 
 # hide/unhide i3status bar
 # bindsym $mod+m bar mode toggle
-
-# Theme colors
-# class                   border  backgr. text    indic.   child_border
-    client.focused          #81a1c1 #81a1c1 #ffffff #81a1c1
-    client.unfocused        #2e3440 #2e3440 #888888 #2e3440
-    client.focused_inactive #2e3440 #2e3440 #888888 #2e3440
-    client.placeholder      #2e3440 #2e3440 #888888 #2e3440
-    client.urgent           #900000 #900000 #ffffff #900000
-
-    client.background       #242424
+# window colors
+# #                     border                  background              text                    indicator
+client.focused          $bg-color               $bg-color               $text-color             #00ff00
+client.unfocused        $inactive-bg-color      $inactive-bg-color      $inactive-text-color    #00ff00
+client.focused_inactive $inactive-bg-color      $inactive-bg-color      $inactive-text-color    #00ff00
+client.urgent           $urgent-bg-color        $urgent-bg-color        $text-color             #00ff00
 
 #############################
 ### settings for i3-gaps: ###

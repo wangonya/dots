@@ -26,7 +26,7 @@ source ~/.profile
 echo
 
 echo "=== installing npm stuff ==="
-npm i -g prettier pyright bash-language-server
+npm i -g prettier pyright bash-language-server vscode-langservers-extracted
 echo
 
 echo "=== setting up dotfiles ==="
@@ -44,8 +44,11 @@ ln -sv ~/dots/terminals/alacritty.yml ~/.alacritty.yml
 mv .dmenurc .dmenurc.bak 
 ln -sv ~/dots/menus/dmenurc ~/.dmenurc
 
-git clone https://github.com/wangonya/NvChad.git ~/.config/nvim
+git clone https://github.com/NvChad/NvChad ~/.config/nvim
 nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
+ln -sv ~/dots/nvchad/init.lua ~/.config/nvim/lua/custom/init.lua
+ln -sv ~/dots/nvchad/chadrc.lua ~/.config/nvim/lua/custom/chadrc.lua
+ln -sv ~/dots/nvchad/lspconfig.lua ~/.config/nvim/lua/custom/lspconfig.lua
 
 echo "source ~/dots/terminals/bashrc" >>~/.bashrc
 echo

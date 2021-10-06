@@ -2,13 +2,13 @@
 DMENU_FN="JetBrainsMonoNerdFont-10.5"
 
 ## background colour for unselected menu-items
-DMENU_NB="#282A36"
+DMENU_NB="#282C34"
 
 ## textcolour for unselected menu-items
-DMENU_NF="#F9FAF9"
+DMENU_NF="#ABB2BF"
 
 ## background colour for selected menu-items
-DMENU_SB="#81a1c1"
+DMENU_SB="#61AFEF"
 
 ## textcolour for selected menu-items
 DMENU_SF="#F8F8F2"
