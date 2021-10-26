@@ -3,12 +3,15 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra tidy ttf-jetbrains-mono python-pipenv
+sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra tidy ttf-jetbrains-mono python-pipenv bluez bluez-utils blueman
 echo
 
 echo "=== starting and enabling systemd services ==="
 systemctl start redis.service
 systemctl enable redis.service
+
+systemctl start bluetooth.service
+systemctl enable bluetooth.service
 echo
 
 echo "=== installing aur stuff ==="
