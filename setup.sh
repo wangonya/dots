@@ -58,8 +58,7 @@ echo
 
 echo "=== setting up git configs"
 git config --global init.defaultBranch main
-ln -sv ~/dots/gitignore ~/.gitignore
-git config --global core.excludesfile ~/.gitignore
+git config --global core.excludesFile '~/dots/git/gitignore'
 echo
 
 echo "=== setting up emacs ==="
@@ -68,6 +67,11 @@ git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 ~/.emacs.d/bin/doom install
 [ -d ~/.doom.d ] && mv ~/.doom.d ~/.doom.d-bak
 ln -sv ~/dots/emacs/doom.d/ ~/.doom.d
+echo
+
+echo "=== installing python-poetry ==="
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+source $HOME/.poetry/env
 echo
 
 #setup postgres

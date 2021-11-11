@@ -80,3 +80,8 @@ flycheck_*.el
 
 # End of https://www.toptal.com/developers/gitignore/api/clojure,leiningen,emacs
 
+.vscode
+
+cloud_sql_proxy
+venv/
+.env*
