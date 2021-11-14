@@ -3,7 +3,7 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra tidy ttf-jetbrains-mono python-pipenv bluez bluez-utils blueman
+sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra tidy ttf-jetbrains-mono python-pipenv bluez bluez-utils blueman docker docker-compose
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -12,6 +12,10 @@ systemctl enable redis.service
 
 systemctl start bluetooth.service
 systemctl enable bluetooth.service
+
+systemctl start docker.service
+systemctl enable docker.service
+sudo setfacl --modify user:$USER:rw /var/run/docker.sock
 echo
 
 echo "=== installing aur stuff ==="
