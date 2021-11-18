@@ -1,25 +1,19 @@
 echo "=== running updates ==="
+sudo pacman-mirrors -f 10
 sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra tidy ttf-jetbrains-mono python-pipenv bluez bluez-utils blueman docker docker-compose
+sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra noto-fonts
 echo
 
 echo "=== starting and enabling systemd services ==="
 systemctl start redis.service
 systemctl enable redis.service
-
-systemctl start bluetooth.service
-systemctl enable bluetooth.service
-
-systemctl start docker.service
-systemctl enable docker.service
-sudo setfacl --modify user:$USER:rw /var/run/docker.sock
 echo
 
 echo "=== installing aur stuff ==="
-yay -S insomnia-bin spotify beekeeper-studio-bin bash-git-prompt
+yay -S insomnia-bin beekeeper-studio-bin bash-git-prompt google-chrome redis-desktop-manager
 echo
 
 echo "=== installing python stuff ==="
@@ -37,25 +31,10 @@ npm i -g prettier pyright bash-language-server vscode-langservers-extracted type
 echo
 
 echo "=== setting up dotfiles ==="
-mv ~/.config/bspwm/ ~/.config/bspwm.bak
-ln -sv ~/dots/bspwm/ ~/.config/bspwm
-
-mv ~/.config/polybar/ ~/.config/polybar.bak
-ln -sv ~/dots/polybar/ ~/.config/polybar
-
-mv ~/.config/sxhkd/ ~/.config/sxhkd.bak
-ln -sv ~/dots/sxhkd/ ~/.config/sxhkd
-
 ln -sv ~/dots/terminals/alacritty.yml ~/.alacritty.yml
 
 mv .dmenurc .dmenurc.bak 
 ln -sv ~/dots/menus/dmenurc ~/.dmenurc
-
-git clone https://github.com/NvChad/NvChad ~/.config/nvim
-nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
-ln -sv ~/dots/nvchad/init.lua ~/.config/nvim/lua/custom/init.lua
-ln -sv ~/dots/nvchad/chadrc.lua ~/.config/nvim/lua/custom/chadrc.lua
-ln -sv ~/dots/nvchad/lspconfig.lua ~/.config/nvim/lua/custom/lspconfig.lua
 
 echo "source ~/dots/terminals/bashrc" >>~/.bashrc
 echo
@@ -66,11 +45,7 @@ git config --global core.excludesFile '~/dots/git/gitignore'
 echo
 
 echo "=== setting up emacs ==="
-[ -d ~/.emacs.d ] && mv ~/.emacs.d ~/.emacs.d-bak
-git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-~/.emacs.d/bin/doom install
-[ -d ~/.doom.d ] && mv ~/.doom.d ~/.doom.d-bak
-ln -sv ~/dots/emacs/doom.d/ ~/.doom.d
+curl -L https://github.com/wangonya/prelude/raw/master/utils/installer.sh | sh
 echo
 
 echo "=== installing python-poetry ==="
