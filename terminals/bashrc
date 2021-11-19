@@ -9,7 +9,7 @@ fi
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='nvim'
+  export EDITOR='vim'
 fi
 
 bind '"\e[A": history-search-backward'
@@ -23,7 +23,7 @@ export PYLINTRC="~/dots/python/pylintrc"
 alias mybash="vim ~/.bashrc"
 alias mybashs="source ~/.bashrc"
 alias myi3="vim ~/.i3/config"
-alias updt="sudo pacman -Syyu"
+alias updt="sudo pacman -Syu"
 alias py="python3"
 alias python3='python3'
 alias gcm="git commit -m"
@@ -36,8 +36,5 @@ alias gs="git status"
 alias gd="git diff"
 alias gp="git push -u origin HEAD"
 alias gpl="git pull origin"
-alias em="emacs"
-alias emt="emacs -nw"
-alias doom="~/.emacs.d/bin/doom"
 
 alias jhr="cd ~/projects/jenga-hr-api && source .env"

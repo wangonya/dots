@@ -4,16 +4,20 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra noto-fonts
+sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra ttf-ibm-plex mariadb
 echo
 
 echo "=== starting and enabling systemd services ==="
 systemctl start redis.service
 systemctl enable redis.service
+
+sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+systemctl start mariadb.service
+systemctl enable mariadb.service
 echo
 
 echo "=== installing aur stuff ==="
-yay -S insomnia-bin beekeeper-studio-bin bash-git-prompt google-chrome redis-desktop-manager
+pamac build insomnia-bin beekeeper-studio-bin bash-git-prompt google-chrome redis-desktop-manager
 echo
 
 echo "=== installing python stuff ==="
@@ -36,6 +40,11 @@ ln -sv ~/dots/terminals/alacritty.yml ~/.alacritty.yml
 mv .dmenurc .dmenurc.bak 
 ln -sv ~/dots/menus/dmenurc ~/.dmenurc
 
+mv .i3/config .i3/config.bak
+ln -sv ~/dots/i3wm/i3 ~/.i3/config
+
+ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf
+
 echo "source ~/dots/terminals/bashrc" >>~/.bashrc
 echo
 
@@ -54,3 +63,4 @@ source $HOME/.poetry/env
 echo
 
 #setup postgres
+#setup mariadb
