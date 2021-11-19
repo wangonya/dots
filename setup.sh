@@ -37,7 +37,7 @@ echo
 echo "=== setting up dotfiles ==="
 ln -sv ~/dots/terminals/alacritty.yml ~/.alacritty.yml
 
-mv .dmenurc .dmenurc.bak 
+mv .dmenurc .dmenurc.bak
 ln -sv ~/dots/menus/dmenurc ~/.dmenurc
 
 mv .i3/config .i3/config.bak
@@ -46,6 +46,8 @@ ln -sv ~/dots/i3wm/i3 ~/.i3/config
 ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf
 
 echo "source ~/dots/terminals/bashrc" >>~/.bashrc
+
+git clone https://github.com/dracula/zathura ~/.config/zathura/
 echo
 
 echo "=== setting up git configs"
