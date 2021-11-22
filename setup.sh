@@ -4,7 +4,10 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra ttf-ibm-plex mariadb
+sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent\
+     postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap\
+     fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra\
+     ttf-ibm-plex mariadb python-jedi jedi-language-server
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -17,7 +20,8 @@ systemctl enable mariadb.service
 echo
 
 echo "=== installing aur stuff ==="
-pamac build insomnia-bin beekeeper-studio-bin bash-git-prompt google-chrome redis-desktop-manager
+pamac build insomnia-bin beekeeper-studio-bin bash-git-prompt google-chrome\
+      redis-desktop-manager
 echo
 
 echo "=== installing python stuff ==="
@@ -25,13 +29,14 @@ pip3 install pylint isort black wakatime
 echo
 
 echo "=== setting up npm system wide install config ==="
-echo PATH="$HOME/.node_modules/bin:$PATH" >>~/.profile
-echo export npm_config_prefix=~/.node_modules >>~/.profile
+echo PATH="$HOME/.node_modules/bin:$PATH" >> ~/.profile
+echo export npm_config_prefix=~/.node_modules >> ~/.profile
 source ~/.profile
 echo
 
 echo "=== installing npm stuff ==="
-npm i -g prettier pyright bash-language-server vscode-langservers-extracted typescript-language-server
+npm i -g prettier pyright bash-language-server vscode-langservers-extracted\
+    typescript-language-server
 echo
 
 echo "=== setting up dotfiles ==="
@@ -45,7 +50,7 @@ ln -sv ~/dots/i3wm/i3 ~/.i3/config
 
 ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf
 
-echo "source ~/dots/terminals/bashrc" >>~/.bashrc
+echo "source ~/dots/terminals/bashrc" >> ~/.bashrc
 
 git clone https://github.com/dracula/zathura ~/.config/zathura/
 echo

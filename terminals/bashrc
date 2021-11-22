@@ -36,5 +36,7 @@ alias gs="git status"
 alias gd="git diff"
 alias gp="git push -u origin HEAD"
 alias gpl="git pull origin"
-
-alias jhr="cd ~/projects/jenga-hr-api && source .env"
+alias e='emacsclient -t'
+alias ec='emacsclient -c'
+alias vim='emacsclient -t'
+alias vi='emacsclient -t'
