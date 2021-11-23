@@ -4,10 +4,10 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent\
-     postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap\
-     fd emacs shfmt go go-tools gopls texlive-core texlive-latexextra\
-     ttf-ibm-plex mariadb python-jedi jedi-language-server
+sudo pacman -S redshift nodejs npm yarn vim zathura-pdf-mupdf qbittorrent \
+     postgresql redis alacritty ripgrep unclutter flameshot bat hugo rlwrap \
+     fd emacs shfmt go go-tools gopls \
+     ttf-ibm-plex mariadb
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -25,7 +25,7 @@ pamac build insomnia-bin beekeeper-studio-bin bash-git-prompt google-chrome\
 echo
 
 echo "=== installing python stuff ==="
-pip3 install pylint isort black wakatime
+pip3 install isort darker wakatime
 echo
 
 echo "=== setting up npm system wide install config ==="
@@ -35,8 +35,7 @@ source ~/.profile
 echo
 
 echo "=== installing npm stuff ==="
-npm i -g prettier pyright bash-language-server vscode-langservers-extracted\
-    typescript-language-server
+npm i -g prettier
 echo
 
 echo "=== setting up dotfiles ==="
@@ -58,10 +57,6 @@ echo
 echo "=== setting up git configs"
 git config --global init.defaultBranch main
 git config --global core.excludesFile '~/dots/git/gitignore'
-echo
-
-echo "=== setting up emacs ==="
-curl -L https://github.com/wangonya/prelude/raw/master/utils/installer.sh | sh
 echo
 
 echo "=== installing python-poetry ==="

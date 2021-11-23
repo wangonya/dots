@@ -85,3 +85,4 @@ flycheck_*.el
 cloud_sql_proxy
 venv/
 .env*
+run.sh
