@@ -300,7 +300,7 @@ bar {
 	i3bar_command i3bar
 	status_command i3status
 	position bottom
-        output primary
+        # output primary
         # mode hide
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
