@@ -6,7 +6,7 @@ echo
 echo "=== installing packages ==="
 sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent \
      postgresql redis alacritty ripgrep unclutter flameshot hugo \
-     fd ttf-ibm-plex mariadb
+     fd go go-tools gopls ttf-ibm-plex mariadb bash-completion
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -19,8 +19,7 @@ systemctl enable mariadb.service
 echo
 
 echo "=== installing aur stuff ==="
-pamac build insomnia-bin beekeeper-studio-bin bash-git-prompt google-chrome\
-      redis-desktop-manager
+pamac build bash-git-prompt google-chrome
 echo
 
 echo "=== installing python stuff ==="
