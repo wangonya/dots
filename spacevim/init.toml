@@ -1,0 +1,73 @@
+#=============================================================================
+# dark_powered.toml --- dark powered configuration example for SpaceVim
+# Copyright (c) 2016-2021 Wang Shidong & Contributors
+# Author: Wang Shidong < wsdjeg at 163.com >
+# URL: https://spacevim.org
+# License: GPLv3
+#=============================================================================
+
+# All SpaceVim option below [option] section
+[options]
+    # set spacevim theme
+    colorscheme = "dracula"
+    colorscheme_bg = "dark"
+    custom_color_palette = [
+        ["#44475A",  "#8BE9FD",  117,  239],
+        ["#6272A4",  "#343746", 237, 61],
+        ["#6272A4",  "#343746", 237, 61],
+        ["#343746", 237],
+        ["#F8F8F2",  "#BD93F9",  255, 141],
+        ["#F8F8F2",  "#50FA7B", 255, 84],
+        ["#F8F8F2",  "#FF5555",   255, 203],
+    ]
+    # Disable guicolors in basic mode, many terminal do not support 24bit
+    # true colors
+    enable_guicolors = true
+    # Disable statusline separator, if you want to use other value, please
+    # install nerd fonts
+    statusline_separator = "nil"
+    statusline_iseparator = "bar"
+    buffer_index_type = 4
+    enable_tabline_filetype_icon = true
+    enable_statusline_mode = false
+
+    # autocomplete
+    autocomplete_method = "deoplete"
+
+    # bootstrap function
+    bootstrap_after = 'myspacevim#after'
+
+# Enable autocomplete layer
+[[layers]]
+name = "autocomplete"
+auto_completion_return_key_behavior = "complete"
+auto_completion_tab_key_behavior = "smart"
+
+[[layers]]
+  name = "lsp"
+  enabled_clients = ["pyright"]
+
+[[layers]]
+  name = "lang#python"
+  python_file_head = [""]
+  enabled_linters = ["python", "pylint"]
+
+[[layers]]
+    name = "git"
+
+[[layers]]
+    name = "VersionControl"
+
+[[layers]]
+  name = "treesitter"
+
+[[layers]]
+name = "shell"
+default_position = "bottom"
+default_height = 15
+
+[[custom_plugins]]
+    repo = "dracula/vim"
+
+[[custom_plugins]]
+    repo = "wakatime/vim-wakatime"

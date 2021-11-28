@@ -6,7 +6,7 @@ echo
 echo "=== installing packages ==="
 sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent \
      postgresql redis alacritty ripgrep unclutter flameshot hugo \
-     fd go go-tools gopls ttf-ibm-plex mariadb bash-completion
+     fd go go-tools gopls ttf-ibm-plex mariadb zsh neovim \
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -19,11 +19,11 @@ systemctl enable mariadb.service
 echo
 
 echo "=== installing aur stuff ==="
-pamac build bash-git-prompt google-chrome
+pamac build google-chrome antigen
 echo
 
 echo "=== installing python stuff ==="
-pip3 install isort darker wakatime
+pip3 install isort darker wakatime pynvim jedi pylint cookiecutter
 echo
 
 echo "=== setting up npm system wide install config ==="
@@ -33,7 +33,7 @@ source ~/.profile
 echo
 
 echo "=== installing npm stuff ==="
-npm i -g prettier
+npm i -g prettier pyright
 echo
 
 echo "=== setting up dotfiles ==="
@@ -47,9 +47,17 @@ ln -sv ~/dots/i3wm/i3 ~/.i3/config
 
 ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf
 
-echo "source ~/dots/terminals/bashrc" >> ~/.bashrc
+[ -f .zshrc ] && mv .zshrc .zshrc.bak
+ln -sv ~/dots/terminals/zshrc ~/.zshrc
+chsh -s /usr/bin/zsh
 
 git clone https://github.com/dracula/zathura ~/.config/zathura/
+
+curl -sLf https://spacevim.org/install.sh | bash
+mkdir -p ~/.Spacevim.d/autoload
+[-f .SpaceVim.d/init.toml ] && mv .SpaceVim.d/init.toml .SpaceVim.d/init.toml.bak
+ln -sv ~/dots/spacevim/init.toml ~/.SpaceVim.d/init.toml
+ln -sv ~/dots/spacevim/myspacevim.vim ~/.SpaceVim.d/autoload/myspacevim.vim
 echo
 
 echo "=== setting up git configs"

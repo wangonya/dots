@@ -1,0 +1,55 @@
+source /usr/share/zsh/share/antigen.zsh
+    
+# Load the oh-my-zsh's library
+antigen use oh-my-zsh
+
+antigen bundles <<EOBUNDLES
+    # Bundles from the default repo (robbyrussell's oh-my-zsh)
+    git
+    pip
+    python
+    vi-mode
+
+    # Syntax highlighting bundle.
+    zsh-users/zsh-syntax-highlighting
+
+    # Fish-like auto suggestions
+    zsh-users/zsh-autosuggestions
+
+    # Extra zsh completions
+    zsh-users/zsh-completions
+EOBUNDLES
+
+# Load the theme
+antigen theme robbyrussell
+
+antigen apply
+
+ZSH_AUTOSUGGEST_USE_ASYNC="true"
+
+export EDITOR='vim'
+export BROWSER=/usr/bin/google-chrome-stable
+
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.poetry/bin:$PATH
+
+export PYLINTRC="~/dots/python/pylintrc"
+
+alias myi3="vim ~/dots/i3wm/i3"
+alias updt="sudo pacman -Syu"
+alias py="python3"
+alias python3='python3'
+alias less="bat"
+alias dt="cd ~/dots"
+alias prj="cd ~/projects"
+alias r="ranger"
+alias pyf="darker -i ."
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+alias gcm="git commit -m"
+alias ga="git add"
+alias gs="git status"
+alias gd="git diff"
+alias gp="git push -u origin HEAD"
+alias gpl="git pull origin"
