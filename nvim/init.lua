@@ -6,12 +6,16 @@ local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
 
 local function opt(scope, key, value)
     scopes[scope][key] = value
-    if scope ~= "o" then scopes["o"][key] = value end
+    if scope ~= "o" then
+        scopes["o"][key] = value
+    end
 end
 
 local function map(mode, lhs, rhs, opts)
     local options = {noremap = true}
-    if opts then options = vim.tbl_extend("force", options, opts) end
+    if opts then
+        options = vim.tbl_extend("force", options, opts)
+    end
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
@@ -22,47 +26,55 @@ g.maplocalleader = ","
 -------------------- plugins -------------------------------
 cmd [[packadd packer.nvim]]
 cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
-require("packer").startup(function()
-    use {"wbthomason/packer.nvim", opt = true}
-    use {
-        "akinsho/nvim-bufferline.lua",
-        requires = "kyazdani42/nvim-web-devicons"
-    }
-    use {
-        "nvim-telescope/telescope.nvim",
-        requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
-    }
-    use {"neovim/nvim-lspconfig"}
-    use {
-	  "hrsh7th/nvim-cmp",
-	  requires = {
-	    "hrsh7th/vim-vsnip",
-	    "hrsh7th/cmp-buffer",
-	  }
-	}
-    use {"wakatime/vim-wakatime"}
-    use {"nvim-treesitter/nvim-treesitter"}
-    use {"kyazdani42/nvim-tree.lua"}
-    use {"glepnir/galaxyline.nvim", branch = "main"}
-    use {"lukas-reineke/format.nvim"}
-    use {"airblade/vim-gitgutter"}
-    use {"b3nj5m1n/kommentary"}
-    use {"p00f/nvim-ts-rainbow"}
-    use {"jiangmiao/auto-pairs"}
-    use {"akinsho/nvim-toggleterm.lua"}
-    use {"f-person/git-blame.nvim"}
-    use 'glepnir/lspsaga.nvim'
-    use 'norcalli/nvim-colorizer.lua'
-    use 'psliwka/vim-smoothie'
-    use 'shaunsingh/moonlight.nvim'
-    use 'romgrk/nvim-treesitter-context'
-    use 'rmagatti/auto-session'
-end)
+require("packer").startup(
+    function()
+        use {"wbthomason/packer.nvim", opt = true}
+        use {
+            "akinsho/nvim-bufferline.lua",
+            requires = "kyazdani42/nvim-web-devicons"
+        }
+        use {
+            "nvim-telescope/telescope.nvim",
+            requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
+        }
+        use {
+            "hrsh7th/nvim-cmp",
+            requires = {
+                "hrsh7th/cmp-vsnip",
+                "hrsh7th/vim-vsnip",
+                "hrsh7th/cmp-buffer",
+                "hrsh7th/cmp-nvim-lsp",
+                "hrsh7th/cmp-path",
+                "hrsh7th/cmp-cmdline"
+            }
+        }
+        use {
+            "kyazdani42/nvim-tree.lua",
+            config = function() require"nvim-tree".setup {} end
+        }
+        use "neovim/nvim-lspconfig"
+        use "wakatime/vim-wakatime"
+        use "nvim-treesitter/nvim-treesitter"
+        use "lukas-reineke/format.nvim"
+        use "airblade/vim-gitgutter"
+        use "b3nj5m1n/kommentary"
+        use "p00f/nvim-ts-rainbow"
+        use "jiangmiao/auto-pairs"
+        use "akinsho/nvim-toggleterm.lua"
+        use "f-person/git-blame.nvim"
+        use "nvim-lualine/lualine.nvim"
+        use "glepnir/lspsaga.nvim"
+        use "norcalli/nvim-colorizer.lua"
+        use "psliwka/vim-smoothie"
+        use "Mofiqul/dracula.nvim"
+        use "romgrk/nvim-treesitter-context"
+        use "rmagatti/auto-session"
+    end
+)
 --------------------------------------------------------------
 
 -------------------- colorscheme -------------------------------
-g.moonlight_borders = true
-require('moonlight').set()
+vim.cmd [[colorscheme dracula]]
 --------------------------------------------------------------
 
 -------------------- key mappings -------------------------------
@@ -71,6 +83,7 @@ map("i", "jk", "<Esc>") -- jk to escape
 map("n", "<leader>w", "<cmd>wa<cr>") -- save
 map("n", "<leader>q", "<cmd>q<cr>") -- quit
 map("n", "<leader>t", "<cmd>WakaTimeToday<CR>") -- wakatime
+map("n", "<leader>bd", "<cmd>bd<CR>") -- wakatime
 
 -- copy cut paste
 map("v", "<C-c>", [["+y]])
@@ -129,30 +142,30 @@ cmd "au FocusLost * :wa" -- autosave on lose focus
 cmd [[au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
 --------------------------------------------------------------
 
-
 ---------------------- git ---------------------------------
-g.gitgutter_grep = 'rg'
+g.gitgutter_grep = "rg"
 ------------------------------------------------------------------
 
-
 ---------------------- git blame ---------------------------------
-g.gitblame_date_format = '%r'
+g.gitblame_date_format = "%r"
 ------------------------------------------------------------------
 
 ---------------------- session ---------------------------------
 -- g.dashboard_default_executive = "telescope"
-require('auto-session').setup({
-  log_level = 'info',
-  auto_session_enable_last_session = false,
-  auto_session_enabled = true,
-  auto_save_enabled = nil,
-  auto_restore_enabled = nil,
-  auto_session_suppress_dirs = nil
-})
+require("auto-session").setup(
+    {
+        log_level = "info",
+        auto_session_enable_last_session = false,
+        auto_session_enabled = true,
+        auto_save_enabled = nil,
+        auto_restore_enabled = nil,
+        auto_session_suppress_dirs = nil
+    }
+)
 ------------------------------------------------------------------
 
 ---------------------- terminal ---------------------------------
-require"toggleterm".setup {
+require "toggleterm".setup {
     size = 10,
     open_mapping = [[<c-\>]],
     hide_numbers = true, -- hide the number column in toggleterm buffers
@@ -175,24 +188,105 @@ require"toggleterm".setup {
 }
 --------------------------------------------------------------
 
+---------------------- completions (nvim-cmp) --------------------------
+local cmp = require "cmp"
+
+cmp.setup(
+    {
+        snippet = {
+            -- REQUIRED - you must specify a snippet engine
+            expand = function(args)
+                vim.fn["vsnip#anonymous"](args.body)
+            end
+        },
+        mapping = {
+            ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
+            ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
+            ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
+            ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+            ["<C-e>"] = cmp.mapping(
+                {
+                    i = cmp.mapping.abort(),
+                    c = cmp.mapping.close()
+                }
+            ),
+            ["<CR>"] = cmp.mapping.confirm({select = true})
+        },
+        sources = cmp.config.sources(
+            {
+                {name = "nvim_lsp"},
+                {name = "vsnip"}
+            },
+            {
+                {name = "buffer"}
+            }
+        )
+    }
+)
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(
+    "/",
+    {
+        sources = {
+            {name = "buffer"}
+        }
+    }
+)
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(
+    ":",
+    {
+        sources = cmp.config.sources(
+            {
+                {name = "path"}
+            },
+            {
+                {name = "cmdline"}
+            }
+        )
+    }
+)
+--------------------------------------------------------------
+
 ---------------------- lsp ---------------------------------
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport =
-    {properties = {"documentation", "detail", "additionalTextEdits"}}
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {"documentation", "detail", "additionalTextEdits"}
+}
 
 --[[ require"lspconfig".pyls.setup {
     settings = {pyls = {plugins = {pylint = {enabled = true}}}}
 } ]]
-require"lspconfig".pyright.setup {}
+require "lspconfig".pyright.setup {
+    cmd = {"pyright-langserver", "--stdio"},
+    filetypes = {"python"},
+    settings = {
+        python = {
+            disableOrganizeImports = true,
+            analysis = {
+                autoImportCompletions = true,
+                autoSearchPaths = true,
+                diagnosticMode = "openFilesOnly",
+                useLibraryCodeForTypes = true
+            }
+        }
+    },
+    single_file_support = true
+}
 
 -- diagnostic signs
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
         virtual_text = {
             prefix = " " -- change this to whatever you want your diagnostic icons to be
         }
-    })
+    }
+)
 
 --------------------------------------------------------------
 
@@ -203,36 +297,51 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 --------------------------------------------------------------
 
 ---------------------- lspsaga ---------------------------------
-require'lspsaga'.init_lsp_saga({
-    error_sign = "",
-    warn_sign = "",
-    hint_sign = " ",
-    infor_sign = " "
-})
+require "lspsaga".init_lsp_saga(
+    {
+        error_sign = "",
+        warn_sign = "",
+        hint_sign = " ",
+        infor_sign = " "
+    }
+)
 --------------------------------------------------------------
 
 ---------------------- autoformat ---------------------------------
-require"format".setup {
+require "format".setup {
     ["*"] = {
         {cmd = {"sed -i 's/[ \t]*$//'"}} -- remove trailing whitespace
     },
-    python = {{cmd = {"autopep8 --in-place -a -a -a"}}, {cmd = {"isort"}}},
-    lua = {{cmd = {"lua-format -i"}}},
+    python = {
+        {
+            cmd = {"darker -i"}
+        }
+    },
+    go = {
+        {
+            cmd = {"gofmt -w", "goimports -w"},
+            tempfile_postfix = ".tmp"
+        }
+    },
+    javascript = {
+        {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
+    },
+    markdown = {
+        {cmd = {"prettier -w"}}
+
+    }
 }
+
 vim.api.nvim_exec([[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost * FormatWrite
+augroup Format
+    autocmd!
+    autocmd BufWritePost * FormatWrite
 augroup END
 ]], true)
 --------------------------------------------------------------
 
----------------------- completions --------------------------
-
---------------------------------------------------------------
-
 -------------------- tree-sitter ---------------------------
-require'nvim-treesitter.configs'.setup {
+require "nvim-treesitter.configs".setup {
     ensure_installed = "maintained",
     highlight = {enable = true},
     rainbow = {
@@ -248,233 +357,53 @@ g.nvim_tree_icons = {git = {unstaged = "~"}}
 --------------------------------------------------------------
 
 -------------------- bufferline -------------------------------
-require"bufferline".setup {
+require "bufferline".setup {
     options = {
         view = "multiwindow",
         diagnostic = "nvim_lsp",
         separator_style = "thin",
-        numbers = "ordinal"
+        numbers = "ordinal",
+        show_buffer_close_icons = false,
+        show_close_icon = false,
     }
 }
 --------------------------------------------------------------
 
 ---------------------- colorizer ---------------------------------
-require'colorizer'.setup()
+require "colorizer".setup()
 --------------------------------------------------------------
 
--------------------- statusline -------------------------------
-local gl = require("galaxyline")
-local condition = require("galaxyline.condition")
-local section = gl.section
-local vcs = require("galaxyline.provider_vcs")
-
-local colors = {
-    bg = "#1B1E2B",
-    fg = "#e4f3fa",
-    line_bg = "#1B1E2B",
-    lbg = "#1B1E2B",
-    fg_green = "#2df4c0",
-    yellow = "#ffc777",
-    cyan = "#b994f1",
-    darkblue = "#f1fa8c",
-    green = "#2df4c0",
-    orange = "#f67f81",
-    purple = "#b4a4f4",
-    magenta = "#BF616A",
-    gray = "#a1abe0",
-    blue = "#04d1f9",
-    red = "#ff5555"
-}
-
-local buffer_not_empty = function()
-    if fn.empty(fn.expand("%:t")) ~= 1 then return true end
-    return false
-end
-
-gl.short_line_list = {"NvimTree", "vista", "dbui", "packer"}
-
-section.left[1] = {
-    FirstElement = {
-        -- provider = function() return '▊ ' end,
-        provider = function() return "  " end,
-        highlight = {colors.blue, colors.line_bg}
-    }
-}
-section.left[2] = {
-    ViMode = {
-        provider = function()
-            -- auto change color according the vim mode
-            local mode_color = {
-                n = colors.magenta,
-                i = colors.green,
-                v = colors.blue,
-                [""] = colors.blue,
-                V = colors.blue,
-                c = colors.red,
-                no = colors.magenta,
-                s = colors.orange,
-                S = colors.orange,
-                [""] = colors.orange,
-                ic = colors.yellow,
-                R = colors.purple,
-                Rv = colors.purple,
-                cv = colors.red,
-                ce = colors.red,
-                r = colors.cyan,
-                rm = colors.cyan,
-                ["r?"] = colors.cyan,
-                ["!"] = colors.red,
-                t = colors.red
-            }
-            cmd("hi GalaxyViMode guifg=" .. mode_color[fn.mode()])
-            return "     "
-        end,
-        highlight = {colors.red, colors.line_bg, "bold"}
-    }
-}
-section.left[3] = {
-    FileIcon = {
-        provider = "FileIcon",
-        condition = buffer_not_empty,
-        highlight = {
-            require("galaxyline.provider_fileinfo").get_file_icon_color,
-            colors.line_bg
-        }
-    }
-}
-section.left[4] = {
-    FileName = {
-        -- provider = "FileName",
-        provider = function() return fn.expand("%:F") end,
-        condition = buffer_not_empty,
-        separator = " ",
-        separator_highlight = {colors.purple, colors.bg},
-        highlight = {colors.purple, colors.line_bg, "bold"}
-    }
-}
-
-section.right[1] = {
-    GitIcon = {
-        provider = function() return " " end,
-        condition = vcs.check_git_workspace,
-        highlight = {colors.orange, colors.line_bg}
-    }
-}
-section.right[5] = {
-    GitBranch = {
-        provider = "GitBranch",
-        condition = vcs.check_git_workspace,
-        separator = "",
-        separator_highlight = {colors.purple, colors.bg},
-        highlight = {colors.orange, colors.line_bg, "bold"}
-    }
-}
-
-local checkwidth = function()
-    local squeeze_width = fn.winwidth(0) / 2
-    if squeeze_width > 40 then return true end
-    return false
-end
-
-section.right[2] = {
-    DiffAdd = {
-        provider = "DiffAdd",
-        condition = checkwidth,
-        icon = "+",
-        highlight = {colors.green, colors.line_bg}
-    }
-}
-section.right[3] = {
-    DiffModified = {
-        provider = "DiffModified",
-        condition = checkwidth,
-        icon = "~",
-        highlight = {colors.yellow, colors.line_bg}
-    }
-}
-section.right[4] = {
-    DiffRemove = {
-        provider = "DiffRemove",
-        condition = checkwidth,
-        icon = "-",
-        highlight = {colors.red, colors.line_bg}
-    }
-}
-
-section.right[6] = {
-    LineInfo = {
-        provider = "LineColumn",
-        separator = " ",
-        separator_highlight = {colors.blue, colors.line_bg},
-        highlight = {colors.gray, colors.line_bg}
-    }
-}
-
-section.right[8] = {
-    DiagnosticError = {
-        provider = "DiagnosticError",
-        separator = " ",
-        icon = " ",
-        highlight = {colors.red, colors.line_bg},
-        separator_highlight = {colors.bg, colors.bg}
-    }
-}
-section.right[9] = {
-    DiagnosticWarn = {
-        provider = "DiagnosticWarn",
-        -- separator = " ",
-        icon = " ",
-        highlight = {colors.yellow, colors.line_bg},
-        separator_highlight = {colors.bg, colors.bg}
-    }
-}
-
-section.right[10] = {
-    DiagnosticInfo = {
-        -- separator = " ",
-        provider = "DiagnosticInfo",
-        icon = " ",
-        highlight = {colors.green, colors.line_bg},
-        separator_highlight = {colors.bg, colors.bg}
-    }
-}
-
-section.right[11] = {
-    DiagnosticHint = {
-        provider = "DiagnosticHint",
-        -- separator = " ",
-        icon = " ",
-        highlight = {colors.blue, colors.line_bg},
-        separator_highlight = {colors.bg, colors.bg}
-    }
-}
-
-section.short_line_left[1] = {
-    BufferType = {
-        provider = "FileIcon",
-        separator = " ",
-        separator_highlight = {"NONE", colors.lbg},
-        highlight = {colors.blue, colors.lbg, "bold"}
-    }
-}
-
-section.short_line_left[2] = {
-    SFileName = {
-        provider = function()
-            local fileinfo = require("galaxyline.provider_fileinfo")
-            local fname = fileinfo.get_current_file_name()
-            for _, v in ipairs(gl.short_line_list) do
-                if v == vim.bo.filetype then return "" end
-            end
-            return fname
-        end,
-        condition = buffer_not_empty,
-        highlight = {colors.white, colors.lbg, "bold"}
-    }
-}
-
-section.short_line_right[1] = {
-    BufferIcon = {provider = "BufferIcon", highlight = {colors.fg, colors.lbg}}
+-------------------- lualine -------------------------------
+require "lualine".setup {
+    options = {
+        icons_enabled = true,
+        theme = "dracula-nvim",
+        component_separators = "|",
+        section_separators = {left = "", right = ""},
+        disabled_filetypes = {},
+        always_divide_middle = true
+    },
+    sections = {
+        lualine_a = {"mode"},
+        lualine_b = {
+            "branch",
+            "diff",
+            {"diagnostics", sources = {"nvim_lsp", "coc"}}
+        },
+        lualine_c = {"filename"},
+        lualine_x = {"encoding", "fileformat", "filetype"},
+        lualine_y = {"progress"},
+        lualine_z = {"location"}
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {"filename"},
+        lualine_x = {"location"},
+        lualine_y = {},
+        lualine_z = {}
+    },
+    tabline = {},
+    extensions = {}
 }
 --------------------------------------------------------------
-

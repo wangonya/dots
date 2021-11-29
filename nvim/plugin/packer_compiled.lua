@@ -81,13 +81,29 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/cmp-buffer"
   },
+  ["cmp-cmdline"] = {
+    loaded = true,
+    path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/cmp-cmdline"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
+  },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/cmp-path"
+  },
+  ["cmp-vsnip"] = {
+    loaded = true,
+    path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/cmp-vsnip"
+  },
+  ["dracula.nvim"] = {
+    loaded = true,
+    path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/dracula.nvim"
+  },
   ["format.nvim"] = {
     loaded = true,
     path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/format.nvim"
-  },
-  ["galaxyline.nvim"] = {
-    loaded = true,
-    path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
   },
   ["git-blame.nvim"] = {
     loaded = true,
@@ -101,9 +117,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
   },
-  ["moonlight.nvim"] = {
+  ["lualine.nvim"] = {
     loaded = true,
-    path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/moonlight.nvim"
+    path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
   ["nvim-bufferline.lua"] = {
     loaded = true,
@@ -126,6 +142,7 @@ _G.packer_plugins = {
     path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/nvim-toggleterm.lua"
   },
   ["nvim-tree.lua"] = {
+    config = { "\27LJ\1\2;\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\14nvim-tree\frequire\0" },
     loaded = true,
     path = "/home/kelvin/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
   },
@@ -181,6 +198,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: nvim-tree.lua
+time([[Config for nvim-tree.lua]], true)
+try_loadstring("\27LJ\1\2;\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")
+time([[Config for nvim-tree.lua]], false)
 if should_profile then save_profiles() end
 
 end)

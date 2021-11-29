@@ -23,7 +23,7 @@ pamac build google-chrome antigen
 echo
 
 echo "=== installing python stuff ==="
-pip3 install isort darker wakatime pynvim jedi pylint cookiecutter
+pip3 install isort darker wakatime pynvim cookiecutter
 echo
 
 echo "=== setting up npm system wide install config ==="
@@ -53,11 +53,8 @@ chsh -s /usr/bin/zsh
 
 git clone https://github.com/dracula/zathura ~/.config/zathura/
 
-curl -sLf https://spacevim.org/install.sh | bash
-mkdir -p ~/.Spacevim.d/autoload
-[-f .SpaceVim.d/init.toml ] && mv .SpaceVim.d/init.toml .SpaceVim.d/init.toml.bak
-ln -sv ~/dots/spacevim/init.toml ~/.SpaceVim.d/init.toml
-ln -sv ~/dots/spacevim/myspacevim.vim ~/.SpaceVim.d/autoload/myspacevim.vim
+[-f .config/nvim ] && mv .config/nvim .config/nvim.bak
+ln -sv ~/dots/nvim ~/.config/nvim
 echo
 
 echo "=== setting up git configs"
