@@ -50,7 +50,9 @@ require("packer").startup(
         }
         use {
             "kyazdani42/nvim-tree.lua",
-            config = function() require"nvim-tree".setup {} end
+            config = function() require"nvim-tree".setup {
+                update_focused_file = { enable = true }
+            } end
         }
         use "neovim/nvim-lspconfig"
         use "wakatime/vim-wakatime"
@@ -352,7 +354,6 @@ require "nvim-treesitter.configs".setup {
 --------------------------------------------------------------
 
 -------------------- file explorer ---------------------------
-g.nvim_tree_follow = 1
 g.nvim_tree_icons = {git = {unstaged = "~"}}
 --------------------------------------------------------------
 
