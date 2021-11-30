@@ -106,7 +106,6 @@ map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 
 -- file explorer
 map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>")
-map("n", "<leader>tr", "<cmd>NvimTreeRefresh<cr>")
 
 -- session
 map("n", "<Leader>ss", "<cmd>SaveSession<cr>")
@@ -351,10 +350,6 @@ require "nvim-treesitter.configs".setup {
         extended_mode = true -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
     }
 }
---------------------------------------------------------------
-
--------------------- file explorer ---------------------------
-g.nvim_tree_icons = {git = {unstaged = "~"}}
 --------------------------------------------------------------
 
 -------------------- bufferline -------------------------------
