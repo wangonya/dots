@@ -23,7 +23,7 @@ pamac build google-chrome antigen
 echo
 
 echo "=== installing python stuff ==="
-pip3 install isort darker wakatime pynvim cookiecutter
+pip3 install isort darker wakatime pynvim cookiecutter pipenv
 echo
 
 echo "=== setting up npm system wide install config ==="
