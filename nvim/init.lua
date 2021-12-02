@@ -71,6 +71,7 @@ require("packer").startup(
         use "Mofiqul/dracula.nvim"
         use "romgrk/nvim-treesitter-context"
         use "rmagatti/auto-session"
+        use "tpope/vim-fugitive"
     end
 )
 --------------------------------------------------------------
@@ -83,9 +84,17 @@ vim.cmd [[colorscheme dracula]]
 map("n", "<leader>hl", "<cmd>noh<cr>") -- Clear highlights
 map("i", "jk", "<Esc>") -- jk to escape
 map("n", "<leader>w", "<cmd>wa<cr>") -- save
+map("n", "<leader>wqa", "<cmd>wqa<cr>") -- save and quit
 map("n", "<leader>q", "<cmd>q<cr>") -- quit
 map("n", "<leader>t", "<cmd>WakaTimeToday<CR>") -- wakatime
 map("n", "<leader>bd", "<cmd>bd<CR>") -- wakatime
+-- fugitive
+map("n", "<leader>ga", ":Git add %:p<CR><CR>")
+map("n", "<leader>gc", ":Git commit -v -q<CR>")
+map("n", "<leader>gs", ":Git<CR>")
+map("n", "<leader>gd", ":Gdiff<CR>")
+map("n", "<leader>gps", ":Dispatch! git push<CR>")
+map("n", "<leader>gpl", ":Dispatch! git pull<CR>")
 
 -- copy cut paste
 map("v", "<C-c>", [["+y]])
