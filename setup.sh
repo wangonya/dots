@@ -67,5 +67,9 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
 source $HOME/.poetry/env
 echo
 
+echo "=== syncing time ==="
+sudo timedatectl set-ntp true
+echo
+
 #setup postgres
 #setup mariadb
