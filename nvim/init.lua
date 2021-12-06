@@ -54,6 +54,7 @@ require("packer").startup(
                 update_focused_file = { enable = true }
             } end
         }
+        use { 'tami5/lspsaga.nvim', branch = 'nvim51' }
         use "neovim/nvim-lspconfig"
         use "wakatime/vim-wakatime"
         use "nvim-treesitter/nvim-treesitter"
@@ -65,7 +66,6 @@ require("packer").startup(
         use "akinsho/nvim-toggleterm.lua"
         use "f-person/git-blame.nvim"
         use "nvim-lualine/lualine.nvim"
-        use "glepnir/lspsaga.nvim"
         use "norcalli/nvim-colorizer.lua"
         use "psliwka/vim-smoothie"
         use "Mofiqul/dracula.nvim"
@@ -84,15 +84,16 @@ vim.cmd [[colorscheme dracula]]
 map("n", "<leader>hl", "<cmd>noh<cr>") -- Clear highlights
 map("i", "jk", "<Esc>") -- jk to escape
 map("n", "<leader>w", "<cmd>wa<cr>") -- save
-map("n", "<leader>wqa", "<cmd>wqa<cr>") -- save and quit
 map("n", "<leader>q", "<cmd>q<cr>") -- quit
 map("n", "<leader>t", "<cmd>WakaTimeToday<CR>") -- wakatime
 map("n", "<leader>bd", "<cmd>bd<CR>") -- wakatime
+
 -- fugitive
 map("n", "<leader>ga", ":Git add %:p<CR><CR>")
 map("n", "<leader>gc", ":Git commit -v -q<CR>")
 map("n", "<leader>gs", ":Git<CR>")
 map("n", "<leader>gd", ":Gdiff<CR>")
+map("n", "<leader>gm", ":GMove<Space>")
 map("n", "<leader>gps", ":Dispatch! git push<CR>")
 map("n", "<leader>gpl", ":Dispatch! git pull<CR>")
 
@@ -209,6 +210,7 @@ cmp.setup(
             end
         },
         mapping = {
+            ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
             ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
             ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
             ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),

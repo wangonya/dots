@@ -13,13 +13,16 @@ echo "=== starting and enabling systemd services ==="
 systemctl start redis.service
 systemctl enable redis.service
 
+systemctl start mongodb.services
+systemctl enable mongodb.service
+
 sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 systemctl start mariadb.service
 systemctl enable mariadb.service
 echo
 
 echo "=== installing aur stuff ==="
-pamac build google-chrome antigen
+pamac build google-chrome antigen mongodb-tools mongodb-tools-bin
 echo
 
 echo "=== installing python stuff ==="
