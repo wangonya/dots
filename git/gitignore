@@ -89,4 +89,5 @@ venv/
 .env-local*
 .env-test*
 .env-uat*
-run.sh
+
+.session.vim

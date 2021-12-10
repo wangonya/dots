@@ -69,8 +69,8 @@ require("packer").startup(
         use "norcalli/nvim-colorizer.lua"
         use "psliwka/vim-smoothie"
         use "Mofiqul/dracula.nvim"
-        use "romgrk/nvim-treesitter-context"
-        use "rmagatti/auto-session"
+        -- use "romgrk/nvim-treesitter-context"
+        -- use "rmagatti/auto-session"
         use "tpope/vim-fugitive"
     end
 )
@@ -118,8 +118,18 @@ map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>")
 
 -- session
-map("n", "<Leader>ss", "<cmd>SaveSession<cr>")
-map("n", "<Leader>sl", "<cmd>RestoreSession<cr>")
+--[[ require("auto-session").setup(
+    {
+        log_level = "info",
+        auto_session_enable_last_session = false,
+        auto_session_enabled = true,
+        auto_save_enabled = true,
+        auto_restore_enabled = true,
+    }
+)
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"]]
+map("n", "<Leader>ss", "<cmd>mksession! .session.vim<cr>")
+map("n", "<Leader>sl", "<cmd>source .session.vim<cr>")
 --------------------------------------------------------------
 
 -------------------- options -------------------------------
@@ -159,19 +169,6 @@ g.gitgutter_grep = "rg"
 
 ---------------------- git blame ---------------------------------
 g.gitblame_date_format = "%r"
-------------------------------------------------------------------
-
----------------------- session ---------------------------------
-require("auto-session").setup(
-    {
-        log_level = "info",
-        auto_session_enable_last_session = false,
-        auto_session_enabled = true,
-        auto_save_enabled = true,
-        auto_restore_enabled = true,
-    }
-)
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 ------------------------------------------------------------------
 
 ---------------------- terminal ---------------------------------
@@ -268,9 +265,23 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {"documentation", "detail", "additionalTextEdits"}
 }
 
---[[ require"lspconfig".pyls.setup {
-    settings = {pyls = {plugins = {pylint = {enabled = true}}}}
-} ]]
+require"lspconfig".pylsp.setup {
+    settings = {
+        pylsp = {
+            configurationSources = {"flake8"},
+            plugins = {
+                flake8 = {
+                    enabled = true,
+                    config = "~/dots/python/flake8"
+                },
+                pycodestyle = {enabled = false},
+                pyflakes = {enabled = false},
+                pylint = {enabled = false},
+                yapf = {enabled = false},
+            }
+        }
+    }
+}
 require "lspconfig".pyright.setup {
     cmd = {"pyright-langserver", "--stdio"},
     filetypes = {"python"},
@@ -278,10 +289,10 @@ require "lspconfig".pyright.setup {
         python = {
             disableOrganizeImports = true,
             analysis = {
+                typeCheckingMode = "off",
                 autoImportCompletions = true,
                 autoSearchPaths = true,
                 diagnosticMode = "openFilesOnly",
-                useLibraryCodeForTypes = true
             }
         }
     },

@@ -26,7 +26,8 @@ pamac build google-chrome antigen mongodb-tools mongodb-tools-bin
 echo
 
 echo "=== installing python stuff ==="
-pip3 install isort darker wakatime pynvim cookiecutter pipenv
+pip install isort darker wakatime pynvim cookiecutter pipenv
+pip install 'python-lsp-server[all]'
 echo
 
 echo "=== setting up npm system wide install config ==="
