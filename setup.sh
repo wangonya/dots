@@ -6,7 +6,7 @@ echo
 echo "=== installing packages ==="
 sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent \
      postgresql redis alacritty ripgrep unclutter flameshot hugo \
-     fd go go-tools gopls ttf-ibm-plex mariadb zsh neovim \
+     fd go go-tools gopls delve ttf-ibm-plex mariadb zsh neovim \
 echo
 
 echo "=== starting and enabling systemd services ==="
