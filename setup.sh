@@ -22,7 +22,7 @@ systemctl enable mariadb.service
 echo
 
 echo "=== installing aur stuff ==="
-pamac build google-chrome antigen mongodb-tools mongodb-tools-bin
+pamac build google-chrome antigen mongodb-tools mongodb-tools-bin lua-format
 echo
 
 echo "=== installing python stuff ==="

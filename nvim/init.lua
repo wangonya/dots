@@ -6,16 +6,12 @@ local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
 
 local function opt(scope, key, value)
     scopes[scope][key] = value
-    if scope ~= "o" then
-        scopes["o"][key] = value
-    end
+    if scope ~= "o" then scopes["o"][key] = value end
 end
 
 local function map(mode, lhs, rhs, opts)
     local options = {noremap = true}
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
+    if opts then options = vim.tbl_extend("force", options, opts) end
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
@@ -26,54 +22,32 @@ g.maplocalleader = ","
 -------------------- plugins -------------------------------
 cmd [[packadd packer.nvim]]
 cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
-require("packer").startup(
-    function()
-        use {"wbthomason/packer.nvim", opt = true}
-        use {
-            "akinsho/nvim-bufferline.lua",
-            requires = "kyazdani42/nvim-web-devicons"
+require("packer").startup(function()
+    use {"wbthomason/packer.nvim", opt = true}
+    use {
+        "nvim-telescope/telescope.nvim",
+        requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
+    }
+    use {
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-vsnip", "hrsh7th/vim-vsnip", "hrsh7th/vim-vsnip-integ",
+            "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline", "rafamadriz/friendly-snippets"
         }
-        use {
-            "nvim-telescope/telescope.nvim",
-            requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
-        }
-        use {
-            "hrsh7th/nvim-cmp",
-            requires = {
-                "hrsh7th/cmp-vsnip",
-                "hrsh7th/vim-vsnip",
-                "hrsh7th/cmp-buffer",
-                "hrsh7th/cmp-nvim-lsp",
-                "hrsh7th/cmp-path",
-                "hrsh7th/cmp-cmdline"
-            }
-        }
-        use {
-            "kyazdani42/nvim-tree.lua",
-            config = function() require"nvim-tree".setup {
-                update_focused_file = { enable = true }
-            } end
-        }
-        use { 'tami5/lspsaga.nvim', branch = 'nvim51' }
-        use "neovim/nvim-lspconfig"
-        use "wakatime/vim-wakatime"
-        use "nvim-treesitter/nvim-treesitter"
-        use "lukas-reineke/format.nvim"
-        use "airblade/vim-gitgutter"
-        use "b3nj5m1n/kommentary"
-        use "p00f/nvim-ts-rainbow"
-        use "jiangmiao/auto-pairs"
-        use "akinsho/nvim-toggleterm.lua"
-        use "f-person/git-blame.nvim"
-        use "nvim-lualine/lualine.nvim"
-        use "norcalli/nvim-colorizer.lua"
-        use "psliwka/vim-smoothie"
-        use "Mofiqul/dracula.nvim"
-        -- use "romgrk/nvim-treesitter-context"
-        -- use "rmagatti/auto-session"
-        use "tpope/vim-fugitive"
-    end
-)
+    }
+    use "neovim/nvim-lspconfig"
+    use "wakatime/vim-wakatime"
+    use "nvim-treesitter/nvim-treesitter"
+    use "lukas-reineke/format.nvim"
+    use "airblade/vim-gitgutter"
+    use "b3nj5m1n/kommentary"
+    use "jiangmiao/auto-pairs"
+    use "f-person/git-blame.nvim"
+    use "nvim-lualine/lualine.nvim"
+    use "akinsho/nvim-bufferline.lua"
+    use "Mofiqul/dracula.nvim"
+end)
 --------------------------------------------------------------
 
 -------------------- colorscheme -------------------------------
@@ -86,16 +60,7 @@ map("i", "jk", "<Esc>") -- jk to escape
 map("n", "<leader>w", "<cmd>wa<cr>") -- save
 map("n", "<leader>q", "<cmd>q<cr>") -- quit
 map("n", "<leader>t", "<cmd>WakaTimeToday<CR>") -- wakatime
-map("n", "<leader>bd", "<cmd>bd<CR>") -- wakatime
-
--- fugitive
-map("n", "<leader>ga", ":Git add %:p<CR><CR>")
-map("n", "<leader>gc", ":Git commit -v -q<CR>")
-map("n", "<leader>gs", ":Git<CR>")
-map("n", "<leader>gd", ":Gdiff<CR>")
-map("n", "<leader>gm", ":GMove<Space>")
-map("n", "<leader>gps", ":Dispatch! git push<CR>")
-map("n", "<leader>gpl", ":Dispatch! git pull<CR>")
+map("n", "<leader>bd", "<cmd>bd<CR>") -- delete buffer
 
 -- copy cut paste
 map("v", "<C-c>", [["+y]])
@@ -114,22 +79,15 @@ map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 
--- file explorer
-map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>")
-
 -- session
---[[ require("auto-session").setup(
-    {
-        log_level = "info",
-        auto_session_enable_last_session = false,
-        auto_session_enabled = true,
-        auto_save_enabled = true,
-        auto_restore_enabled = true,
-    }
-)
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"]]
 map("n", "<Leader>ss", "<cmd>mksession! .session.vim<cr>")
 map("n", "<Leader>sl", "<cmd>source .session.vim<cr>")
+
+-- term
+map("n", "<Leader>tt", "<cmd>term<cr>")
+map("n", "<Leader>ht", "<cmd>sp term://zsh<cr>")
+map("n", "<Leader>vt", "<cmd>vsp term://zsh<cr>")
+map("t", "<Esc>", "<C-\\><C-n>") -- jk to escape
 --------------------------------------------------------------
 
 -------------------- options -------------------------------
@@ -171,118 +129,112 @@ g.gitgutter_grep = "rg"
 g.gitblame_date_format = "%r"
 ------------------------------------------------------------------
 
----------------------- terminal ---------------------------------
-require "toggleterm".setup {
-    size = 10,
-    open_mapping = [[<c-\>]],
-    hide_numbers = true, -- hide the number column in toggleterm buffers
-    shade_terminals = true,
-    start_in_insert = true,
-    persist_size = true,
-    direction = "float",
-    -- This field is only relevant if direction is set to 'float'
-    float_opts = {
-        -- The border key is *almost* the same as 'nvim_win_open'
-        -- see :h nvim_win_open for details on borders however
-        -- the 'curved' border is a custom border type
-        -- not natively supported but implemented in this plugin.
-        border = "curved",
-        width = 75,
-        height = 17,
-        winblend = 3,
-        highlights = {border = "Normal", background = "Normal"}
-    }
-}
---------------------------------------------------------------
-
 ---------------------- completions (nvim-cmp) --------------------------
 local cmp = require "cmp"
 
-cmp.setup(
-    {
-        snippet = {
-            -- REQUIRED - you must specify a snippet engine
-            expand = function(args)
-                vim.fn["vsnip#anonymous"](args.body)
-            end
-        },
-        mapping = {
-            ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
-            ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
-            ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
-            ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
-            ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-            ["<C-e>"] = cmp.mapping(
-                {
-                    i = cmp.mapping.abort(),
-                    c = cmp.mapping.close()
-                }
-            ),
-            ["<CR>"] = cmp.mapping.confirm({select = true})
-        },
-        sources = cmp.config.sources(
-            {
-                {name = "nvim_lsp"},
-                {name = "vsnip"}
-            },
-            {
-                {name = "buffer"}
-            }
-        )
-    }
-)
+cmp.setup({
+    snippet = {
+        -- REQUIRED - you must specify a snippet engine
+        expand = function(args) vim.fn["vsnip#anonymous"](args.body) end
+    },
+    mapping = {
+        ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), {"i", "s"}),
+        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
+        ["<C-leader>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
+        ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+        ["<C-e>"] = cmp.mapping({
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close()
+        }),
+        ["<CR>"] = cmp.mapping.confirm({select = true})
+    },
+    sources = cmp.config.sources({{name = "nvim_lsp"}, {name = "vsnip"}},
+                                 {{name = "buffer"}})
+})
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(
-    "/",
-    {
-        sources = {
-            {name = "buffer"}
-        }
-    }
-)
+cmp.setup.cmdline("/", {sources = {{name = "buffer"}}})
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(
-    ":",
-    {
-        sources = cmp.config.sources(
-            {
-                {name = "path"}
-            },
-            {
-                {name = "cmdline"}
-            }
-        )
-    }
-)
+cmp.setup.cmdline(":", {
+    sources = cmp.config.sources({{name = "path"}}, {{name = "cmdline"}})
+})
 --------------------------------------------------------------
 
 ---------------------- lsp ---------------------------------
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local nvim_lsp = require('lspconfig')
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp
+                                                                     .protocol
+                                                                     .make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {"documentation", "detail", "additionalTextEdits"}
 }
 
-require"lspconfig".pylsp.setup {
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+    local function buf_set_keymap(...)
+        vim.api.nvim_buf_set_keymap(bufnr, ...)
+    end
+    local function buf_set_option(...)
+        vim.api.nvim_buf_set_option(bufnr, ...)
+    end
+
+    -- Enable completion triggered by <c-x><c-o>
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    -- Mappings.
+    local opts = {noremap = true, silent = true}
+
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', '<leader>gi',
+                   '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
+                   opts)
+    buf_set_keymap('n', '<leader>wa',
+                   '<cmd>lua vim.lsp.buf.add_workleader_folder()<CR>', opts)
+    buf_set_keymap('n', '<leader>wr',
+                   '<cmd>lua vim.lsp.buf.remove_workleader_folder()<CR>', opts)
+    buf_set_keymap('n', '<leader>wl',
+                   '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workleader_folders()))<CR>',
+                   opts)
+    buf_set_keymap('n', '<leader>D',
+                   '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>',
+                   opts)
+    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>',
+                   opts)
+    buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+end
+
+nvim_lsp.pylsp.setup {
+    on_attach = on_attach,
+    flags = {debounce_text_changes = 150},
     settings = {
         pylsp = {
             configurationSources = {"flake8"},
             plugins = {
-                flake8 = {
-                    enabled = true,
-                    config = "~/dots/python/flake8"
-                },
+                flake8 = {enabled = true, config = "~/dots/python/flake8"},
                 pycodestyle = {enabled = false},
                 pyflakes = {enabled = false},
                 pylint = {enabled = false},
-                yapf = {enabled = false},
+                yapf = {enabled = false}
             }
         }
     }
 }
-require "lspconfig".pyright.setup {
+
+nvim_lsp.pyright.setup {
+    on_attach = on_attach,
+    flags = {debounce_text_changes = 150},
     cmd = {"pyright-langserver", "--stdio"},
     filetypes = {"python"},
     settings = {
@@ -292,65 +244,35 @@ require "lspconfig".pyright.setup {
                 typeCheckingMode = "off",
                 autoImportCompletions = true,
                 autoSearchPaths = true,
-                diagnosticMode = "openFilesOnly",
+                diagnosticMode = "openFilesOnly"
             }
         }
     },
     single_file_support = true
 }
 
--- diagnostic signs
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    {
-        virtual_text = {
-            prefix = " " -- change this to whatever you want your diagnostic icons to be
-        }
-    }
-)
+nvim_lsp.gopls.setup {}
 
---------------------------------------------------------------
-
--------------------- snippets -------------------------------
---g.UltiSnipsExpandTrigger = "<tab>"
---g.UltiSnipsJumpForwardTrigger = "<c-b>"
---g.UltiSnipsJumpBackwardTrigger = "<c-z>"
---------------------------------------------------------------
-
----------------------- lspsaga ---------------------------------
-require "lspsaga".init_lsp_saga(
-    {
-        error_sign = "",
-        warn_sign = "",
-        hint_sign = " ",
-        infor_sign = " "
-    }
-)
 --------------------------------------------------------------
 
 ---------------------- autoformat ---------------------------------
-require "format".setup {
+require"format".setup {
     ["*"] = {
-        {cmd = {"sed -i 's/[ \t]*$//'"}} -- remove trailing whitespace
+        {cmd = {"sed -i 's/[ \t]*$//'"}} -- remove trailing whiteleader
     },
-    python = {
+    python = {{cmd = {"darker -i"}}},
+    go = {{cmd = {"gofmt -w", "goimports -w"}, tempfile_postfix = ".tmp"}},
+    javascript = {{cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}},
+    lua = {
         {
-            cmd = {"darker -i"}
+            cmd = {
+                function(file)
+                    return string.format("lua-format -i %s", file)
+                end
+            }
         }
     },
-    go = {
-        {
-            cmd = {"gofmt -w", "goimports -w"},
-            tempfile_postfix = ".tmp"
-        }
-    },
-    javascript = {
-        {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
-    },
-    markdown = {
-        {cmd = {"prettier -w"}}
-    },
+    markdown = {{cmd = {"prettier -w"}}}
 }
 
 vim.api.nvim_exec([[
@@ -362,37 +284,30 @@ augroup END
 --------------------------------------------------------------
 
 -------------------- tree-sitter ---------------------------
-require "nvim-treesitter.configs".setup {
+require"nvim-treesitter.configs".setup {
     ensure_installed = "maintained",
-    highlight = {enable = true},
-    rainbow = {
-        enable = true,
-        extended_mode = true -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-    }
+    highlight = {enable = true}
 }
 --------------------------------------------------------------
 
 -------------------- bufferline -------------------------------
-require "bufferline".setup {
+require"bufferline".setup {
     options = {
         view = "multiwindow",
         diagnostic = "nvim_lsp",
         separator_style = "thin",
         numbers = "ordinal",
+        show_buffer_icons = false,
         show_buffer_close_icons = false,
-        show_close_icon = false,
+        show_close_icon = false
     }
 }
 --------------------------------------------------------------
 
----------------------- colorizer ---------------------------------
-require "colorizer".setup()
---------------------------------------------------------------
-
 -------------------- lualine -------------------------------
-require "lualine".setup {
+require"lualine".setup {
     options = {
-        icons_enabled = true,
+        icons_enabled = false,
         theme = "dracula-nvim",
         component_separators = "|",
         section_separators = {left = "", right = ""},
@@ -402,24 +317,12 @@ require "lualine".setup {
     sections = {
         lualine_a = {"mode"},
         lualine_b = {
-            "branch",
-            "diff",
-            {"diagnostics", sources = {"nvim_lsp", "coc"}}
+            "branch", "diff", {"diagnostics", sources = {"nvim_diagnostic"}}
         },
-        lualine_c = {"filename"},
+        lualine_c = {{"filename", path = 1}},
         lualine_x = {"encoding", "fileformat", "filetype"},
         lualine_y = {"progress"},
         lualine_z = {"location"}
-    },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {"filename"},
-        lualine_x = {"location"},
-        lualine_y = {},
-        lualine_z = {}
-    },
-    tabline = {},
-    extensions = {}
+    }
 }
 --------------------------------------------------------------

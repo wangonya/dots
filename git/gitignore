@@ -91,3 +91,4 @@ venv/
 .env-uat*
 
 .session.vim
+run.sh
