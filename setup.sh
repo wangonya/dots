@@ -28,6 +28,7 @@ echo
 echo "=== installing python stuff ==="
 pip install isort darker wakatime pynvim cookiecutter pipenv
 pip install 'python-lsp-server[all]'
+curl -fsSL https://get.deta.dev/cli.sh | sh  # deta for fastapi deployments
 echo
 
 echo "=== setting up npm system wide install config ==="
