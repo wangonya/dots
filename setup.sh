@@ -10,7 +10,7 @@ sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent \
 echo
 
 echo "=== installing aur stuff ==="
-pamac build google-chrome antigen mongodb-tools mongodb-tools-bin lua-format ngrok
+pamac build google-chrome antigen mongodb-tools mongodb-tools-bin lua-format ngrok google-cloud-sdk
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -28,7 +28,6 @@ echo
 echo "=== installing python stuff ==="
 pip install isort darker wakatime pynvim cookiecutter pipenv
 pip install 'python-lsp-server[all]'
-curl -fsSL https://get.deta.dev/cli.sh | sh  # deta for fastapi deployments
 echo
 
 echo "=== setting up npm system wide install config ==="
