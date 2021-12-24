@@ -6,7 +6,11 @@ echo
 echo "=== installing packages ==="
 sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent \
      postgresql redis alacritty ripgrep unclutter flameshot hugo \
-     fd go go-tools gopls delve ttf-ibm-plex mariadb zsh neovim \
+     fd go go-tools gopls delve ttf-ibm-plex mariadb zsh neovim
+echo
+
+echo "=== installing aur stuff ==="
+pamac build google-chrome antigen mongodb-tools mongodb-tools-bin lua-format ngrok
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -19,10 +23,6 @@ systemctl enable mongodb.service
 sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 systemctl start mariadb.service
 systemctl enable mariadb.service
-echo
-
-echo "=== installing aur stuff ==="
-pamac build google-chrome antigen mongodb-tools mongodb-tools-bin lua-format
 echo
 
 echo "=== installing python stuff ==="
