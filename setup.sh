@@ -10,7 +10,8 @@ sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent \
 echo
 
 echo "=== installing aur stuff ==="
-pamac build google-chrome antigen mongodb-tools mongodb-tools-bin lua-format ngrok google-cloud-sdk
+pamac build google-chrome antigen mongodb-tools mongodb-tools-bin \
+      mongodb-compass lua-format ngrok google-cloud-sdk
 echo
 
 echo "=== starting and enabling systemd services ==="
