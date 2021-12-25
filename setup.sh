@@ -26,7 +26,7 @@ systemctl enable mariadb.service
 echo
 
 echo "=== installing python stuff ==="
-pip install isort darker wakatime pynvim cookiecutter pipenv
+pip install isort darker wakatime pynvim cookiecutter pipenv build
 pip install 'python-lsp-server[all]'
 echo
 
