@@ -252,6 +252,7 @@ nvim_lsp.pyright.setup {
 }
 
 nvim_lsp.gopls.setup {}
+nvim_lsp.eslint.setup {}
 
 --------------------------------------------------------------
 

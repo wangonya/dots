@@ -38,7 +38,7 @@ source ~/.profile
 echo
 
 echo "=== installing npm stuff ==="
-npm i -g prettier pyright
+npm i -g prettier pyright vscode-langservers-extracted
 echo
 
 echo "=== setting up dotfiles ==="
