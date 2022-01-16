@@ -1,17 +1,17 @@
 echo "=== running updates ==="
-sudo pacman-mirrors -f 10
-sudo pacman -Syyu
+sudo xbps-install -Su
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent \
+sudo xbps-install -S i3-gaps git chromium rofi redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent \
      postgresql redis alacritty ripgrep unclutter flameshot hugo \
      fd go go-tools gopls delve ttf-ibm-plex mariadb zsh neovim
 echo
 
-echo "=== installing aur stuff ==="
-pamac build google-chrome antigen mongodb-tools mongodb-tools-bin \
-      mongodb-compass lua-format ngrok google-cloud-sdk
+echo "=== installing external libs ==="
+# pamac build lua-format ngrok google-cloud-sdk
+
+curl -L git.io/antigen > antigen.zsh
 echo
 
 echo "=== starting and enabling systemd services ==="
