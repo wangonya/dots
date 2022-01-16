@@ -24,10 +24,8 @@ cmd [[packadd packer.nvim]]
 cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 require("packer").startup(function()
     use {"wbthomason/packer.nvim", opt = true}
-    use {
-        "nvim-telescope/telescope.nvim",
-        requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
-    }
+    use "junegunn/fzf"
+    use "junegunn/fzf.vim"
     use {
         "hrsh7th/nvim-cmp",
         requires = {
@@ -73,11 +71,10 @@ map("n", "<C-K>", "<C-W><C-K>")
 map("n", "<C-L>", "<C-W><C-L>")
 map("n", "<C-H>", "<C-W><C-H>")
 
--- telescope
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
-map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
-map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
-map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
+-- fzf
+map("n", "<leader>ff", "<cmd>Files<cr>")
+map("n", "<leader>fg", "<cmd>Rg<cr>")
+map("n", "<leader>fb", "<cmd>Buffers<cr>")
 
 -- session
 map("n", "<Leader>ss", "<cmd>mksession! .session.vim<cr>")
