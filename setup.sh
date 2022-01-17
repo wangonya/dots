@@ -3,9 +3,10 @@ sudo xbps-install -Su
 echo
 
 echo "=== installing packages ==="
-sudo xbps-install -S i3-gaps git chromium rofi redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent \
-     postgresql redis alacritty ripgrep unclutter flameshot hugo \
-     fd go go-tools gopls delve ttf-ibm-plex mariadb zsh neovim
+sudo xbps-install -S i3-gaps git chromium rofi redshift nodejs \
+     npm yarn zathura-pdf-mupdf qbittorrent postgresql redis \
+     alacritty ripgrep unclutter flameshot hugo fd go go-tools \
+     gopls delve ttf-ibm-plex mariadb zsh neovim
 echo
 
 echo "=== installing external libs ==="
@@ -15,15 +16,10 @@ curl -L git.io/antigen > antigen.zsh
 echo
 
 echo "=== starting and enabling systemd services ==="
-systemctl start redis.service
-systemctl enable redis.service
+sudo ln -s /etc/sv/redis.service /var/service/
 
-systemctl start mongodb.services
-systemctl enable mongodb.service
-
-sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-systemctl start mariadb.service
-systemctl enable mariadb.service
+sudo ln -s /etc/sv/mysqld /var/service
+sudo mysql_secure_installation
 echo
 
 echo "=== installing python stuff ==="
@@ -70,10 +66,6 @@ echo
 echo "=== installing python-poetry ==="
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 source $HOME/.poetry/env
-echo
-
-echo "=== syncing time ==="
-sudo timedatectl set-ntp true
 echo
 
 #setup postgres
