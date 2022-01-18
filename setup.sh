@@ -8,7 +8,8 @@ sudo xbps-install -S i3-gaps i3lock i3status git chromium dmenu redshift nodejs 
      alacritty ripgrep unclutter flameshot hugo fd go xorg-minimal bat cdm \
      gopls delve font-ibm-plex-ttf mariadb zsh neovim xf86-video-intel \
      python3-devel python3-pip iwd lua-devel luarocks cmake wget pipewire \
-     zsh-autosuggestions zsh-syntax-highlighting zsh-completions chrony
+     zsh-autosuggestions zsh-syntax-highlighting zsh-completions chrony \
+     xarandr arandr
 echo
 
 echo "=== installing external libs ==="
@@ -44,10 +45,6 @@ echo
 echo "=== setting up dotfiles ==="
 ln -sv ~/dots/terminals/alacritty.yml ~/.alacritty.yml
 
-[ -f .dmenurc ] && mv .dmenurc .dmenurc.bak
-ln -sv ~/dots/menus/dmenurc ~/.dmenurc
-
-mv .i3/config .i3/config.bak
 ln -sv ~/dots/i3wm/i3 ~/.i3/config
 
 ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf

@@ -30,7 +30,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run -fn IBMPlexMono-10 -nb '#282A36' -nf '#F8F8F2' -sf '#F8F8F2' -sb '#6272A4'
 
 # set primary screen
 exec-always --no-startup-id xrandr --output eDP1 --primary
