@@ -30,10 +30,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
-
-# launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu
+bindsym $mod+d exec --no-startup-id dmenu_run
 
 # set primary screen
 exec-always --no-startup-id xrandr --output eDP1 --primary
@@ -316,13 +313,13 @@ bar {
             separator  $inactive-bg-color
             background $bg-color
             statusline $text-color
-              
+
             #                  border                   background              text
-            focused_workspace  $bg-color                $bg-color               $text-color 
+            focused_workspace  $bg-color                $bg-color               $text-color
             active_workspace   $bg-color                $bg-color               $text-color
             inactive_workspace $inactive-bg-color       $inactive-bg-color      $inactive-text-color
             urgent_workspace   $urgent-bg-color         $urgent-bg-color        $text-color
-            binding_mode       $bg-color                $bg-color               $text-color 
+            binding_mode       $bg-color                $bg-color               $text-color
     }
   status_command exec ~/dots/i3wm/i3status-net-speed.sh
 }

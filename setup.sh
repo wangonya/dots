@@ -3,23 +3,27 @@ sudo xbps-install -Su
 echo
 
 echo "=== installing packages ==="
-sudo xbps-install -S i3-gaps git chromium rofi redshift nodejs \
-     npm yarn zathura-pdf-mupdf qbittorrent postgresql redis \
-     alacritty ripgrep unclutter flameshot hugo fd go go-tools \
-     gopls delve ttf-ibm-plex mariadb zsh neovim
+sudo xbps-install -S i3-gaps i3lock i3status git chromium dmenu redshift nodejs \
+     yarn zathura-pdf-mupdf qbittorrent postgresql redis fzf curl xorg-fonts \
+     alacritty ripgrep unclutter flameshot hugo fd go xorg-minimal bat cdm \
+     gopls delve font-ibm-plex-ttf mariadb zsh neovim xf86-video-intel \
+     python3-devel python3-pip iwd lua-devel luarocks cmake wget pipewire \
+     zsh-autosuggestions zsh-syntax-highlighting zsh-completions chrony
 echo
 
 echo "=== installing external libs ==="
 # pamac build lua-format ngrok google-cloud-sdk
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-curl -L git.io/antigen > antigen.zsh
+luarocks install --server=https://luarocks.org/dev luaformatter --local
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 echo
 
 echo "=== starting and enabling systemd services ==="
-sudo ln -s /etc/sv/redis.service /var/service/
-
+sudo ln -s /etc/sv/redis /var/service
 sudo ln -s /etc/sv/mysqld /var/service
-sudo mysql_secure_installation
 echo
 
 echo "=== installing python stuff ==="
@@ -40,7 +44,7 @@ echo
 echo "=== setting up dotfiles ==="
 ln -sv ~/dots/terminals/alacritty.yml ~/.alacritty.yml
 
-mv .dmenurc .dmenurc.bak
+[ -f .dmenurc ] && mv .dmenurc .dmenurc.bak
 ln -sv ~/dots/menus/dmenurc ~/.dmenurc
 
 mv .i3/config .i3/config.bak
@@ -48,7 +52,7 @@ ln -sv ~/dots/i3wm/i3 ~/.i3/config
 
 ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf
 
-[ -f .zshrc ] && mv .zshrc .zshrc.bak
+mv .zshrc .zshrc.bak
 ln -sv ~/dots/terminals/zshrc ~/.zshrc
 chsh -s /usr/bin/zsh
 
@@ -66,6 +70,11 @@ echo
 echo "=== installing python-poetry ==="
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 source $HOME/.poetry/env
+echo
+
+echo "=== set timezone ==="
+sudo ln -sf /usr/share/zoneinfo/Africa/Nairobi /etc/localtime
+sudo ln -s /etc/sv/chronyd /var/service
 echo
 
 #setup postgres
