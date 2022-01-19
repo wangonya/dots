@@ -3,13 +3,13 @@ sudo xbps-install -Su
 echo
 
 echo "=== installing packages ==="
-sudo xbps-install -S i3-gaps i3lock i3status git chromium dmenu redshift nodejs \
+sudo xbps-install -S i3-gaps i3lock i3status git firefox dmenu redshift nodejs \
      yarn zathura-pdf-mupdf qbittorrent postgresql redis fzf curl xorg-fonts \
      alacritty ripgrep unclutter flameshot hugo fd go xorg-minimal bat cdm \
      gopls delve font-ibm-plex-ttf mariadb zsh neovim xf86-video-intel \
      python3-devel python3-pip iwd lua-devel luarocks cmake wget pipewire \
      zsh-autosuggestions zsh-syntax-highlighting zsh-completions chrony \
-     xarandr arandr
+     xarandr arandr nitrogen
 echo
 
 echo "=== installing external libs ==="
