@@ -21,3 +21,15 @@ let g:netrw_winsize = 15 " size of the Netrw window when it creates a split
 let g:netrw_banner = 0 " hide banner
 let g:netrw_liststyle = 3
 nnoremap <Leader>e :Lexplore<CR>
+
+" signify
+highlight link SignifySignAdd             DiffAdd
+highlight link SignifySignChange          DiffChange
+highlight link SignifySignChangeDelete    SignifySignChange
+highlight link SignifySignDelete          DiffDelete
+highlight link SignifySignDeleteFirstLine SignifySignDelete
+
+highlight SignColumn ctermbg=NONE cterm=NONE guibg=NONE gui=NONE
+highlight SignifySignAdd    ctermfg=29  guifg=#50fa7b cterm=NONE gui=NONE
+highlight SignifySignDelete ctermfg=red    guifg=#ff0000 cterm=NONE gui=NONE
+highlight SignifySignChange ctermfg=yellow guifg=#ffff00 cterm=NONE gui=NONE
