@@ -7,9 +7,9 @@ sudo xbps-install -S i3-gaps i3lock i3status git firefox dmenu redshift nodejs \
      yarn zathura-pdf-mupdf qbittorrent postgresql redis fzf curl xorg-fonts \
      alacritty ripgrep unclutter flameshot hugo fd go xorg-minimal bat cdm \
      gopls delve font-ibm-plex-ttf mariadb zsh neovim xf86-video-intel \
-     python3-devel python3-pip iwd lua-devel luarocks cmake wget pipewire \
+     python3-devel python3-pip iwd lua-devel luarocks cmake wget pulseaudio \
      zsh-autosuggestions zsh-syntax-highlighting zsh-completions chrony \
-     xarandr arandr nitrogen
+     xarandr arandr nitrogen alsa-utils pavucontrol
 echo
 
 echo "=== installing external libs ==="
@@ -25,6 +25,12 @@ echo
 echo "=== starting and enabling systemd services ==="
 sudo ln -s /etc/sv/redis /var/service
 sudo ln -s /etc/sv/mysqld /var/service
+sudo ln -s /etc/sv/pulseaudio /var/service/
+echo
+
+echo "=== fix fonts ==="
+sudo ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
+sudo xbps-reconfigure -f fontconfig
 echo
 
 echo "=== installing python stuff ==="
