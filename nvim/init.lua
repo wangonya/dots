@@ -28,9 +28,7 @@ require("packer").startup(function()
         'nvim-telescope/telescope.nvim',
         requires = {{'nvim-lua/plenary.nvim'}}
     }
-    use {'nvim-telescope/telescope-fzf-native.nvim',
-        run = 'make'
-    }
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
     use {
         "hrsh7th/nvim-cmp",
         requires = {
@@ -125,15 +123,15 @@ cmd [[au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1
 
 ---------------------- telescope ---------------------------------
 require('telescope').setup {
-  extensions = {
-    fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = true,  -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
+    extensions = {
+        fzf = {
+            fuzzy = true, -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = "smart_case" -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
+        }
     }
-  }
 }
 require('telescope').load_extension('fzf')
 --------------------------------------------------------------
