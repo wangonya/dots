@@ -24,8 +24,13 @@ cmd [[packadd packer.nvim]]
 cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 require("packer").startup(function()
     use {"wbthomason/packer.nvim", opt = true}
-    use "junegunn/fzf"
-    use "junegunn/fzf.vim"
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = {{'nvim-lua/plenary.nvim'}}
+    }
+    use {'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make'
+    }
     use {
         "hrsh7th/nvim-cmp",
         requires = {
@@ -71,10 +76,10 @@ map("n", "<C-K>", "<C-W><C-K>")
 map("n", "<C-L>", "<C-W><C-L>")
 map("n", "<C-H>", "<C-W><C-H>")
 
--- fzf
-map("n", "<leader>ff", "<cmd>Files<cr>")
-map("n", "<leader>fg", "<cmd>Rg<cr>")
-map("n", "<leader>fb", "<cmd>Buffers<cr>")
+-- telescope
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 
 -- session
 map("n", "<Leader>ss", "<cmd>mksession! .session.vim<cr>")
@@ -116,6 +121,21 @@ cmd "au FocusLost * :wa" -- autosave on lose focus
 
 -- jump to the last position when reopening a file
 cmd [[au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
+--------------------------------------------------------------
+
+---------------------- telescope ---------------------------------
+require('telescope').setup {
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true,  -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
+    }
+  }
+}
+require('telescope').load_extension('fzf')
 --------------------------------------------------------------
 
 ---------------------- git blame ---------------------------------
