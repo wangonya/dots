@@ -38,7 +38,7 @@ require("packer").startup(function()
     use "wakatime/vim-wakatime"
     use "nvim-treesitter/nvim-treesitter"
     use "lukas-reineke/format.nvim"
-    use "airblade/vim-gitgutter"
+    use "mhinz/vim-signify"
     use "b3nj5m1n/kommentary"
     use "jiangmiao/auto-pairs"
     use "f-person/git-blame.nvim"
@@ -117,10 +117,6 @@ cmd "au FocusLost * :wa" -- autosave on lose focus
 -- jump to the last position when reopening a file
 cmd [[au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
 --------------------------------------------------------------
-
----------------------- git ---------------------------------
-g.gitgutter_grep = "rg"
-------------------------------------------------------------------
 
 ---------------------- git blame ---------------------------------
 g.gitblame_date_format = "%r"
