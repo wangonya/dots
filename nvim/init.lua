@@ -257,6 +257,9 @@ require"format".setup {
     python = {{cmd = {"darker -i"}}},
     go = {{cmd = {"gofmt -w", "goimports -w"}, tempfile_postfix = ".tmp"}},
     javascript = {{cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}},
+    html = {{cmd = {"prettier -w"}}},
+    css = {{cmd = {"prettier -w"}}},
+    scss = {{cmd = {"prettier -w"}}},
     lua = {
         {
             cmd = {
