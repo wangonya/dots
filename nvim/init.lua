@@ -128,7 +128,7 @@ require('telescope').setup {
             fuzzy = true, -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
             override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case" -- or "ignore_case" or "respect_case"
+            case_mode = "respect_case" -- or "ignore_case" or "respect_case"
             -- the default case_mode is "smart_case"
         }
     }
@@ -262,8 +262,8 @@ nvim_lsp.pyright.setup {
     single_file_support = true
 }
 
-nvim_lsp.gopls.setup {}
-nvim_lsp.eslint.setup {}
+nvim_lsp.gopls.setup {on_attach = on_attach}
+nvim_lsp.eslint.setup {on_attach = on_attach}
 
 --------------------------------------------------------------
 
@@ -297,7 +297,10 @@ augroup END
 
 -------------------- tree-sitter ---------------------------
 require"nvim-treesitter.configs".setup {
-    ensure_installed = "maintained",
+    ensure_installed = {
+        "bash", "css", "go", "html", "json", "lua", "python", "rst", "tsx",
+        "typescript", "yaml"
+    },
     highlight = {enable = true}
 }
 --------------------------------------------------------------

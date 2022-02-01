@@ -14,22 +14,16 @@ nnoremap <silent><leader>0 <Cmd>BufferLineGoToBuffer 10<CR>
 nnoremap <silent><leader>bn <Cmd>bn<CR>
 nnoremap <silent><leader>bp <Cmd>bp<CR>
 
-" netrw
-let g:netrw_fastbrowse = 0 " close after oprning file"
-let g:netrw_keepdir = 0 " keep the current directory and the browsing directory synced
-let g:netrw_winsize = 15 " size of the Netrw window when it creates a split
-let g:netrw_banner = 0 " hide banner
-let g:netrw_liststyle = 3
-nnoremap <Leader>e :Lexplore<CR>
-
 " signify
 highlight link SignifySignAdd             DiffAdd
 highlight link SignifySignChange          DiffChange
 highlight link SignifySignChangeDelete    SignifySignChange
 highlight link SignifySignDelete          DiffDelete
 highlight link SignifySignDeleteFirstLine SignifySignDelete
-
 highlight SignColumn ctermbg=NONE cterm=NONE guibg=NONE gui=NONE
 highlight SignifySignAdd    ctermfg=29  guifg=#50fa7b cterm=NONE gui=NONE
 highlight SignifySignDelete ctermfg=red    guifg=#ff0000 cterm=NONE gui=NONE
 highlight SignifySignChange ctermfg=yellow guifg=#ffff00 cterm=NONE gui=NONE
+let g:signify_sign_add               = '|'
+let g:signify_sign_delete            = '|'
+let g:signify_sign_change            = '|'
