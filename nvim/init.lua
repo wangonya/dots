@@ -330,14 +330,14 @@ require"lualine".setup {
         always_divide_middle = true
     },
     sections = {
-        lualine_a = {"mode"},
+        lualine_a = {},
         lualine_b = {
             "branch", "diff", {"diagnostics", sources = {"nvim_diagnostic"}}
         },
         lualine_c = {{"filename", path = 1}},
-        lualine_x = {"encoding", "fileformat", "filetype"},
-        lualine_y = {"progress"},
-        lualine_z = {"location"}
+        lualine_x = {"progress"},
+        lualine_y = {"location"},
+        lualine_z = {},
     }
 }
 --------------------------------------------------------------
