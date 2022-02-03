@@ -275,6 +275,23 @@ require"format".setup {
     python = {{cmd = {"darker -i"}}},
     go = {{cmd = {"gofmt -w", "goimports -w"}, tempfile_postfix = ".tmp"}},
     javascript = {{cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}},
+    javascriptreact = {
+        {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
+    },
+    ["javascript.jsx"] = {
+        {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
+    },
+    typescript = {{cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}},
+    typescriptreact = {
+        {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
+    },
+    ["typescript.tsx"] = {
+        {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
+    },
+    vue = {{cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}},
+    html = {{cmd = {"prettier -w"}}},
+    css = {{cmd = {"prettier -w"}}},
+    scss = {{cmd = {"prettier -w"}}},
     lua = {
         {
             cmd = {
@@ -284,7 +301,14 @@ require"format".setup {
             }
         }
     },
-    markdown = {{cmd = {"prettier -w"}}}
+    markdown = {
+        {cmd = {"prettier -w"}}, {
+            cmd = {"black"},
+            start_pattern = "^```python$",
+            end_pattern = "^```$",
+            target = "current"
+        }
+    }
 }
 
 vim.api.nvim_exec([[
@@ -337,7 +361,7 @@ require"lualine".setup {
         lualine_c = {{"filename", path = 1}},
         lualine_x = {"progress"},
         lualine_y = {"location"},
-        lualine_z = {},
+        lualine_z = {}
     }
 }
 --------------------------------------------------------------
