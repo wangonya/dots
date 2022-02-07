@@ -17,6 +17,7 @@ end
 
 g.mapleader = " "
 g.maplocalleader = ","
+g.python3_host_prog = "/usr/bin/python"
 --------------------------------------------------------------
 
 -------------------- plugins -------------------------------
@@ -29,16 +30,7 @@ require("packer").startup(function()
         requires = {{'nvim-lua/plenary.nvim'}}
     }
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
-    use {
-        "hrsh7th/nvim-cmp",
-        requires = {
-            "hrsh7th/cmp-vsnip", "hrsh7th/vim-vsnip", "hrsh7th/vim-vsnip-integ",
-            "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline", "rafamadriz/friendly-snippets"
-        }
-    }
     use "neovim/nvim-lspconfig"
-    use "wakatime/vim-wakatime"
     use "nvim-treesitter/nvim-treesitter"
     use "lukas-reineke/format.nvim"
     use "mhinz/vim-signify"
@@ -47,12 +39,12 @@ require("packer").startup(function()
     use "f-person/git-blame.nvim"
     use "nvim-lualine/lualine.nvim"
     use "akinsho/nvim-bufferline.lua"
-    use "Mofiqul/dracula.nvim"
+    use "https://github.com/hauleth/blame.vim"
 end)
 --------------------------------------------------------------
 
 -------------------- colorscheme -------------------------------
-vim.cmd [[colorscheme dracula]]
+vim.cmd [[colorscheme blame]]
 --------------------------------------------------------------
 
 -------------------- key mappings -------------------------------
@@ -97,13 +89,10 @@ opt("b", "smartindent", true) -- Insert indents automatically
 opt("b", "tabstop", 4) -- Number of spaces tabs count for
 opt("o", "completeopt", "menuone,noselect") -- Completion options
 opt("o", "hidden", true) -- Enable modified buffers in background
-opt("o", "ignorecase", true) -- Ignore case
 opt("o", "joinspaces", false) -- No double spaces with join after a dot
 opt("o", "mouse", "a") -- Allow mouse
-opt("o", "signcolumn", "yes")
 opt("o", "updatetime", 100)
 opt("o", "shiftround", true) -- Round indent
-opt("o", "smartcase", true) -- Don't ignore case with capitals
 opt("o", "splitbelow", true) -- Put new windows below current
 opt("o", "splitright", true) -- Put new windows right of current
 opt("w", "list", true)
@@ -126,10 +115,9 @@ require('telescope').setup {
     extensions = {
         fzf = {
             fuzzy = true, -- false will only do exact matching
-            override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case" -- or "ignore_case" or "respect_case"
-            -- the default case_mode is "smart_case"
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "respect_case" -- "smart_case", "ignore_case" or "respect_case"
         }
     }
 }
@@ -140,48 +128,8 @@ require('telescope').load_extension('fzf')
 g.gitblame_date_format = "%r"
 ------------------------------------------------------------------
 
----------------------- completions (nvim-cmp) --------------------------
-local cmp = require "cmp"
-
-cmp.setup({
-    snippet = {
-        -- REQUIRED - you must specify a snippet engine
-        expand = function(args) vim.fn["vsnip#anonymous"](args.body) end
-    },
-    mapping = {
-        ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), {"i", "s"}),
-        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
-        ["<C-leader>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
-        ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-        ["<C-e>"] = cmp.mapping({
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close()
-        }),
-        ["<CR>"] = cmp.mapping.confirm({select = true})
-    },
-    sources = cmp.config.sources({{name = "nvim_lsp"}, {name = "vsnip"}},
-                                 {{name = "buffer"}})
-})
-
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline("/", {sources = {{name = "buffer"}}})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(":", {
-    sources = cmp.config.sources({{name = "path"}}, {{name = "cmdline"}})
-})
---------------------------------------------------------------
-
 ---------------------- lsp ---------------------------------
 local nvim_lsp = require('lspconfig')
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp
-                                                                     .protocol
-                                                                     .make_client_capabilities())
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {"documentation", "detail", "additionalTextEdits"}
-}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -262,8 +210,8 @@ nvim_lsp.pyright.setup {
     single_file_support = true
 }
 
-nvim_lsp.gopls.setup {}
-nvim_lsp.eslint.setup {}
+nvim_lsp.gopls.setup {on_attach = on_attach}
+nvim_lsp.eslint.setup {on_attach = on_attach}
 
 --------------------------------------------------------------
 
@@ -275,6 +223,24 @@ require"format".setup {
     python = {{cmd = {"darker -i"}}},
     go = {{cmd = {"gofmt -w", "goimports -w"}, tempfile_postfix = ".tmp"}},
     javascript = {{cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}},
+    javascriptreact = {
+        {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
+    },
+    ["javascript.jsx"] = {
+        {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
+    },
+    typescript = {{cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}},
+    typescriptreact = {
+        {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
+    },
+    ["typescript.tsx"] = {
+        {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
+    },
+    vue = {{cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}},
+    html = {{cmd = {"prettier -w"}}},
+    css = {{cmd = {"prettier -w"}}},
+    scss = {{cmd = {"prettier -w"}}},
+    json = {{cmd = {"prettier -w"}}},
     lua = {
         {
             cmd = {
@@ -284,7 +250,14 @@ require"format".setup {
             }
         }
     },
-    markdown = {{cmd = {"prettier -w"}}}
+    markdown = {
+        {cmd = {"prettier -w"}}, {
+            cmd = {"black"},
+            start_pattern = "^```python$",
+            end_pattern = "^```$",
+            target = "current"
+        }
+    }
 }
 
 vim.api.nvim_exec([[
@@ -297,7 +270,10 @@ augroup END
 
 -------------------- tree-sitter ---------------------------
 require"nvim-treesitter.configs".setup {
-    ensure_installed = "maintained",
+    ensure_installed = {
+        "bash", "css", "go", "html", "json", "lua", "python", "rst", "tsx",
+        "typescript", "yaml"
+    },
     highlight = {enable = true}
 }
 --------------------------------------------------------------
@@ -320,21 +296,29 @@ require"bufferline".setup {
 require"lualine".setup {
     options = {
         icons_enabled = false,
-        theme = "dracula-nvim",
+        theme = "nord",
         component_separators = "|",
         section_separators = {left = "", right = ""},
         disabled_filetypes = {},
         always_divide_middle = true
     },
     sections = {
-        lualine_a = {"mode"},
-        lualine_b = {
-            "branch", "diff", {"diagnostics", sources = {"nvim_diagnostic"}}
-        },
+        lualine_a = {},
+        lualine_b = {"branch", "diff"},
         lualine_c = {{"filename", path = 1}},
-        lualine_x = {"encoding", "fileformat", "filetype"},
-        lualine_y = {"progress"},
-        lualine_z = {"location"}
+        lualine_x = {
+            {
+                'diagnostics',
+                sources = {'nvim_diagnostic'},
+                sections = {'error', 'warn', 'info', 'hint'},
+                symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
+                colored = true,
+                update_in_insert = false,
+                always_visible = false
+            }
+        },
+        lualine_y = {"location", "progress"},
+        lualine_z = {}
     }
 }
 --------------------------------------------------------------
