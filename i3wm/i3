@@ -235,16 +235,15 @@ bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec ~/.screenlayout/monitor.sh
-exec --no-startup-id nitrogen --restore
 exec --no-startup-id redshift -l -1.28:36.81
 exec --no-startup-id unclutter &
 
 # Theme colors
-set $bg-color            #282A36
+set $bg-color            #2b3240
 set $inactive-bg-color   #44475A
-set $text-color          #F8F8F2
+set $text-color          #4a5265
 set $inactive-text-color #BFBFBF
-set $urgent-bg-color     #FF5555
+set $urgent-bg-color     #bc284f
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 
