@@ -5,12 +5,12 @@ echo
 echo "=== installing packages ==="
 sudo xbps-install -S i3-gaps i3lock i3status git firefox dmenu redshift nodejs \
      yarn zathura-pdf-mupdf qbittorrent postgresql redis fzf curl xorg-fonts \
-     alacritty ripgrep unclutter flameshot hugo fd go xorg-minimal bat \
+     ripgrep unclutter flameshot hugo fd go xorg-minimal bat \
      gopls delve font-ibm-plex-ttf mariadb zsh neovim xf86-video-intel \
      python3-devel python3-pip iwd lua-devel luarocks cmake wget pulseaudio \
      zsh-autosuggestions zsh-syntax-highlighting zsh-completions chrony \
      xarandr arandr nitrogen alsa-utils pavucontrol v4l-utils v4l2loopback \
-     alsa-plugins-pulseaudio
+     alsa-plugins-pulseaudio xterm xrdb
 echo
 
 echo "=== installing external libs ==="
@@ -49,7 +49,8 @@ npm i -g prettier pyright vscode-langservers-extracted
 echo
 
 echo "=== setting up dotfiles ==="
-ln -sv ~/dots/terminals/alacritty.yml ~/.alacritty.yml
+ln -sv ~/dots/x/.Xresources ~
+xrdb -merge ~/.Xresources
 
 ln -sv ~/dots/i3wm/i3 ~/.i3/config
 
