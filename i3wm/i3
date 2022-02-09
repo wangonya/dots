@@ -240,7 +240,7 @@ exec --no-startup-id unclutter &
 
 # Theme colors
 set $bg-color            #2b3240
-set $inactive-bg-color   #2b3240
+set $inactive-bg-color   #212631
 set $text-color          #008097
 set $inactive-text-color #4a5265
 set $urgent-bg-color     #bc284f
@@ -262,14 +262,14 @@ bar {
 	strip_workspace_numbers yes
 
     colors {
-            separator  $inactive-bg-color
+            separator  $bg-color
             background $bg-color
             statusline $inactive-text-color
 
             #                  border                   background              text
-            focused_workspace  $bg-color                $bg-color               $inactive-text-color
-            active_workspace   $bg-color                $bg-color               $inactive-text-color
-            inactive_workspace $inactive-bg-color       $inactive-bg-color      $inactive-text-color
+            focused_workspace  $bg-color                $bg-color               $text-color
+            active_workspace   $bg-color                $bg-color               $text-color
+            inactive_workspace $bg-color                $bg-color               $inactive-text-color
             urgent_workspace   $urgent-bg-color         $urgent-bg-color        $text-color
             binding_mode       $bg-color                $bg-color               $text-color
     }
