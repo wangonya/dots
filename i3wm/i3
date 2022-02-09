@@ -240,9 +240,9 @@ exec --no-startup-id unclutter &
 
 # Theme colors
 set $bg-color            #2b3240
-set $inactive-bg-color   #44475A
-set $text-color          #4a5265
-set $inactive-text-color #BFBFBF
+set $inactive-bg-color   #2b3240
+set $text-color          #008097
+set $inactive-text-color #4a5265
 set $urgent-bg-color     #bc284f
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
@@ -252,13 +252,10 @@ bar {
 	i3bar_command i3bar
 	status_command i3status
 	position bottom
-        # output primary
-        # mode hide
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 	tray_output primary
-	tray_output eDP1
-        tray_padding 1
+    tray_padding 1
 
 	bindsym button4 nop
 	bindsym button5 nop
@@ -267,11 +264,11 @@ bar {
     colors {
             separator  $inactive-bg-color
             background $bg-color
-            statusline $text-color
+            statusline $inactive-text-color
 
             #                  border                   background              text
-            focused_workspace  $bg-color                $bg-color               $text-color
-            active_workspace   $bg-color                $bg-color               $text-color
+            focused_workspace  $bg-color                $bg-color               $inactive-text-color
+            active_workspace   $bg-color                $bg-color               $inactive-text-color
             inactive_workspace $inactive-bg-color       $inactive-bg-color      $inactive-text-color
             urgent_workspace   $urgent-bg-color         $urgent-bg-color        $text-color
             binding_mode       $bg-color                $bg-color               $text-color
