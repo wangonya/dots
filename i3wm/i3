@@ -287,42 +287,39 @@ set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
 # Theme colors
-set $bg-color            #282A36
-set $inactive-bg-color   #44475A
-set $text-color          #F8F8F2
-set $inactive-text-color #BFBFBF
-set $urgent-bg-color     #FF5555
+set $bg-color            #2b3240
+set $inactive-bg-color   #212631
+set $text-color          #008097
+set $inactive-text-color #4a5265
+set $urgent-bg-color     #bc284f
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 
 bar {
   height 20
-	i3bar_command i3bar
-	status_command i3status
-	position bottom
-        # output primary
-        # mode hide
+    i3bar_command i3bar
+    status_command i3status
+    position bottom
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-	tray_output primary
-	tray_output eDP1
-        tray_padding 1
+    tray_output primary
+    tray_padding 1
 
-	bindsym button4 nop
-	bindsym button5 nop
-	strip_workspace_numbers yes
+    bindsym button4 nop
+    bindsym button5 nop
+    strip_workspace_numbers yes
 
     colors {
-            separator  $inactive-bg-color
+            separator  $bg-color
             background $bg-color
-            statusline $text-color
-              
+            statusline $inactive-text-color
+
             #                  border                   background              text
-            focused_workspace  $bg-color                $bg-color               $text-color 
+            focused_workspace  $bg-color                $bg-color               $text-color
             active_workspace   $bg-color                $bg-color               $text-color
-            inactive_workspace $inactive-bg-color       $inactive-bg-color      $inactive-text-color
+            inactive_workspace $bg-color                $bg-color               $inactive-text-color
             urgent_workspace   $urgent-bg-color         $urgent-bg-color        $text-color
-            binding_mode       $bg-color                $bg-color               $text-color 
+            binding_mode       $bg-color                $bg-color               $text-color
     }
   status_command exec ~/dots/i3wm/i3status-net-speed.sh
 }

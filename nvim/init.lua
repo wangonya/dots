@@ -33,13 +33,13 @@ require("packer").startup(function()
     use "neovim/nvim-lspconfig"
     use "nvim-treesitter/nvim-treesitter"
     use "lukas-reineke/format.nvim"
-    use "mhinz/vim-signify"
+    use "airblade/vim-gitgutter"
     use "b3nj5m1n/kommentary"
     use "jiangmiao/auto-pairs"
     use "f-person/git-blame.nvim"
     use "nvim-lualine/lualine.nvim"
     use "akinsho/nvim-bufferline.lua"
-    use "https://github.com/hauleth/blame.vim"
+    use "hauleth/blame.vim"
 end)
 --------------------------------------------------------------
 
@@ -102,6 +102,7 @@ opt("o", "wildmode", "list:longest") -- Command-line completion mode
 opt("o", "wildmenu", true)
 opt("w", "number", true) -- Print line number
 opt("w", "relativenumber", true) -- Relative line numbers
+opt("w", "signcolumn", "number") -- Combine sign and line numbers
 cmd "au TextYankPost * lua vim.highlight.on_yank {on_visual = false}" -- highlight on yank
 cmd "au BufRead,BufNewFile *.md,*.mdx,*.txt,*.rst setlocal spell" -- always set spell on for .md,txt,mdx,rst files
 cmd "au FocusLost * :wa" -- autosave on lose focus
@@ -296,7 +297,6 @@ require"bufferline".setup {
 require"lualine".setup {
     options = {
         icons_enabled = false,
-        theme = "dracula-nvim",
         component_separators = "|",
         section_separators = {left = "", right = ""},
         disabled_filetypes = {},
