@@ -1,16 +1,12 @@
-echo "=== running updates ==="
-sudo xbps-install -Su
-echo
-
 echo "=== installing packages ==="
-sudo xbps-install -S i3-gaps i3lock i3status git firefox dmenu redshift nodejs \
+sudo xbps-install -S i3-gaps i3lock i3status firefox dmenu redshift nodejs \
      yarn zathura-pdf-mupdf qbittorrent postgresql redis fzf curl xorg-fonts \
-     ripgrep unclutter flameshot hugo fd go xorg-minimal bat \
+     ripgrep unclutter flameshot zola fd go xorg-minimal bat \
      gopls delve font-ibm-plex-ttf mariadb zsh neovim xf86-video-intel \
      python3-devel python3-pip iwd lua-devel luarocks cmake wget pulseaudio \
      zsh-autosuggestions zsh-syntax-highlighting zsh-completions chrony \
-     xarandr arandr nitrogen alsa-utils pavucontrol v4l-utils v4l2loopback \
-     alsa-plugins-pulseaudio xterm xrdb
+     arandr alsa-utils pavucontrol v4l-utils v4l2loopback \
+     alsa-plugins-pulseaudio xterm xrdb ffmpeg
 echo
 
 echo "=== installing external libs ==="
@@ -18,14 +14,12 @@ echo "=== installing external libs ==="
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-luarocks install --server=https://luarocks.org/dev luaformatter --local
-
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 echo
 
 echo "=== starting and enabling systemd services ==="
 sudo ln -s /etc/sv/{redis,mysqld,pulseaudio,iwd} /var/service
-sudo modprobe v4l2loopback # webcam -- creates /dev/video0
+# sudo modprobe v4l2loopback # webcam
 echo
 
 echo "=== fix fonts ==="
@@ -86,11 +80,3 @@ echo
 
 # sudo visudo add:
 # user_name ALL=(ALL) NOPASSWD: /bin/poweroff, /bin/reboot, /bin/shutdown
-
-# alsa headphones fix
-# /etc/modprobe.d/alsa-base.conf
-# options snd-pcsp index=-2
-# alias snd-card-0 snd-hda-intel
-# alias sound-slot-0 snd-hda-intel
-# options snd-hda-intel model=laptop
-# options snd-hda-intel position_fix=1 enable=yes
