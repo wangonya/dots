@@ -6,7 +6,7 @@ sudo xbps-install -S i3-gaps i3lock i3status firefox dmenu redshift nodejs \
      python3-devel python3-pip iwd lua-devel luarocks cmake wget pulseaudio \
      zsh-autosuggestions zsh-syntax-highlighting zsh-completions chrony \
      arandr alsa-utils pavucontrol v4l-utils v4l2loopback \
-     alsa-plugins-pulseaudio xterm xrdb ffmpeg
+     alsa-plugins-pulseaudio xterm xrdb ffmpeg mpv youtube-dl
 echo
 
 echo "=== installing external libs ==="
