@@ -5,7 +5,7 @@ sudo xbps-install -S i3-gaps i3lock i3status firefox dmenu redshift nodejs \
      gopls delve font-ibm-plex-ttf mariadb zsh neovim xf86-video-intel \
      python3-devel python3-pip iwd lua-devel luarocks cmake wget pulseaudio \
      zsh-autosuggestions zsh-syntax-highlighting zsh-completions chrony \
-     arandr alsa-utils pavucontrol v4l-utils v4l2loopback \
+     arandr alsa-utils pavucontrol v4l-utils v4l2loopback flatpak \
      alsa-plugins-pulseaudio xterm xrdb ffmpeg mpv youtube-dl
 echo
 
@@ -14,7 +14,9 @@ echo "=== installing external libs ==="
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.slack.Slack
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -58,6 +60,9 @@ git clone https://github.com/dracula/zathura ~/.config/zathura/
 
 [-f .config/nvim ] && mv .config/nvim .config/nvim.bak
 ln -sv ~/dots/nvim ~/.config/nvim
+
+curl https://tools.suckless.org/dmenu/scripts/dmenu_run_with_command_history/dmenu_run_history --output ~/.local/bin/dmenu_run_history
+chmod +x ~/.local/bin/dmenu_run_history
 echo
 
 echo "=== setting up git configs"
