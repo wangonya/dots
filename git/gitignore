@@ -15,6 +15,7 @@ venv/
 .env-local*
 .env-test*
 .env-uat*
+*.db
 
 .session.vim
 run.sh

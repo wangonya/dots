@@ -1,25 +1,25 @@
+set -e
+
 echo "=== running updates ==="
 sudo pacman-mirrors -f 10
 sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent \
-     postgresql redis alacritty ripgrep unclutter flameshot hugo \
-     fd go go-tools gopls delve ttf-ibm-plex mariadb zsh neovim
+sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent zola bat \
+     postgresql redis ripgrep unclutter flameshot pulseaudio pulseaudio-alsa \
+     fd go go-tools gopls delve ttf-ibm-plex mariadb pavucontrol python-pip \
+     gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa
 echo
 
 echo "=== installing aur stuff ==="
-pamac build google-chrome antigen mongodb-tools mongodb-tools-bin \
-      mongodb-compass lua-format ngrok google-cloud-sdk
+pamac build ngrok slack-desktop spotify we10x-icon-theme-git usql \
+      visual-studio-code-bin 
 echo
 
 echo "=== starting and enabling systemd services ==="
 systemctl start redis.service
 systemctl enable redis.service
-
-systemctl start mongodb.services
-systemctl enable mongodb.service
 
 sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 systemctl start mariadb.service
@@ -27,8 +27,7 @@ systemctl enable mariadb.service
 echo
 
 echo "=== installing python stuff ==="
-pip install isort darker wakatime pynvim cookiecutter pipenv build
-pip install 'python-lsp-server[all]'
+pip install darker[isort] build
 echo
 
 echo "=== setting up npm system wide install config ==="
@@ -38,16 +37,11 @@ source ~/.profile
 echo
 
 echo "=== installing npm stuff ==="
-npm i -g prettier pyright vscode-langservers-extracted
+npm i -g prettier
 echo
 
 echo "=== setting up dotfiles ==="
-ln -sv ~/dots/terminals/alacritty.yml ~/.alacritty.yml
-
-mv .dmenurc .dmenurc.bak
-ln -sv ~/dots/menus/dmenurc ~/.dmenurc
-
-mv .i3/config .i3/config.bak
+mv ~/.i3/config ~/.i3/config.bak
 ln -sv ~/dots/i3wm/i3 ~/.i3/config
 
 ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf
@@ -56,8 +50,6 @@ ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf
 ln -sv ~/dots/terminals/zshrc ~/.zshrc
 chsh -s /usr/bin/zsh
 
-git clone https://github.com/dracula/zathura ~/.config/zathura/
-
 [-f .config/nvim ] && mv .config/nvim .config/nvim.bak
 ln -sv ~/dots/nvim ~/.config/nvim
 echo
@@ -65,11 +57,7 @@ echo
 echo "=== setting up git configs"
 git config --global init.defaultBranch main
 git config --global core.excludesFile '~/dots/git/gitignore'
-echo
-
-echo "=== installing python-poetry ==="
-curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-source $HOME/.poetry/env
+git config --global credential.helper store
 echo
 
 echo "=== syncing time ==="
@@ -78,3 +66,4 @@ echo
 
 #setup postgres
 #setup mariadb
+#https://wiki.manjaro.org/index.php/Improve_Font_Rendering
