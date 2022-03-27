@@ -6,15 +6,17 @@ sudo pacman -Syyu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent zola bat \
+sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
      postgresql redis ripgrep unclutter flameshot pulseaudio pulseaudio-alsa \
      fd go go-tools gopls delve ttf-ibm-plex mariadb pavucontrol python-pip \
-     gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa
+     gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa \
+     emacs pandoc
 echo
 
 echo "=== installing aur stuff ==="
-pamac build ngrok slack-desktop spotify we10x-icon-theme-git usql \
-      visual-studio-code-bin 
+gpg --recv-key 2D347EA6AA65421D
+pamac build ngrok slack-desktop spotify we10x-icon-theme-git \
+      visual-studio-code-bin beekeeper-studio-bin python37
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -46,12 +48,11 @@ ln -sv ~/dots/i3wm/i3 ~/.i3/config
 
 ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf
 
-[ -f .zshrc ] && mv .zshrc .zshrc.bak
-ln -sv ~/dots/terminals/zshrc ~/.zshrc
-chsh -s /usr/bin/zsh
-
-[-f .config/nvim ] && mv .config/nvim .config/nvim.bak
-ln -sv ~/dots/nvim ~/.config/nvim
+git clone https://gist.github.com/wandernauta/6800547
+chmod +x 6800547/sp
+sudo mv 6800547/sp /usr/local/bin
+sp
+rm -rf 6800547
 echo
 
 echo "=== setting up git configs"
@@ -67,3 +68,10 @@ echo
 #setup postgres
 #setup mariadb
 #https://wiki.manjaro.org/index.php/Improve_Font_Rendering
+
+# git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+# ~/.emacs.d/bin/doom install
+# rm -rf ~/.doom.d/
+# ln -sv ~/dots/emacs ~/.doom.d
+# ~/.emacs.d/bin/doom sync
+# sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'

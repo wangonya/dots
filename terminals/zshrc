@@ -1,10 +1,12 @@
 export EDITOR='vim'
-export BROWSER=/usr/bin/firefox
+export BROWSER=/usr/bin/google-chrome-stable
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.poetry/bin:$PATH
+export PATH=$HOME/.emacs.d/bin:$PATH
 
 export PYLINTRC="~/dots/python/pylintrc"
+export DOOMDIR="~/dots/emacs"
 
 alias myi3="vim ~/dots/i3wm/i3"
 alias updt="sudo pacman -Syu"

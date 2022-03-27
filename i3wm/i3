@@ -258,6 +258,11 @@ exec --no-startup-id redshift -l -1.28:36.81
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id unclutter &
 
+# Spotify
+bindsym $mod+greater exec "sp next"
+bindsym $mod+less exec "sp prev"
+bindsym $mod+slash exec "sp play"
+
 # Color palette used for the terminal ( ~/.Xresources file )
 set_from_resource $background background
 set_from_resource $foreground foreground
