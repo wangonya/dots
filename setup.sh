@@ -29,7 +29,7 @@ systemctl enable mariadb.service
 echo
 
 echo "=== installing python stuff ==="
-pip install darker[isort] build
+pip install darker[isort] build wheel pudb
 echo
 
 echo "=== setting up npm system wide install config ==="
@@ -53,6 +53,11 @@ chmod +x 6800547/sp
 sudo mv 6800547/sp /usr/local/bin
 sp
 rm -rf 6800547
+
+mkdir .config/pudb
+ln -sv ~/dots/python/pudb.cfg .config/pudb
+
+echo "source ~/dots/terminals/zshrc" >> ~/.zshrc
 echo
 
 echo "=== setting up git configs"
@@ -69,6 +74,8 @@ echo
 #setup mariadb
 #https://wiki.manjaro.org/index.php/Improve_Font_Rendering
 
+# mkdir .emacs.d
+# ln -sv ~/dots/emacs/init.el ~/.emacs.d/init.el
 # git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 # ~/.emacs.d/bin/doom install
 # rm -rf ~/.doom.d/

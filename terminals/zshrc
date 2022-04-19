@@ -6,8 +6,8 @@ export PATH=$HOME/.poetry/bin:$PATH
 export PATH=$HOME/.emacs.d/bin:$PATH
 
 export PYLINTRC="~/dots/python/pylintrc"
-export DOOMDIR="~/dots/emacs"
 export CLOUDSDK_PYTHON=$(which python3)
+#export PYTHONBREAKPOINT="pudb.set_trace"
 
 alias myi3="vim ~/dots/i3wm/i3"
 alias updt="sudo pacman -Syu"

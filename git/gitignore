@@ -6,16 +6,16 @@ pyrightconfig.json
 typings/
 .lsp
 
-.vscode
-
 cloud_sql_proxy
 venv/
+.venv/
 .env
 .env-dev*
 .env-local*
 .env-test*
 .env-uat*
 *.db
+.envrc
 
 .session.vim
 run.sh
