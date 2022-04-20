@@ -29,7 +29,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (defalias 'yes-or-no-p 'y-or-n-p)
-					; hide minor modes from modeline
+; hide minor modes from modeline
 (setq mode-line-modes
       (mapcar (lambda (elem)
 		(pcase elem
@@ -92,10 +92,11 @@
 ;; realgud??
 
 ;; tree-sitter
+(use-package tree-sitter-langs)
 (use-package tree-sitter
   :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+  (add-hook 'python-mode-hook #'tree-sitter-hl-mode)
+  (add-hook 'go-mode-hook #'tree-sitter-hl-mode))
 
 ;; flycheck
 (use-package flycheck
