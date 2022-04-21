@@ -8,9 +8,8 @@ echo
 echo "=== installing packages ==="
 sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
      postgresql redis ripgrep unclutter flameshot pulseaudio pulseaudio-alsa \
-     fd go go-tools gopls delve ttf-ibm-plex mariadb pavucontrol python-pip \
-     gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa \
-     emacs pandoc
+     fd go go-tools gopls delve mariadb pavucontrol python-pip emacs pandoc \
+     gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa
 echo
 
 echo "=== installing aur stuff ==="
@@ -56,6 +55,9 @@ rm -rf 6800547
 
 mkdir .config/pudb
 ln -sv ~/dots/python/pudb.cfg .config/pudb
+
+mv ~/.Xresources ~/.Xresources.bak
+ln -sv ~/dots/i3wm/Xresources ~/.Xresources
 
 echo "source ~/dots/terminals/zshrc" >> ~/.zshrc
 echo

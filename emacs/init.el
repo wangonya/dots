@@ -1,3 +1,17 @@
+;;; $HOME/dots/emacs/init.el --- My emacs config
+
+;;; Commentary:
+;; ¯\_(ツ)_/¯
+
+;;; Code:
+
+;; make it easy to edit this file
+(defun find-config ()
+  "Edit Emacs config."
+  (interactive)
+  (find-file "~/dots/emacs/init.el"))
+(global-set-key (kbd "C-c i") 'find-config)
+
 ;; package setup
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -10,14 +24,6 @@
   (eval-when-compile (require 'use-package)))
 (setq use-package-always-ensure t)
 
-;; benchmark startup
-(use-package benchmark-init
-  :config
-  ;; To disable collection of benchmark data after init is done.
-  (add-hook 'after-init-hook 'benchmark-init/deactivate))
-(add-hook 'after-init-hook
-	  (lambda () (message "loaded in %s" (emacs-init-time))))
-
 ;; autosave on lose focus
 (add-function :after after-focus-change-function
 	      (lambda () (save-some-buffers t)))
@@ -25,24 +31,20 @@
 ;; minimal look
 (setq inhibit-startup-screen t)
 (defun display-startup-echo-area-message ()
+  "Disable startup message."
   (message nil))
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (defalias 'yes-or-no-p 'y-or-n-p)
-					; hide minor modes from modeline
-(setq mode-line-modes
-      (mapcar (lambda (elem)
-		(pcase elem
-                  (`(:propertize (,_ minor-mode-alist . ,_) . ,_)
-                   "")
-                  (_ elem)))
-              mode-line-modes))
 
 ;; wrap lines
 (global-visual-line-mode 1)
 
+;; stop creating ~ files
+(setq make-backup-files nil)
+
 ;; font
-(set-frame-font "IBM Plex Mono 10" nil t)
+(set-frame-font "Monospace 10" nil t)
 
 ;; remember cursor position
 (save-place-mode 1)
@@ -52,6 +54,27 @@
 
 ;; theme
 (load-theme 'modus-vivendi)
+(global-set-key (kbd "<f5>") 'modus-themes-toggle)
+(use-package theme-magic)
+
+;; benchmark startup
+(use-package benchmark-init
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+(add-hook 'after-init-hook
+	  (lambda () (message "loaded in %s" (emacs-init-time))))
+
+;; better modeline
+(use-package telephone-line
+  :config
+  (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
+	telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
+	telephone-line-primary-right-separator 'telephone-line-cubed-right
+	telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
+  (setq telephone-line-height 18
+	telephone-line-evil-use-short-tag t)
+  (telephone-line-mode 1))
 
 ;; whic-key
 (use-package which-key
@@ -68,10 +91,12 @@
 
 ;; git
 (use-package magit
-  :bind ("C-x g" . magit-status))
+  :bind ("C-c g" . magit-status))
 (use-package git-gutter
   :config
   (global-git-gutter-mode 't))
+(use-package vc-msg
+  :bind ("C-c c" . vc-msg-show))
 
 ;; projectile
 (use-package projectile
@@ -170,7 +195,7 @@
  ;; If there is more than one, they won't work right.
  '(doc-view-continuous t)
  '(package-selected-packages
-   '(dired-sidebar go-mode flycheck orderless format-all company vertico wakatime-mode auto-virtualenv lsp-pyright lsp-ui lsp-mode projectile git-gutter magit rainbow-delimiters smartparens which-key benchmark-init use-package))
+   '(vc-msg vc-msg-show telephone-line dired-sidebar go-mode flycheck orderless format-all company vertico wakatime-mode auto-virtualenv lsp-pyright lsp-ui lsp-mode projectile git-gutter magit rainbow-delimiters smartparens which-key benchmark-init use-package))
  '(wakatime-cli-path "/usr/bin/wakatime-cli"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -178,3 +203,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;;; init.el ends here
