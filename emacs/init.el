@@ -30,9 +30,6 @@
 
 ;; minimal look
 (setq inhibit-startup-screen t)
-(defun display-startup-echo-area-message ()
-  "Disable startup message."
-  (message nil))
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -55,15 +52,15 @@
 ;; theme
 (load-theme 'modus-vivendi)
 (global-set-key (kbd "<f5>") 'modus-themes-toggle)
-(use-package theme-magic)
 
 ;; benchmark startup
 (use-package benchmark-init
   :config
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
-(add-hook 'after-init-hook
-	  (lambda () (message "loaded in %s" (emacs-init-time))))
+(defun display-startup-echo-area-message ()
+  "Show load time as startup message."
+   (message "loaded in %s" (emacs-init-time)))
 
 ;; better modeline
 (use-package telephone-line
@@ -76,11 +73,6 @@
 	telephone-line-evil-use-short-tag t)
   (telephone-line-mode 1))
 
-;; whic-key
-(use-package which-key
-  :config
-  (add-hook 'after-init-hook 'which-key-mode))
-
 ;; help with parens and delimiters
 (use-package smartparens
   :config
@@ -88,15 +80,6 @@
 (use-package rainbow-delimiters
   :config
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-
-;; git
-(use-package magit
-  :bind ("C-c g" . magit-status))
-(use-package git-gutter
-  :config
-  (global-git-gutter-mode 't))
-(use-package vc-msg
-  :bind ("C-c c" . vc-msg-show))
 
 ;; projectile
 (use-package projectile
@@ -115,12 +98,6 @@
 
 ;; debugger
 ;; realgud??
-
-;; tree-sitter
-(use-package tree-sitter
-  :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 ;; flycheck
 (use-package flycheck
@@ -177,13 +154,16 @@
   :init
   (global-company-mode))
 
+;; better search
+(use-package rg
+  :bind
+  (("C-c s" . rg-project)))
+
 ;; format-all
 (use-package format-all)
 
-;; project sidebar
-(use-package dired-sidebar
-  :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
-  :commands (dired-sidebar-toggle-sidebar))
+;; treemacs
+(global-set-key (kbd "C-c t") 'treemacs)
 
 ;;
 ;;
@@ -195,7 +175,7 @@
  ;; If there is more than one, they won't work right.
  '(doc-view-continuous t)
  '(package-selected-packages
-   '(vc-msg vc-msg-show telephone-line dired-sidebar go-mode flycheck orderless format-all company vertico wakatime-mode auto-virtualenv lsp-pyright lsp-ui lsp-mode projectile git-gutter magit rainbow-delimiters smartparens which-key benchmark-init use-package))
+   '(rg vc-msg-show telephone-line go-mode flycheck orderless format-all company vertico wakatime-mode auto-virtualenv lsp-pyright lsp-ui lsp-mode projectile rainbow-delimiters smartparens benchmark-init use-package))
  '(wakatime-cli-path "/usr/bin/wakatime-cli"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
