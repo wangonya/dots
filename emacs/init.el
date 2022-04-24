@@ -41,26 +41,13 @@
 (setq make-backup-files nil)
 
 ;; font
-(set-frame-font "Monospace 10" nil t)
+(add-to-list 'default-frame-alist '(font . "Monospace-10"))
 
 ;; remember cursor position
 (save-place-mode 1)
 
-;; delete backup files on save
-(setq delete-auto-save-files t)
-
 ;; theme
 (load-theme 'modus-vivendi)
-(global-set-key (kbd "<f5>") 'modus-themes-toggle)
-
-;; benchmark startup
-(use-package benchmark-init
-  :config
-  ;; To disable collection of benchmark data after init is done.
-  (add-hook 'after-init-hook 'benchmark-init/deactivate))
-(defun display-startup-echo-area-message ()
-  "Show load time as startup message."
-   (message "loaded in %s" (emacs-init-time)))
 
 ;; better modeline
 (use-package telephone-line
@@ -89,34 +76,29 @@
 
 ;; lsp
 (use-package lsp-mode
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :hook
-  ((lsp-mode-hook . lsp-enable-which-key-integration)))
+  :config
+  (setq lsp-enable-snippet nil
+	lsp-pylsp-plugins-flake8-config "~/dots/python/flake8"
+	lsp-pylsp-plugins-pydocstyle-enabled nil)
+  :hook ((python-mode . lsp)
+	 (go-mode . lsp)))
 (use-package lsp-ui
   :commands lsp-ui-mode)
 
-;; debugger
-;; realgud??
+;; load env vars
+(use-package load-env-vars)
 
 ;; flycheck
 (use-package flycheck
   :init (global-flycheck-mode))
 
 ;; python
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp))))
-(use-package auto-virtualenv)
-(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
-(with-eval-after-load 'lsp-mode
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\venv\\'"))
+(use-package auto-virtualenv
+  :hook
+  (python-mode . auto-virtualenv-set-virtualenv))
 
 ;; go
 (use-package go-mode)
-(add-hook 'go-mode-hook 'lsp-deferred)
 
 ;; wakatime
 (use-package wakatime-mode
@@ -160,7 +142,8 @@
   (("C-c s" . rg-project)))
 
 ;; format-all
-(use-package format-all)
+(use-package format-all
+  :hook (prog-mode . format-all-mode))
 
 ;; treemacs
 (global-set-key (kbd "C-c t") 'treemacs)
@@ -175,7 +158,7 @@
  ;; If there is more than one, they won't work right.
  '(doc-view-continuous t)
  '(package-selected-packages
-   '(rg vc-msg-show telephone-line go-mode flycheck orderless format-all company vertico wakatime-mode auto-virtualenv lsp-pyright lsp-ui lsp-mode projectile rainbow-delimiters smartparens benchmark-init use-package))
+   '(load-env-vars rg vc-msg-show telephone-line go-mode flycheck orderless format-all company vertico wakatime-mode auto-virtualenv lsp-ui lsp-mode projectile rainbow-delimiters smartparens use-package))
  '(wakatime-cli-path "/usr/bin/wakatime-cli"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

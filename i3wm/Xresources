@@ -36,11 +36,3 @@ Xft.lcdfilter: lcddefault
 ! White colours
 *.color7:        #bfbfbf
 *.color15:       #ffffff
-
-XTerm*selectToClipboard: true \
-      VT100.Translations: #override \n\
-      Shift Ctrl<Key>V: insert-selection(CLIPBOARD) \n\ 
-      Shift Ctrl<Key>V: insert-selection(PRIMARY) \n\ 
-      Shift<Btn1Down>: select-start() \n\ 
-      Shift<Btn1Motion>: select-extend() \n\ 
-      Shift<Btn1Up>: select-end(CLIPBOARD) \n\

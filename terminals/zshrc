@@ -1,5 +1,7 @@
-export EDITOR='vim'
 export BROWSER=/usr/bin/google-chrome-stable
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -c"                  # $EDITOR opens in terminal
+export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.poetry/bin:$PATH
@@ -7,7 +9,6 @@ export PATH=$HOME/.emacs.d/bin:$PATH
 
 export PYLINTRC="~/dots/python/pylintrc"
 export CLOUDSDK_PYTHON=$(which python3)
-export PYTHONBREAKPOINT="pudb.set_trace"
 
 alias myi3="vim ~/dots/i3wm/i3"
 alias updt="sudo pacman -Syu"
@@ -22,3 +23,4 @@ alias gs="git status"
 alias gd="git diff"
 alias gp="git push -u origin HEAD"
 alias gpl="git pull origin"
+alias black="darker"

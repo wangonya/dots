@@ -9,27 +9,25 @@ echo "=== installing packages ==="
 sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
      postgresql redis ripgrep unclutter flameshot pulseaudio pulseaudio-alsa \
      fd go go-tools gopls delve mariadb pavucontrol python-pip emacs pandoc \
-     gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa
+     gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa \
+     python-build python-wheel python-isort python-lsp-server
 echo
 
 echo "=== installing aur stuff ==="
 gpg --recv-key 2D347EA6AA65421D
 pamac build ngrok slack-desktop spotify we10x-icon-theme-git xarchiver \
       visual-studio-code-bin beekeeper-studio-bin python37 google-cloud-sdk \
-      orchis-theme
+      orchis-theme python-darker \
+      
 echo
 
 echo "=== starting and enabling systemd services ==="
-systemctl start redis.service
 systemctl enable redis.service
+systemctl start redis.service
 
 sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-systemctl start mariadb.service
 systemctl enable mariadb.service
-echo
-
-echo "=== installing python stuff ==="
-pip install darker[isort] build wheel pudb
+systemctl start mariadb.service
 echo
 
 echo "=== setting up npm system wide install config ==="
@@ -61,7 +59,9 @@ mv ~/.Xresources ~/.Xresources.bak
 ln -sv ~/dots/i3wm/Xresources ~/.Xresources
 
 mv ~/.dmenurc ~/.dmenurc.bak
-ln -sv ~/dots/i3wm/dmenurc ~/.dmenurc 
+ln -sv ~/dots/i3wm/dmenurc ~/.dmenurc
+
+ln -sv ~/dots/python/pdbrc ~/.pdbrc
 
 echo "source ~/dots/terminals/zshrc" >> ~/.zshrc
 echo
