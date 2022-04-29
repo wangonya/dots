@@ -3,16 +3,16 @@
 #
 
 ## background colour for unselected menu-items
-DMENU_NB="#000000"
+DMENU_NB="#1f2022"
 
 ## textcolour for unselected menu-items
 DMENU_NF="#595959"
 
 ## background colour for selected menu-items
-DMENU_SB="#000000"
+DMENU_SB="#1f2022"
 
 ## textcolour for selected menu-items
-DMENU_SF="#bfbfbf"
+DMENU_SF="#f8f8f8"
 
 ## command for the terminal application to be used:
 TERMINAL_CMD="terminal -e"

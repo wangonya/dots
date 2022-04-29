@@ -17,7 +17,7 @@ echo "=== installing aur stuff ==="
 gpg --recv-key 2D347EA6AA65421D
 pamac build ngrok slack-desktop spotify we10x-icon-theme-git xarchiver \
       visual-studio-code-bin beekeeper-studio-bin python37 google-cloud-sdk \
-      orchis-theme python-darker \
+      yaru-gtk-theme python-darker \
       
 echo
 

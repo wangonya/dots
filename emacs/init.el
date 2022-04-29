@@ -12,6 +12,40 @@
   (find-file "~/dots/emacs/init.el"))
 (global-set-key (kbd "C-c i") 'find-config)
 
+;; easy copy cut paste
+(cua-mode t)
+
+;; autosave on lose focus
+(add-function :after after-focus-change-function
+	      (lambda () (save-some-buffers t)))
+
+;; minimal look
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
+(setq inhibit-startup-screen t)
+(setq-default cursor-type 'bar)
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; show line numbers
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+;; move focus to split window
+(global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
+(global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
+
+;; wrap lines
+(global-visual-line-mode 1)
+
+;; stop creating ~ files
+(setq make-backup-files nil)
+
+;; font
+(add-to-list 'default-frame-alist '(font . "Monospace-10"))
+
+;; remember cursor position
+(save-place-mode t)
+
 ;; package setup
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -24,30 +58,10 @@
   (eval-when-compile (require 'use-package)))
 (setq use-package-always-ensure t)
 
-;; autosave on lose focus
-(add-function :after after-focus-change-function
-	      (lambda () (save-some-buffers t)))
-
-;; minimal look
-(setq inhibit-startup-screen t)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;; wrap lines
-(global-visual-line-mode 1)
-
-;; stop creating ~ files
-(setq make-backup-files nil)
-
-;; font
-(add-to-list 'default-frame-alist '(font . "Monospace-10"))
-
-;; remember cursor position
-(save-place-mode 1)
-
 ;; theme
-(load-theme 'modus-vivendi)
+(use-package spacemacs-theme
+  :defer t
+  :init (load-theme 'spacemacs-dark t))
 
 ;; better modeline
 (use-package telephone-line
@@ -58,7 +72,7 @@
 	telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
   (setq telephone-line-height 18
 	telephone-line-evil-use-short-tag t)
-  (telephone-line-mode 1))
+  (telephone-line-mode t))
 
 ;; help with parens and delimiters
 (use-package smartparens
@@ -71,7 +85,7 @@
 ;; projectile
 (use-package projectile
   :config
-  (projectile-mode +1)
+  (projectile-mode t)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 ;; lsp
@@ -110,7 +124,7 @@
   :init
   (vertico-mode)
   (setq vertico-cycle t))
-(savehist-mode 1)
+(savehist-mode t)
 
 ;; vertico directory
 (use-package vertico-directory
@@ -143,10 +157,36 @@
 
 ;; format-all
 (use-package format-all
-  :hook (prog-mode . format-all-mode))
+  :bind
+  (("C-c f" . format-all-buffer)))
 
-;; treemacs
-(global-set-key (kbd "C-c t") 'treemacs)
+;; tree-sitter
+(use-package tree-sitter
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+(use-package tree-sitter-langs)
+
+
+;; neotree
+(defun neotree-project-dir ()
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (projectile-project-root))
+        (file-name (buffer-file-name)))
+    (neotree-toggle)
+    (if project-dir
+        (if (neo-global--window-exists-p)
+            (progn
+              (neotree-dir project-dir)
+              (neotree-find file-name)))
+      (message "Could not find git project root."))))
+(use-package neotree
+  :bind (("C-c t" . neotree-project-dir))
+  :config
+  (setq neo-theme (if (display-graphic-p) 'arrow 'arrow)
+	neo-smart-open t
+	projectile-switch-project-action 'neotree-projectile-action))
 
 ;;
 ;;
@@ -158,7 +198,7 @@
  ;; If there is more than one, they won't work right.
  '(doc-view-continuous t)
  '(package-selected-packages
-   '(load-env-vars rg vc-msg-show telephone-line go-mode flycheck orderless format-all company vertico wakatime-mode auto-virtualenv lsp-ui lsp-mode projectile rainbow-delimiters smartparens use-package))
+   '(spacemacs-theme neotree tree-sitter-langs tree-sitter load-env-vars rg telephone-line go-mode flycheck orderless format-all company vertico wakatime-mode auto-virtualenv lsp-ui lsp-mode projectile rainbow-delimiters smartparens use-package))
  '(wakatime-cli-path "/usr/bin/wakatime-cli"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

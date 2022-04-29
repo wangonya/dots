@@ -1,3 +1,4 @@
+echo -e -n "\x1b[\x36 q" # | cursor
 export BROWSER=/usr/bin/google-chrome-stable
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -c"                  # $EDITOR opens in terminal
