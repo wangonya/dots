@@ -27,15 +27,15 @@
 (setq-default cursor-type 'bar)
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; show line numbers
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
-
 ;; move focus to split window
 (global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
 (global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
 
 ;; wrap lines
 (global-visual-line-mode 1)
+
+;; refresh buffer when files change on disk
+(global-auto-revert-mode t)
 
 ;; stop creating ~ files
 (setq make-backup-files nil)
@@ -45,6 +45,12 @@
 
 ;; remember cursor position
 (save-place-mode t)
+
+;; org capture notes file
+(setq org-default-notes-file "~org/wm.org")
+
+;; org capture keybinding
+(global-set-key (kbd "C-c c") 'org-capture)
 
 ;; package setup
 (require 'package)
@@ -62,6 +68,19 @@
 (use-package spacemacs-theme
   :defer t
   :init (load-theme 'spacemacs-dark t))
+
+;; git-gutter
+(use-package git-gutter
+  :bind
+  (("C-x p" . git-gutter:previous-hunk)
+   ("C-x n" . git-gutter:next-hunk)
+   ("C-x v s" . git-gutter:stage-hunk)
+   ("C-x v =" . git-gutter:popup-hunk)
+   ("C-x v r" . git-gutter:revert-hunk))
+  :config
+  (global-git-gutter-mode t)
+  (setq git-gutter:added-sign "|"
+	git-gutter:modified-sign "|"))
 
 ;; better modeline
 (use-package telephone-line
@@ -198,7 +217,7 @@
  ;; If there is more than one, they won't work right.
  '(doc-view-continuous t)
  '(package-selected-packages
-   '(spacemacs-theme neotree tree-sitter-langs tree-sitter load-env-vars rg telephone-line go-mode flycheck orderless format-all company vertico wakatime-mode auto-virtualenv lsp-ui lsp-mode projectile rainbow-delimiters smartparens use-package))
+   '(git-gutter spacemacs-theme neotree tree-sitter-langs tree-sitter load-env-vars rg telephone-line go-mode flycheck orderless format-all company vertico wakatime-mode auto-virtualenv lsp-ui lsp-mode projectile rainbow-delimiters smartparens use-package))
  '(wakatime-cli-path "/usr/bin/wakatime-cli"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
