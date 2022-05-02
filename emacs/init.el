@@ -47,7 +47,7 @@
 (save-place-mode t)
 
 ;; org capture notes file
-(setq org-default-notes-file "~org/wm.org")
+(setq org-default-notes-file "~/org/wm.org")
 
 ;; org capture keybinding
 (global-set-key (kbd "C-c c") 'org-capture)
@@ -78,52 +78,32 @@
    ("C-x v =" . git-gutter:popup-hunk)
    ("C-x v r" . git-gutter:revert-hunk))
   :config
-  (global-git-gutter-mode t)
   (setq git-gutter:added-sign "|"
-	git-gutter:modified-sign "|"))
-
-;; better modeline
-(use-package telephone-line
-  :config
-  (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
-	telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
-	telephone-line-primary-right-separator 'telephone-line-cubed-right
-	telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
-  (setq telephone-line-height 18
-	telephone-line-evil-use-short-tag t)
-  (telephone-line-mode t))
+	git-gutter:modified-sign "|")
+  (global-git-gutter-mode t))
 
 ;; help with parens and delimiters
 (use-package smartparens
-  :config
-  (add-hook 'prog-mode-hook 'smartparens-mode))
+  :hook ((prog-mode . smartparens-mode)))
 (use-package rainbow-delimiters
-  :config
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  :hook((prog-mode . rainbow-delimiters-mode)))
 
-;; projectile
-(use-package projectile
-  :config
-  (projectile-mode t)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+;; project.el
+(require 'project)
+(define-key ctl-x-map "p" project-prefix-map)
 
-;; lsp
-(use-package lsp-mode
-  :config
-  (setq lsp-enable-snippet nil
-	lsp-pylsp-plugins-flake8-config "~/dots/python/flake8"
-	lsp-pylsp-plugins-pydocstyle-enabled nil)
-  :hook ((python-mode . lsp)
-	 (go-mode . lsp)))
-(use-package lsp-ui
-  :commands lsp-ui-mode)
+;; eglot
+(use-package eglot
+  :bind
+  (("C-c r" . eglot-rename)
+   ("C-c h" . eldoc)
+   ("<f6>" . xref-find-definitions))
+  :hook ((python-mode . eglot-ensure)
+	 (go-mode . eglot-ensure)
+	 (bash-mode . eglot-ensure)))
 
 ;; load env vars
 (use-package load-env-vars)
-
-;; flycheck
-(use-package flycheck
-  :init (global-flycheck-mode))
 
 ;; python
 (use-package auto-virtualenv
@@ -217,7 +197,7 @@
  ;; If there is more than one, they won't work right.
  '(doc-view-continuous t)
  '(package-selected-packages
-   '(git-gutter spacemacs-theme neotree tree-sitter-langs tree-sitter load-env-vars rg telephone-line go-mode flycheck orderless format-all company vertico wakatime-mode auto-virtualenv lsp-ui lsp-mode projectile rainbow-delimiters smartparens use-package))
+   '(eglot git-gutter spacemacs-theme neotree tree-sitter-langs tree-sitter load-env-vars rg go-mode orderless format-all company vertico wakatime-mode auto-virtualenv rainbow-delimiters smartparens use-package))
  '(wakatime-cli-path "/usr/bin/wakatime-cli"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
