@@ -11,6 +11,7 @@ sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
      fd go go-tools gopls delve mariadb pavucontrol python-pip emacs pandoc \
      gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa \
      python-build python-wheel python-isort python-lsp-server tela-icon-theme \
+     falkon tela-icon-theme
 echo
 
 echo "=== installing aur stuff ==="
@@ -78,13 +79,6 @@ echo
 
 #setup postgres
 #setup mariadb
-#https://wiki.manjaro.org/index.php/Improve_Font_Rendering
-
+#remove style from .config/qt5ct/qt5ct.conf and set icon font to Tela-purple-dark
 # mkdir .emacs.d
-# ln -sv ~/dots/emacs/init.el ~/.emacs.d/init.el
-# git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-# ~/.emacs.d/bin/doom install
-# rm -rf ~/.doom.d/
-# ln -sv ~/dots/emacs ~/.doom.d
-# ~/.emacs.d/bin/doom sync
 # sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'

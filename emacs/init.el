@@ -19,7 +19,7 @@
 (add-function :after after-focus-change-function
 	      (lambda () (save-some-buffers t)))
 
-;; minimal look
+;; improve looks
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
@@ -70,17 +70,22 @@
   :init (load-theme 'spacemacs-dark t))
 
 ;; git-gutter
-(use-package git-gutter
+(use-package git-gutter+
   :bind
-  (("C-x p" . git-gutter:previous-hunk)
-   ("C-x n" . git-gutter:next-hunk)
-   ("C-x v s" . git-gutter:stage-hunk)
-   ("C-x v =" . git-gutter:popup-hunk)
-   ("C-x v r" . git-gutter:revert-hunk))
+  (("C-x p" . git-gutter+-previous-hunk)
+   ("C-x n" . git-gutter+-next-hunk)
+   ("C-x v s" . git-gutter+-stage-hunks)
+   ("C-x v =" . git-gutter+-show-hunk)
+   ("C-x v r" . git-gutter+-revert-hunks)
+   ("C-x v c" . git-gutter+-commit)
+   ("C-x v C" . git-gutter+-stage-and-commit)
+   )
   :config
-  (setq git-gutter:added-sign "|"
-	git-gutter:modified-sign "|")
-  (global-git-gutter-mode t))
+  (setq git-gutter+-added-sign "|"
+	git-gutter+-modified-sign "|")
+  (global-git-gutter+-mode)
+  :diminish (git-gutter+-mode . "gg"))
+(use-package git-gutter-fringe+)
 
 ;; help with parens and delimiters
 (use-package smartparens
@@ -197,7 +202,7 @@
  ;; If there is more than one, they won't work right.
  '(doc-view-continuous t)
  '(package-selected-packages
-   '(eglot git-gutter spacemacs-theme neotree tree-sitter-langs tree-sitter load-env-vars rg go-mode orderless format-all company vertico wakatime-mode auto-virtualenv rainbow-delimiters smartparens use-package))
+   '(git-gutter-fringe+ git-gutter+ eglot spacemacs-theme neotree tree-sitter-langs tree-sitter load-env-vars rg go-mode orderless format-all company vertico wakatime-mode auto-virtualenv rainbow-delimiters smartparens use-package))
  '(wakatime-cli-path "/usr/bin/wakatime-cli"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
