@@ -10,12 +10,12 @@ sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
      postgresql redis ripgrep unclutter flameshot pulseaudio pulseaudio-alsa \
      fd go go-tools gopls delve mariadb pavucontrol python-pip emacs pandoc \
      gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa \
-     python-build python-wheel python-isort python-lsp-server
+     python-build python-wheel python-isort python-lsp-server tela-icon-theme \
 echo
 
 echo "=== installing aur stuff ==="
 gpg --recv-key 2D347EA6AA65421D
-pamac build ngrok slack-desktop spotify we10x-icon-theme-git xarchiver \
+pamac build ngrok slack-desktop spotify xarchiver \
       visual-studio-code-bin beekeeper-studio-bin python37 google-cloud-sdk \
       yaru-gtk-theme python-darker \
       
