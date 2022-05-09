@@ -114,7 +114,9 @@
 (use-package project-x
   :load-path "~/dots/emacs/"
   :after project
-  :config (project-x-mode t)) 
+  :config
+  (setq project-x-save-interval 300)    ;Save project state every 5 min
+  (project-x-mode t))
 
 ;; vterm
 (use-package vterm)
@@ -180,10 +182,49 @@
   :init
   (global-company-mode))
 
-;; better search
-(use-package rg
-  :bind
-  (("C-c s" . rg-project)))
+;; consult
+(use-package consult
+  ;; Replace bindings. Lazily loaded due by `use-package'.
+  :bind (;; C-x bindings (ctl-x-map)
+         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+         ;; M-g bindings (goto-map)
+         ("M-g e" . consult-compile-error)
+         ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+         ("M-g m" . consult-mark)
+         ("M-g k" . consult-global-mark)
+         ("M-g i" . consult-imenu)
+         ("M-g I" . consult-imenu-multi)
+         ;; M-s bindings (search-map)
+         ("M-s d" . consult-find)
+         ("M-s r" . consult-ripgrep)
+         ("M-s l" . consult-line)
+         ("M-s k" . consult-keep-lines)
+         ("M-s u" . consult-focus-lines)
+         ;; Isearch integration
+         ("M-s e" . consult-isearch-history))
+
+
+  ;; Enable automatic preview at point in the *Completions* buffer.
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+
+  :init
+
+  ;; Configure the register formatting. This improves the register
+  ;; preview for `consult-register', `consult-register-load',
+  ;; `consult-register-store' and the Emacs built-ins.
+  (setq register-preview-delay 0.5
+        register-preview-function #'consult-register-format)
+
+  ;; Tweak the register preview window.
+  ;; This adds thin lines, sorting and hides the mode line of the window.
+  (advice-add #'register-preview :override #'consult-register-window)
+
+  ;; Use Consult to select xref locations with preview
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref))
 
 ;; formatter
 (use-package apheleia
@@ -198,24 +239,10 @@
 
 
 ;; neotree
-(defun neotree-project-dir ()
-  "Open NeoTree using the git root."
-  (interactive)
-  (let ((project-dir (projectile-project-root))
-        (file-name (buffer-file-name)))
-    (neotree-toggle)
-    (if project-dir
-        (if (neo-global--window-exists-p)
-            (progn
-              (neotree-dir project-dir)
-              (neotree-find file-name)))
-      (message "Could not find git project root."))))
 (use-package neotree
-  :bind (("C-c t" . neotree-project-dir))
   :config
   (setq neo-theme (if (display-graphic-p) 'arrow 'arrow)
-	neo-smart-open t
-	projectile-switch-project-action 'neotree-projectile-action))
+	neo-smart-open t))
 
 ;;
 ;;
@@ -227,7 +254,7 @@
  ;; If there is more than one, they won't work right.
  '(doc-view-continuous t)
  '(package-selected-packages
-   '(vterm-toggle vterm project-x apheleia git-gutter-fringe+ git-gutter+ eglot spacemacs-theme neotree tree-sitter-langs tree-sitter load-env-vars rg go-mode orderless company vertico wakatime-mode auto-virtualenv rainbow-delimiters smartparens use-package))
+   '(consult vterm-toggle vterm project-x apheleia git-gutter-fringe+ git-gutter+ eglot spacemacs-theme neotree tree-sitter-langs tree-sitter load-env-vars go-mode orderless company vertico wakatime-mode auto-virtualenv rainbow-delimiters smartparens use-package))
  '(wakatime-cli-path "/usr/bin/wakatime-cli"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
