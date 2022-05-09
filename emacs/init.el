@@ -27,12 +27,27 @@
 (setq-default cursor-type 'bar)
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; remove minor mode from mode-line
+;; https://emacs.stackexchange.com/a/41135
+(let ((my/minor-mode-alist '((flycheck-mode flycheck-mode-line))))
+  (setq mode-line-modes
+        (mapcar (lambda (elem)
+                  (pcase elem
+                    (`(:propertize (,_ minor-mode-alist . ,_) . ,_)
+                     `(:propertize ("" ,my/minor-mode-alist)
+			           mouse-face mode-line-highlight
+			           local-map ,mode-line-minor-mode-keymap)
+                     )
+                    (_ elem)))
+                mode-line-modes)
+        ))
+
 ;; move focus to split window
 (global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
 (global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
 
 ;; wrap lines
-(global-visual-line-mode 1)
+(global-visual-line-mode t)
 
 ;; refresh buffer when files change on disk
 (global-auto-revert-mode t)
@@ -96,13 +111,24 @@
 ;; project.el
 (require 'project)
 (define-key ctl-x-map "p" project-prefix-map)
+(use-package project-x
+  :load-path "~/dots/emacs/"
+  :after project
+  :config (project-x-mode t)) 
+
+;; vterm
+(use-package vterm)
+(use-package vterm-toggle
+  :custom
+  (vterm-toggle-scope 'project)
+  (vterm-toggle-hide-method 'reset-window-configration)
+  :bind (("C-c t" . #'vterm-toggle)))
 
 ;; eglot
 (use-package eglot
   :bind
   (("C-c r" . eglot-rename)
-   ("C-c h" . eldoc)
-   ("<f6>" . xref-find-definitions))
+   ("C-c h" . eldoc))
   :hook ((python-mode . eglot-ensure)
 	 (go-mode . eglot-ensure)
 	 (bash-mode . eglot-ensure)))
@@ -159,10 +185,9 @@
   :bind
   (("C-c s" . rg-project)))
 
-;; format-all
-(use-package format-all
-  :bind
-  (("C-c f" . format-all-buffer)))
+;; formatter
+(use-package apheleia
+  :config (apheleia-global-mode t))
 
 ;; tree-sitter
 (use-package tree-sitter
@@ -202,7 +227,7 @@
  ;; If there is more than one, they won't work right.
  '(doc-view-continuous t)
  '(package-selected-packages
-   '(git-gutter-fringe+ git-gutter+ eglot spacemacs-theme neotree tree-sitter-langs tree-sitter load-env-vars rg go-mode orderless format-all company vertico wakatime-mode auto-virtualenv rainbow-delimiters smartparens use-package))
+   '(vterm-toggle vterm project-x apheleia git-gutter-fringe+ git-gutter+ eglot spacemacs-theme neotree tree-sitter-langs tree-sitter load-env-vars rg go-mode orderless company vertico wakatime-mode auto-virtualenv rainbow-delimiters smartparens use-package))
  '(wakatime-cli-path "/usr/bin/wakatime-cli"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
