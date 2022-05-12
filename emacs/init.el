@@ -115,8 +115,8 @@
   :load-path "~/dots/emacs/"
   :after project
   :config
-  (setq project-x-save-interval 300)    ;Save project state every 5 min
-  (project-x-mode t))
+  (setq project-x-save-interval 600)    ;Save project state every 10 min
+  (project-x-mode 1))
 
 ;; vterm
 (use-package vterm)

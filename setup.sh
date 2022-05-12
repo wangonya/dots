@@ -11,11 +11,12 @@ sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
      fd go go-tools gopls delve mariadb pavucontrol python-pip emacs pandoc \
      gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa \
      python-build python-wheel python-isort python-lsp-server tela-icon-theme \
-     falkon tela-icon-theme
+     firefox tela-icon-theme
 echo
 
 echo "=== installing aur stuff ==="
 gpg --recv-key 2D347EA6AA65421D
+gpg --recv-key 2954CC8585E27A3F
 pamac build ngrok slack-desktop spotify xarchiver \
       visual-studio-code-bin beekeeper-studio-bin python37 google-cloud-sdk \
       yaru-gtk-theme python-darker \
@@ -79,6 +80,4 @@ echo
 
 #setup postgres
 #setup mariadb
-#remove style from .config/qt5ct/qt5ct.conf and set icon font to Tela-purple-dark
-# mkdir .emacs.d
 # sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
