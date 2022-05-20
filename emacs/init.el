@@ -88,6 +88,10 @@
 (use-package centaur-tabs
   :demand
   :config
+  (setq centaur-tabs-show-new-tab-button nil
+	centaur-tabs-height 25
+	centaur-tabs-set-modified-marker t)
+  (centaur-tabs-headline-match)
   (centaur-tabs-mode t)
   :bind
   ("C-<prior>" . centaur-tabs-backward)
