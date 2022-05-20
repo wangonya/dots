@@ -8,10 +8,10 @@ echo
 echo "=== installing packages ==="
 sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
      postgresql redis ripgrep unclutter flameshot pulseaudio pulseaudio-alsa \
-     fd go go-tools gopls delve mariadb pavucontrol python-pip emacs pandoc \
+     fd go go-tools gopls delve mariadb pavucontrol python-pip pandoc \
      gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa \
      python-build python-wheel python-isort python-lsp-server tela-icon-theme \
-     firefox tela-icon-theme
+     firefox tela-icon-theme neovim alacritty
 echo
 
 echo "=== installing aur stuff ==="
@@ -19,7 +19,7 @@ gpg --recv-key 2D347EA6AA65421D
 gpg --recv-key 2954CC8585E27A3F
 pamac build ngrok slack-desktop spotify xarchiver \
       visual-studio-code-bin beekeeper-studio-bin python37 google-cloud-sdk \
-      yaru-gtk-theme python-darker \
+      python-darker \
       
 echo
 
@@ -54,9 +54,6 @@ sudo mv 6800547/sp /usr/local/bin
 sp
 rm -rf 6800547
 
-mkdir .config/pudb
-ln -sv ~/dots/python/pudb.cfg .config/pudb
-
 mv ~/.Xresources ~/.Xresources.bak
 ln -sv ~/dots/i3wm/Xresources ~/.Xresources
 
@@ -65,7 +62,11 @@ ln -sv ~/dots/i3wm/dmenurc ~/.dmenurc
 
 ln -sv ~/dots/python/pdbrc ~/.pdbrc
 
+ln -sv ~/dots/terminals/alacritty.yml ~/.config/
+
 echo "source ~/dots/terminals/zshrc" >> ~/.zshrc
+echo "corner-radius = 7" >> ~/.config/picom.conf
+git clone https://github.com/UnnatShaneshwar/AtomOneDarkTheme.git .themes/AtomOne
 echo
 
 echo "=== setting up git configs"
@@ -81,3 +82,8 @@ echo
 #setup postgres
 #setup mariadb
 # sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+
+# nvchad
+# git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+# nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
+# ln -sv ~/dots/vim/custom ~/.config/nvim/lua/custom
