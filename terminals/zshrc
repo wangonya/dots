@@ -1,18 +1,14 @@
-echo -e -n "\x1b[\x36 q" # | cursor
-export BROWSER=/usr/bin/google-chrome-stable
-export ALTERNATE_EDITOR=""
-export EDITOR="emacsclient -c"                  # $EDITOR opens in terminal
-export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
+export BROWSER=/usr/bin/firefox
+export EDITOR="vim"                  # $EDITOR opens in terminal
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.poetry/bin:$PATH
-export PATH=$HOME/.emacs.d/bin:$PATH
 
 export PYLINTRC="~/dots/python/pylintrc"
 export CLOUDSDK_PYTHON=$(which python3)
 export PYTHONBREAKPOINT=ipdb.set_trace
 
-alias myi3="vim ~/dots/i3wm/i3"
+alias myi3="nv ~/dots/i3wm/i3"
 alias updt="sudo pacman -Syu"
 alias py="python3"
 alias python3='python3'
@@ -20,6 +16,7 @@ alias less="bat"
 alias dt="cd ~/dots"
 alias pyf="darker -i ."
 alias gcm="git commit -m"
+alias gcma="git commit --amend -m"
 alias ga="git add"
 alias gs="git status"
 alias gd="git diff"
