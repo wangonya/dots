@@ -6,7 +6,7 @@ Xft.autohint:  false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
-*.faceName: Monospace
+*.faceName: "BlexMono Nerd Font"
 *.faceSize: 10
 
 !! xterm

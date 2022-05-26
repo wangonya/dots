@@ -11,19 +11,19 @@ window:
 
 font:
   normal:
-    family: Monospace
+    family: BlexMono Nerd Font
     style: Regular
 
   bold:
-    family: Monospace
+    family: BlexMono Nerd Font
     style: Bold
 
   italic:
-    family: Monospace
+    family: BlexMono Nerd Font
     style: Italic
 
   bold_italic:
-    family: Monospace
+    family: BlexMono Nerd Font
     style: Bold Italic
 
   size: 10.0

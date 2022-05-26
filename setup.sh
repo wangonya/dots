@@ -19,7 +19,7 @@ gpg --recv-key 2D347EA6AA65421D
 gpg --recv-key 2954CC8585E27A3F
 pamac build ngrok slack-desktop spotify xarchiver \
       visual-studio-code-bin beekeeper-studio-bin python37 google-cloud-sdk \
-      python-darker rdm-bin \
+      python-darker rdm-bin nerd-fonts-ibm-plex-mono \
       
 echo
 
