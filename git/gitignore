@@ -9,11 +9,7 @@ typings/
 cloud_sql_proxy
 venv/
 .venv/
-.env
-.env-dev*
-.env-local*
-.env-test*
-.env-uat*
+.env*
 *.db
 .envrc
 
