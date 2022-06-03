@@ -11,7 +11,7 @@ sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
      fd go go-tools gopls delve mariadb pavucontrol python-pip pandoc \
      gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa \
      python-build python-wheel python-isort python-lsp-server tela-icon-theme \
-     firefox tela-icon-theme neovim alacritty
+     firefox tela-icon-theme neovim alacritty stylua python-debugpy
 echo
 
 echo "=== installing aur stuff ==="
