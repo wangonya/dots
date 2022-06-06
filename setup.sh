@@ -7,18 +7,19 @@ echo
 
 echo "=== installing packages ==="
 sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
-     postgresql redis ripgrep unclutter flameshot pulseaudio pulseaudio-alsa \
-     fd go go-tools gopls delve mariadb pavucontrol python-pip pandoc \
-     gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-equalizer-ladspa \
+     postgresql redis ripgrep unclutter flameshot xarchiver \
+     fd go go-tools gopls delve mariadb python-pip pandoc \
+     gparted dosfstools mtools unzip mpv youtube-dl \
      python-build python-wheel python-isort python-lsp-server tela-icon-theme \
-     firefox tela-icon-theme neovim alacritty stylua python-debugpy
+     firefox neovim alacritty stylua python-debugpy
 echo
 
 echo "=== installing aur stuff ==="
 gpg --recv-key 2D347EA6AA65421D
 gpg --recv-key 2954CC8585E27A3F
-pamac build ngrok slack-desktop spotify xarchiver \
-      visual-studio-code-bin beekeeper-studio-bin python37 google-cloud-sdk \
+gpg --recv-key 5E3C45D7B312C643
+pamac build ngrok slack-desktop spotify \
+      beekeeper-studio-bin python37 google-cloud-sdk \
       python-darker rdm-bin nerd-fonts-ibm-plex-mono \
       
 echo
@@ -65,7 +66,7 @@ ln -sv ~/dots/python/pdbrc ~/.pdbrc
 ln -sv ~/dots/terminals/alacritty.yml ~/.config/
 
 echo "source ~/dots/terminals/zshrc" >> ~/.zshrc
-echo "corner-radius = 7" >> ~/.config/picom.conf
+echo "corner-radius = 5" >> ~/.config/picom.conf
 git clone https://github.com/UnnatShaneshwar/AtomOneDarkTheme.git .themes/AtomOne
 echo
 
