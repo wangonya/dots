@@ -6,25 +6,25 @@ echo
 
 echo "=== running updates ==="
 sudo pacman-mirrors -f 10
-sudo pacman -Syyu
+sudo pacman -Syyuu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
+sudo pacman -S --needed redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
      postgresql redis ripgrep unclutter flameshot xarchiver pulseaudio \
      fd go go-tools gopls delve mariadb python-pip pandoc pulseaudio-alsa \
      gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-jack pavucontrol \
      python-build python-wheel python-isort python-lsp-server tela-icon-theme \
-     firefox neovim alacritty stylua python-debugpy yaru-icon-theme
+     firefox neovim alacritty stylua python-debugpy base-devel yay
 echo
 
 echo "=== installing aur stuff ==="
-gpg --recv-key 2D347EA6AA65421D
-gpg --recv-key 2954CC8585E27A3F
-gpg --recv-key 5E3C45D7B312C643
-pamac build ngrok slack-desktop spotify \
-      beekeeper-studio-bin python37 google-cloud-sdk \
-      python-darker nerd-fonts-ibm-plex-mono \
+#gpg --recv-key 2D347EA6AA65421D
+#gpg --recv-key 2954CC8585E27A3F
+#gpg --recv-key 5E3C45D7B312C643
+yay -S ngrok slack-desktop spotify mictray \
+       beekeeper-studio-bin google-cloud-sdk \
+       python-darker nerd-fonts-ibm-plex-mono \
       
 echo
 
@@ -70,7 +70,7 @@ ln -sv ~/dots/terminals/alacritty.yml ~/.config/
 
 echo "source ~/dots/terminals/zshrc" >> ~/.zshrc
 echo "corner-radius = 5" >> ~/.config/picom.conf
-git clone https://github.com/UnnatShaneshwar/AtomOneDarkTheme.git .themes/AtomOne
+git clone https://github.com/UnnatShaneshwar/AtomOneDarkTheme.git ~/.themes/AtomOne
 echo
 
 echo "=== setting up git configs"
