@@ -1,5 +1,9 @@
 set -e
 
+echo "=== syncing time ==="
+sudo timedatectl set-ntp true
+echo
+
 echo "=== running updates ==="
 sudo pacman-mirrors -f 10
 sudo pacman -Syyu
@@ -7,11 +11,11 @@ echo
 
 echo "=== installing packages ==="
 sudo pacman -S redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
-     postgresql redis ripgrep unclutter flameshot xarchiver \
-     fd go go-tools gopls delve mariadb python-pip pandoc \
-     gparted dosfstools mtools unzip mpv youtube-dl \
+     postgresql redis ripgrep unclutter flameshot xarchiver pulseaudio \
+     fd go go-tools gopls delve mariadb python-pip pandoc pulseaudio-alsa \
+     gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-jack pavucontrol \
      python-build python-wheel python-isort python-lsp-server tela-icon-theme \
-     firefox neovim alacritty stylua python-debugpy
+     firefox neovim alacritty stylua python-debugpy yaru-icon-theme
 echo
 
 echo "=== installing aur stuff ==="
@@ -20,7 +24,7 @@ gpg --recv-key 2954CC8585E27A3F
 gpg --recv-key 5E3C45D7B312C643
 pamac build ngrok slack-desktop spotify \
       beekeeper-studio-bin python37 google-cloud-sdk \
-      python-darker rdm-bin nerd-fonts-ibm-plex-mono \
+      python-darker nerd-fonts-ibm-plex-mono \
       
 echo
 
@@ -52,7 +56,6 @@ ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf
 git clone https://gist.github.com/wandernauta/6800547
 chmod +x 6800547/sp
 sudo mv 6800547/sp /usr/local/bin
-sp
 rm -rf 6800547
 
 mv ~/.Xresources ~/.Xresources.bak
@@ -74,10 +77,6 @@ echo "=== setting up git configs"
 git config --global init.defaultBranch main
 git config --global core.excludesFile '~/dots/git/gitignore'
 git config --global credential.helper store
-echo
-
-echo "=== syncing time ==="
-sudo timedatectl set-ntp true
 echo
 
 #setup postgres
