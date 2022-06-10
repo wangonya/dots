@@ -5,8 +5,8 @@ scrolling:
 
 window:
   padding:
-    x: 4
-    y: 4
+    x: 5
+    y: 5
   dynamic_padding: true
 
 font:
@@ -33,28 +33,28 @@ subpixel_render: true
 
 colors:
   primary:
-    background: "#1e222a" # 282c34
-    foreground: "#abb2bf"
+    background: "#111111"
+    foreground: "#eeffff"
 
   normal:
-    black: "#282c34"
-    red: "#e06c75"
-    green: "#98c379"
-    yellow: "#e5c07b"
-    blue: "#61afef"
-    magenta: "#c678dd"
-    cyan: "#56b6c2"
-    white: "#abb2bf"
+    black: "#111111"
+    red: "#f07178"
+    green: "#5af78e"
+    yellow: "#ffcb6b"
+    blue: "#57c7ff"
+    magenta: "#c792ea"
+    cyan: "#89ddff"
+    white: "#eeffff"
 
   bright:
-    black: "#3f3f3f"
-    red: "#e06c75"
-    green: "#98c379"
-    yellow: "#e5c07b"
-    blue: "#61afef"
-    magenta: "#c678dd"
-    cyan: "#56b6c2"
-    white: "#bfc5ce"
+    black: "#3e4452"
+    red: "#f07178"
+    green: "#5af78e"
+    yellow: "#ffcb6b"
+    blue: "#57c7ff"
+    magenta: "#c792ea"
+    cyan: "#89ddff"
+    white: "#eeffff"
 
   cursor:
     text: CellBackground

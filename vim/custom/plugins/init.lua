@@ -25,8 +25,4 @@ return {
 			require("custom.plugins.null-ls").setup()
 		end,
 	},
-
-	["goolord/alpha-nvim"] = {
-		disable = false,
-	},
 }

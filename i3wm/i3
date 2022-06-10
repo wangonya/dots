@@ -177,7 +177,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # assign [class="Pale moon"] $ws2
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
-assign [class="[zoom]*"] $ws1
+# assign [class="^zoom$"] $ws1
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -189,7 +189,10 @@ for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
 for_window [class="Manjaro Settings Manager"] floating enable border normal
 for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [title="^zoom$" class="[zoom]*"] floating enable
+#for_window [title="^zoom$" class="[zoom]*"] floating enable
+
+# remove all titlebars
+for_window [class="^.*"] border pixel 1
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -378,3 +381,20 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+
+# Zoom client config
+# Set Zoom notification window to floating with no focus
+for_window [title="^zoom\s?$" class="[zoom]*"] floating enable
+no_focus [title="^zoom\s?$"]
+
+# For meetings that you have joined via a link
+for_window [title="^join\?action=join.*$"] floating enable
+no_focus [title="^join\?action=join.*$"]
+
+# Always open in ws1
+assign [class="^zoom\s?$"] $ws1
+
+# Alternatively if the popups are annoying you...
+# for_window [title="^zoom\s?$"] kill
+# for_window [title="^join\?action=join.*$"] kill

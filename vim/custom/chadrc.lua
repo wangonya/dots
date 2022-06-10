@@ -2,13 +2,16 @@ local M = {}
 local override = require "custom.plugins.override"
 
 M.ui = {
-   theme = "onedark",
+  theme = "darker",
 }
 
 M.plugins = {
   options = {
       lspconfig = {
          setup_lspconf = "custom.plugins.lspconfig",
+      },
+      statusline = {
+         separator_style = "block", -- default/round/block
       },
    },
 

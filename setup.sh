@@ -11,8 +11,8 @@ echo
 
 echo "=== installing packages ==="
 sudo pacman -S --needed redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
-     postgresql redis ripgrep unclutter flameshot xarchiver pulseaudio \
-     fd go go-tools gopls delve mariadb python-pip pandoc pulseaudio-alsa \
+     postgresql redis ripgrep unclutter flameshot xarchiver pulseaudio python-rope \
+     fd go go-tools gopls delve mariadb python-pip pandoc pulseaudio-alsa python-poetry \
      gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-jack pavucontrol \
      python-build python-wheel python-isort python-lsp-server tela-icon-theme \
      firefox neovim alacritty stylua python-debugpy base-devel yay
@@ -22,7 +22,7 @@ echo "=== installing aur stuff ==="
 #gpg --recv-key 2D347EA6AA65421D
 #gpg --recv-key 2954CC8585E27A3F
 #gpg --recv-key 5E3C45D7B312C643
-yay -S ngrok slack-desktop spotify mictray \
+yay -S ngrok slack-desktop spotify mictray zoom \
        beekeeper-studio-bin google-cloud-sdk \
        python-darker nerd-fonts-ibm-plex-mono \
       
@@ -50,6 +50,9 @@ echo
 echo "=== setting up dotfiles ==="
 mv ~/.i3/config ~/.i3/config.bak
 ln -sv ~/dots/i3wm/i3 ~/.i3/config
+
+mv ~/.config/dunst/dunstrc ~/.config/dunst/dunstrc.bak
+ln -sv ~/dots/i3wm/dunstrc ~/.config/dunst
 
 ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf
 

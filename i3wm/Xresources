@@ -19,6 +19,8 @@ XTerm*VT100.colorITMode: false
 XTerm*colorULMode: off
 XTerm*italicULMode: false
 
+Xterm*font:     xft:BlexMono Nerd Font:size=11.5:antialias=true
+
 ! Dont send Ctrl-H for Backspace
 XTerm.vt100.backarrowKey: false
 XTerm.ttyModes: erase ^?
@@ -60,29 +62,45 @@ XTerm*VT100*translations:    #override \n\
 #define base0E #c678dd
 #define base0F #be5046
 
-*.foreground:   base05
-#ifdef background_opacity
-*.background:   [background_opacity]base00
-#else
-*.background:   base00
-#endif
-*.cursorColor:  base05
+! =========================
+! ======== COLORS =========
+! =========================
 
-*.color0:       base00
-*.color1:       base08
-*.color2:       base0B
-*.color3:       base0A
-*.color4:       base0D
-*.color5:       base0E
-*.color6:       base0C
-*.color7:       base05
+!----Previous----
+*background:  #111111
+*foreground:  #eeffff
 
-*.color8:       base03
-*.color9:       base09
-*.color10:      base01
-*.color11:      base02
-*.color12:      base04
-*.color13:      base06
-*.color14:      base0F
-*.color15:      base07
+!black
+*trueblack:   #000000
+*black:       #111111
+*color0:      #212121
+*color8:      #8c8c8c
+
+!red
+*color1:      #f07178
+*color9:      #f07178
+
+!green
+*color2:      #5af78e
+*color10:     #5af78e
+
+!yellow
+*color3:      #ffcb6b
+*color11:     #ffcb6b
+
+!blue
+*color4:      #57c7ff
+*color12:     #57c7ff
+
+!magenta
+*color5:      #c792ea
+*color13:     #c792ea
+
+!cyan
+*color6:      #89ddff
+*color14:     #89ddff
+
+!white
+*color7:      #eeffff
+*color15:     #eeffff
 
