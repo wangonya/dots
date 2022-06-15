@@ -17,6 +17,8 @@ return {
 		end,
 	},
 
+        ["chrisbra/csv.vim"] = {},
+
 	-- plugins below come with NVChad
 
 	["jose-elias-alvarez/null-ls.nvim"] = {

@@ -22,7 +22,7 @@ echo "=== installing aur stuff ==="
 #gpg --recv-key 2D347EA6AA65421D
 #gpg --recv-key 2954CC8585E27A3F
 #gpg --recv-key 5E3C45D7B312C643
-yay -S ngrok slack-desktop spotify mictray zoom \
+yay -S ngrok slack-desktop spotify mictray zoom nvim-packer-git \
        beekeeper-studio-bin google-cloud-sdk \
        python-darker nerd-fonts-ibm-plex-mono \
       
@@ -73,7 +73,8 @@ ln -sv ~/dots/terminals/alacritty.yml ~/.config/
 
 echo "source ~/dots/terminals/zshrc" >> ~/.zshrc
 echo "corner-radius = 5" >> ~/.config/picom.conf
-git clone https://github.com/UnnatShaneshwar/AtomOneDarkTheme.git ~/.themes/AtomOne
+
+ln -sv ~/dots/nvim/ ~/.config/nvim
 echo
 
 echo "=== setting up git configs"
