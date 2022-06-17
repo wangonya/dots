@@ -75,4 +75,11 @@ return require("packer").startup(function()
 		"nvim-treesitter/nvim-treesitter",
 		config = get_setup("treesitter"),
 	})
+
+	-- dashboard
+	use({
+		"goolord/alpha-nvim",
+		requires = { "kyazdani42/nvim-web-devicons" },
+		config = get_setup("dash"),
+	})
 end)
