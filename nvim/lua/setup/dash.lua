@@ -2,7 +2,7 @@
 
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
-local handle = io.popen("fortune -e computers linux tao wisdom work")
+local handle = io.popen("fortune -se computers linux tao wisdom work")
 local fortune = handle:read("*a")
 
 local section = dashboard.section

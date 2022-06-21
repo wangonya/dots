@@ -6,7 +6,7 @@ Xft.autohint:  false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
-*.faceName: "BlexMono Nerd Font"
+*.faceName: "RobotoMono Nerd Font"
 *.faceSize: 10
 
 !! xterm
@@ -19,7 +19,7 @@ XTerm*VT100.colorITMode: false
 XTerm*colorULMode: off
 XTerm*italicULMode: false
 
-Xterm*font:     xft:BlexMono Nerd Font:size=11.5:antialias=true
+Xterm*font:     xft:RobotoMono Nerd Font:size=11.5:antialias=true
 
 ! Dont send Ctrl-H for Backspace
 XTerm.vt100.backarrowKey: false
@@ -41,66 +41,48 @@ XTerm*VT100*translations:    #override \n\
    Shift Ctrl <Key> C: copy-selection(CLIPBOARD, PRIMARY) \n\
    Shift Ctrl <Key> V: insert-selection(CLIPBOARD) \n\
 
-! Base16 OneDark
-! Scheme: Lalit Magant (http://github.com/tilal6991)
-
-! #282c34 - real bg color
-#define base00 #1e222a 
-#define base01 #353b45
-#define base02 #3e4451
-#define base03 #545862
-#define base04 #565c64
-#define base05 #abb2bf
-#define base06 #b6bdca
-#define base07 #c8ccd4
-#define base08 #e06c75
-#define base09 #d19a66
-#define base0A #e5c07b
-#define base0B #98c379
-#define base0C #56b6c2
-#define base0D #61afef
-#define base0E #c678dd
-#define base0F #be5046
 
 ! =========================
-! ======== COLORS =========
+! ========= NORD ==========
 ! =========================
 
-!----Previous----
-*background:  #111111
-*foreground:  #eeffff
+#define nord0 #2E3440
+#define nord1 #3B4252
+#define nord2 #434C5E
+#define nord3 #4C566A
+#define nord4 #D8DEE9
+#define nord5 #E5E9F0
+#define nord6 #ECEFF4
+#define nord7 #8FBCBB
+#define nord8 #88C0D0
+#define nord9 #81A1C1
+#define nord10 #5E81AC
+#define nord11 #BF616A
+#define nord12 #D08770
+#define nord13 #EBCB8B
+#define nord14 #A3BE8C
+#define nord15 #B48EAD
 
-!black
-*trueblack:   #000000
-*black:       #111111
-*color0:      #212121
-*color8:      #8c8c8c
+*.foreground:   nord4
+*.background:   nord0
+*.cursorColor:  nord4
+*fading: 35
+*fadeColor: nord3
 
-!red
-*color1:      #f07178
-*color9:      #f07178
-
-!green
-*color2:      #5af78e
-*color10:     #5af78e
-
-!yellow
-*color3:      #ffcb6b
-*color11:     #ffcb6b
-
-!blue
-*color4:      #57c7ff
-*color12:     #57c7ff
-
-!magenta
-*color5:      #c792ea
-*color13:     #c792ea
-
-!cyan
-*color6:      #89ddff
-*color14:     #89ddff
-
-!white
-*color7:      #eeffff
-*color15:     #eeffff
+*.color0: nord1
+*.color1: nord11
+*.color2: nord14
+*.color3: nord13
+*.color4: nord9
+*.color5: nord15
+*.color6: nord8
+*.color7: nord5
+*.color8: nord3
+*.color9: nord11
+*.color10: nord14
+*.color11: nord13
+*.color12: nord9
+*.color13: nord15
+*.color14: nord7
+*.color15: nord6
 

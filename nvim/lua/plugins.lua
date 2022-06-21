@@ -66,8 +66,7 @@ return require("packer").startup(function()
 
 	-- theme
 	use({
-		"wangonya/xresources-nvim",
-		config = get_setup("xresources-nvim"),
+		"shaunsingh/nord.nvim",
 	})
 
 	-- treesitter
@@ -82,4 +81,22 @@ return require("packer").startup(function()
 		requires = { "kyazdani42/nvim-web-devicons" },
 		config = get_setup("dash"),
 	})
+
+	-- parens
+	use({
+		"windwp/nvim-autopairs",
+		config = get_setup("autopairs"),
+	})
+
+	-- commentary
+	use("b3nj5m1n/kommentary")
+
+	-- gitsigns
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = get_setup("gitsigns"),
+	})
+
+	-- diffview
+	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 end)

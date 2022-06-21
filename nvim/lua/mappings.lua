@@ -8,9 +8,13 @@ function map(mode, lhs, rhs, opts)
 	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- ?
+--
 map("n", "<C-s>", ":wa<CR>")
 
 -- nvim-tree
 map("n", "<leader>n", ":NvimTreeToggle<CR>", { silent = true })
 map("n", "<leader>r", ":NvimTreeRefresh<CR>", { silent = true })
+
+-- diffview
+map("n", "<leader>do", ":DiffviewOpen<CR>", { silent = true })
+map("n", "<leader>dc", ":DiffviewClose<CR>", { silent = true })

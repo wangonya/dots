@@ -14,5 +14,5 @@ require("nvim-treesitter.configs").setup({
 		"go",
 	},
 	highlight = { enable = true },
-	indent = { enable = true },
+	indent = { enable = false },
 })

@@ -1,20 +1,36 @@
 --[[ opts.lua ]]
 
-local g = vim.g
-local opt = vim.opt
-local cmd = vim.api.nvim_command
-local exec = vim.api.nvim_exec
+vim.g.mapleader = " "
+vim.g.autoread = true
 
-g.mapleader = " "
+vim.wo.number = true
+vim.wo.cursorline = true
+vim.wo.cursorlineopt = "number"
+vim.wo.foldlevel = 99
+vim.wo.foldenable = true
 
-opt.termguicolors = true
-opt.mouse = "a"
+vim.opt.termguicolors = true
+vim.opt.mouse = "a"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-exec(
+vim.cmd([[colorscheme nord]])
+
+vim.api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
   autocmd BufWritePost * FormatWrite
+augroup END
+]],
+	true
+)
+
+vim.api.nvim_exec(
+	[[
+augroup SessionSave
+    autocmd!
+    autocmd VimLeave * mksession! .session.vim
 augroup END
 ]],
 	true

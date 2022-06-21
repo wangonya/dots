@@ -14,7 +14,7 @@ sudo pacman -S --needed redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent h
      postgresql redis ripgrep unclutter flameshot xarchiver pulseaudio python-rope \
      fd go go-tools gopls delve mariadb python-pip pandoc pulseaudio-alsa python-poetry \
      gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-jack pavucontrol \
-     python-build python-wheel python-isort python-lsp-server tela-icon-theme \
+     python-build python-wheel python-isort python-lsp-server \
      firefox neovim alacritty stylua python-debugpy base-devel yay
 echo
 
@@ -23,8 +23,8 @@ echo "=== installing aur stuff ==="
 #gpg --recv-key 2954CC8585E27A3F
 #gpg --recv-key 5E3C45D7B312C643
 yay -S ngrok slack-desktop spotify mictray zoom nvim-packer-git \
-       beekeeper-studio-bin google-cloud-sdk \
-       python-darker nerd-fonts-ibm-plex-mono \
+       beekeeper-studio-bin google-cloud-sdk nordic-theme \
+       python-darker nerd-fonts-roboto-mono nordzy-icon-theme-git \
       
 echo
 
@@ -85,9 +85,3 @@ echo
 
 #setup postgres
 #setup mariadb
-# sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-
-# nvchad
-# git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-# nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
-# ln -sv ~/dots/vim/custom ~/.config/nvim/lua/custom
