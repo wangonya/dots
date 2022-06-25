@@ -4,6 +4,7 @@ require("bufferline").setup({
 	options = {
 		modified_icon = "·",
 		always_show_bufferline = false,
+		show_close_icon = false,
 		offsets = {
 			{
 				filetype = "NvimTree",

@@ -306,13 +306,13 @@ bar {
     colors {
             separator  $background
             background $background
-            statusline $color8
+            statusline $color1
 
             #                  border                   background              text
             focused_workspace  $background              $background             $foreground
             active_workspace   $background              $background             $foreground
-            inactive_workspace $background              $background             $color8
-            urgent_workspace   $background    		$color9	                $background
+            inactive_workspace $background              $background             $color1
+            urgent_workspace   $background    		$color8	                $background
             binding_mode       $background              $background             $foreground
     }
   status_command exec ~/dots/i3wm/i3status-net-speed.sh
@@ -321,9 +321,9 @@ bar {
 # window colors
 # #                     border                  background              text                    indicator
 client.focused          $background             $background             $foreground             #00ff00
-client.unfocused        $background	        $background             $color8  		#00ff00
-client.focused_inactive $background	        $background             $color8		        #00ff00
-client.urgent           $background             $color9       	        $background             #00ff00
+client.unfocused        $background	        $background             $color1  		#00ff00
+client.focused_inactive $background	        $background             $color1		        #00ff00
+client.urgent           $background             $color8       	        $background             #00ff00
 
 #############################
 ### settings for i3-gaps: ###

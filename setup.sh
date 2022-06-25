@@ -14,7 +14,7 @@ sudo pacman -S --needed redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent h
      postgresql redis ripgrep unclutter flameshot xarchiver pulseaudio python-rope \
      fd go go-tools gopls delve mariadb python-pip pandoc pulseaudio-alsa python-poetry \
      gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-jack pavucontrol \
-     python-build python-wheel python-isort python-lsp-server \
+     python-build python-wheel python-isort python-lsp-server tela-icon-theme \
      firefox neovim alacritty stylua python-debugpy base-devel yay
 echo
 
@@ -23,8 +23,8 @@ echo "=== installing aur stuff ==="
 #gpg --recv-key 2954CC8585E27A3F
 #gpg --recv-key 5E3C45D7B312C643
 yay -S ngrok slack-desktop spotify mictray zoom nvim-packer-git \
-       beekeeper-studio-bin google-cloud-sdk nordic-theme \
-       python-darker nerd-fonts-roboto-mono nordzy-icon-theme-git \
+       beekeeper-studio-bin google-cloud-sdk phinger-cursors \
+       python-darker nerd-fonts-roboto-mono ly \
       
 echo
 
@@ -35,6 +35,9 @@ systemctl start redis.service
 sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 systemctl enable mariadb.service
 systemctl start mariadb.service
+
+systemctl disable lightdm.service
+systemctl enable ly.service
 echo
 
 echo "=== setting up npm system wide install config ==="
@@ -85,3 +88,6 @@ echo
 
 #setup postgres
 #setup mariadb
+
+# https://github.com/andreasgrafen/cascade#how-to-use-a-userchromecss-theme
+# ln -sv ~/dots/firefox-css/chrome ~/.mozilla/firefox/...

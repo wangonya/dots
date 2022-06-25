@@ -1,8 +1,8 @@
 [global]
     frame_width = 1
-    frame_color = "#111111"
+    frame_color = "#0B0F10"
     
-    font = BlexMono Nerd Font 10
+    font = RobotoMono Nerd Font 10
     
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -50,7 +50,7 @@
     
     # Split notifications into multiple lines if they don't fit into
     # geometry.
-    word_wrap = no
+    word_wrap = yes
     
     # Ignore newlines '\n' in notifications.
     ignore_newline = no
@@ -179,21 +179,19 @@
     context = ctrl+mod1+c
 
 [urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#111111"
-    foreground = "#F9FAF9"
-    timeout = 10
+    background = "#0B0F10"
+    foreground = "#6e7071"
+    timeout = 5
 
 [urgency_normal]
-    background = "#111111"
-    foreground = "#F9FAF9"
-    timeout = 10
+    background = "#0B0F10"
+    foreground = "#9fa0a0"
+    timeout = 5
 
 [urgency_critical]
-    background = "#111111"
-    foreground = "#f07178"
-    timeout = 0
+    background = "#0B0F10"
+    foreground = "#c5c8c9"
+    timeout = 7
 
 
 # Every section that isn't one of the above is interpreted as a rules to

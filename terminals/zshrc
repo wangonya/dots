@@ -13,7 +13,7 @@ alias updt="sudo pacman -Syu"
 alias py="python3"
 alias python3='python3'
 alias less="bat"
-alias dt="cd ~/dots"
+alias dt="cd ~/dots && nv"
 alias pyf="darker -i ."
 alias gcm="git commit -m"
 alias gcma="git commit --amend -m"
@@ -25,3 +25,6 @@ alias gpl="git pull origin"
 alias black="darker"
 alias nv="nvim"
 alias venv="python -m venv venv --system-site-packages"
+
+# Custom Highlight syntax
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#404040,underline"

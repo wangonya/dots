@@ -1,7 +1,7 @@
 -- plugins.lua
 
 function get_setup(name)
-	return string.format('require("setup/%s")', name)
+	return string.format('require("plugins-config/%s")', name)
 end
 
 return require("packer").startup(function()
@@ -64,11 +64,6 @@ return require("packer").startup(function()
 		config = get_setup("telescope"),
 	})
 
-	-- theme
-	use({
-		"shaunsingh/nord.nvim",
-	})
-
 	-- treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -99,4 +94,22 @@ return require("packer").startup(function()
 
 	-- diffview
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+
+	-- indent guides
+	use({
+		"lukas-reineke/indent-blankline.nvim",
+		config = get_setup("indent-blankline"),
+	})
+
+	-- theme
+	use({
+		"norcalli/nvim-base16.lua",
+		requires = { { "norcalli/nvim.lua" } },
+	})
+
+	-- terminal
+	use({
+		"akinsho/toggleterm.nvim",
+		config = get_setup("terminal"),
+	})
 end)
