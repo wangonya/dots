@@ -15,7 +15,7 @@ sudo pacman -S --needed redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent h
      fd go go-tools gopls delve mariadb python-pip pandoc pulseaudio-alsa python-poetry \
      gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-jack pavucontrol \
      python-build python-wheel python-isort python-lsp-server tela-icon-theme \
-     firefox neovim alacritty stylua python-debugpy base-devel yay
+     firefox alacritty stylua python-debugpy base-devel yay prettier
 echo
 
 echo "=== installing aur stuff ==="
@@ -24,7 +24,7 @@ echo "=== installing aur stuff ==="
 #gpg --recv-key 5E3C45D7B312C643
 yay -S ngrok slack-desktop spotify mictray zoom nvim-packer-git \
        beekeeper-studio-bin google-cloud-sdk phinger-cursors \
-       python-darker nerd-fonts-roboto-mono ly \
+       python-darker nerd-fonts-roboto-mono ly neovim-git \
       
 echo
 
@@ -44,10 +44,6 @@ echo "=== setting up npm system wide install config ==="
 echo PATH="$HOME/.node_modules/bin:$PATH" >> ~/.profile
 echo export npm_config_prefix=~/.node_modules >> ~/.profile
 source ~/.profile
-echo
-
-echo "=== installing npm stuff ==="
-npm i -g prettier
 echo
 
 echo "=== setting up dotfiles ==="
