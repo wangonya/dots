@@ -50,12 +50,12 @@ return require("packer").startup(function()
 			-- Snippets
 			{ "L3MON4D3/LuaSnip" },
 			{ "rafamadriz/friendly-snippets" },
+
+			-- Formatting
+			{ "jose-elias-alvarez/null-ls.nvim" },
 		},
 		config = get_setup("lsp"),
 	})
-
-	-- formatting
-	use({ "mhartington/formatter.nvim", config = get_setup("formatter") })
 
 	-- telescope
 	use({

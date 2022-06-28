@@ -31,16 +31,6 @@ opt.shortmess = "F"
 
 exec(
 	[[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost * FormatWrite
-augroup END
-]],
-	true
-)
-
-exec(
-	[[
 augroup SessionSave
     autocmd!
     autocmd VimLeave * mksession! .session.vim
