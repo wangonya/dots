@@ -3,16 +3,16 @@
 #
 
 ## background colour for unselected menu-items
-DMENU_NB="#0b0f10"
+DMENU_NB="#101010"
 
 ## textcolour for unselected menu-items
-DMENU_NF="#4c566a"
+DMENU_NF="#525252"
 
 ## background colour for selected menu-items
-DMENU_SB="#0b0f10"
+DMENU_SB="#101010"
 
 ## textcolour for selected menu-items
-DMENU_SF="#d8dee9"
+DMENU_SF="#b9b9b9"
 
 ## font
 DMENU_FN="RobotoMonoNerdFont-10"

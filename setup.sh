@@ -74,6 +74,9 @@ echo "source ~/dots/terminals/zshrc" >> ~/.zshrc
 echo "corner-radius = 5" >> ~/.config/picom.conf
 
 ln -sv ~/dots/nvim/ ~/.config/nvim
+
+git clone https://github.com/mantissa-/mantis-theme.git --depth=1
+mv mantis-theme/Mantis* ~/.themes
 echo
 
 echo "=== setting up git configs"

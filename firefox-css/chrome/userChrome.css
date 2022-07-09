@@ -39,9 +39,9 @@
   /* Comment the color theme you don't want to use */
 
   /* Dark Theme Colors */
-  --window-colour: #0b0f10;
-  --secondary-colour: #101415;
-  --inverted-colour: #c5c8c9;
+  --window-colour: #101010;
+  --secondary-colour: #252525;
+  --inverted-colour: #525252;
 
   /* Light Theme Colors
     --window-colour:               #FAFAFC;
@@ -50,14 +50,14 @@
     */
 
   /* Containter Tab Colours */
-  --uc-identity-colour-blue: #7ba5dd;
-  --uc-identity-colour-turquoise: #7fc8db;
-  --uc-identity-colour-green: #96d6b0;
-  --uc-identity-colour-yellow: #ffb29b;
-  --uc-identity-colour-orange: #f19066;
-  --uc-identity-colour-red: #ee6a70;
-  --uc-identity-colour-pink: #f78fb3;
-  --uc-identity-colour-purple: #cb92f2;
+  --uc-identity-colour-blue: #686868;
+  --uc-identity-colour-turquoise: #868686;
+  --uc-identity-colour-green: #8e8e8e;
+  --uc-identity-colour-yellow: #a0a0a0;
+  --uc-identity-colour-orange: #a0a0a0;
+  --uc-identity-colour-red: #7c7c7c;
+  --uc-identity-colour-pink: #7c7c7c;
+  --uc-identity-colour-purple: #747474;
 
   /* URL colour in URL bar suggestions */
   --urlbar-popup-url-color: var(--uc-identity-color-purple) !important;

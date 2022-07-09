@@ -46,23 +46,85 @@ XTerm*VT100*translations:    #override \n\
 ! ======== COLORS =========
 ! =========================
 
-*.foreground:   "#C5C8C9"
-*.background:   "#0b0f10"
+! Base16 Grayscale Dark
+! Scheme: Alexandre Gavioli (https://github.com/Alexx2/)
 
-*.color0: "#0b0f10"
-*.color1: "#505050"
-*.color2: "#3e4141"
-*.color3: "#6e7071"
-*.color4: "#6e7071"
-*.color5: "#9fa0a0"
-*.color6: "#b7b8b8"
-*.color7: "#C5C8C9"
-*.color8: "#0b0f10"
-*.color9: "#C5C8C9"
-*.color10: "#ee6a70"
-*.color11: "#96d6b0"
-*.color12: "#ffb29b"
-*.color13: "#7ba5dd"
-*.color14: "#cb92f2"
-*.color15: "#7fc8db"
+#define base00 #101010
+#define base01 #252525
+#define base02 #464646
+#define base03 #525252
+#define base04 #ababab
+#define base05 #b9b9b9
+#define base06 #e3e3e3
+#define base07 #f7f7f7
+#define base08 #7c7c7c
+#define base09 #999999
+#define base0A #a0a0a0
+#define base0B #8e8e8e
+#define base0C #868686
+#define base0D #686868
+#define base0E #747474
+#define base0F #5e5e5e
+
+*foreground:   base05
+#ifdef background_opacity
+*background:   [background_opacity]base00
+#else
+*background:   base00
+#endif
+*cursorColor:  base05
+
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
+
+*color8:       base03
+*color9:       base08
+*color10:      base0B
+*color11:      base0A
+*color12:      base0D
+*color13:      base0E
+*color14:      base0C
+*color15:      base07
+
+! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+! use 'shell' template to set these if necessary
+*color16:      base09
+*color17:      base0F
+*color18:      base01
+*color19:      base02
+*color20:      base04
+*color21:      base06
+
+
+/* ! black dark/light
+*color0:                S_base02
+*color8:                S_base03
+! red dark/light
+*color1:                S_red
+*color9:                S_orange
+! green dark/light
+*color2:                S_green
+*color10:               S_base01
+! yellow dark/light
+*color3:                S_yellow
+*color11:               S_base00
+! blue dark/light
+*color4:                S_blue
+*color12:               S_base0
+! magenta dark/light
+*color5:                S_magenta
+*color13:               S_violet
+! cyan dark/light
+*color6:                S_cyan
+*color14:               S_base1
+! white dark/light
+*color7:                S_base2
+*color15:               S_base3 */
+
 

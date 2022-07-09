@@ -102,10 +102,7 @@ return require("packer").startup(function()
 	})
 
 	-- theme
-	use({
-		"norcalli/nvim-base16.lua",
-		requires = { { "norcalli/nvim.lua" } },
-	})
+	use("RRethy/nvim-base16")
 
 	-- terminal
 	use({

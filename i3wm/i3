@@ -289,6 +289,7 @@ set_from_resource $color12    color12
 set_from_resource $color13    color13
 set_from_resource $color14    color14
 set_from_resource $color15    color15
+set_from_resource $color17    color17
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 
@@ -311,8 +312,8 @@ bar {
             #                  border                   background              text
             focused_workspace  $background              $background             $foreground
             active_workspace   $background              $background             $foreground
-            inactive_workspace $background              $background             $color1
-            urgent_workspace   $background    		$color8	                $background
+            inactive_workspace $background              $background             $color8
+            urgent_workspace   $background    		    $color8	                $background
             binding_mode       $background              $background             $foreground
     }
   status_command exec ~/dots/i3wm/i3status-net-speed.sh
@@ -321,8 +322,8 @@ bar {
 # window colors
 # #                     border                  background              text                    indicator
 client.focused          $background             $background             $foreground             #00ff00
-client.unfocused        $background	        $background             $color1  		#00ff00
-client.focused_inactive $background	        $background             $color1		        #00ff00
+client.unfocused        $background	            $background             $color8  		#00ff00
+client.focused_inactive $background	            $background             $color8		        #00ff00
 client.urgent           $background             $color8       	        $background             #00ff00
 
 #############################
