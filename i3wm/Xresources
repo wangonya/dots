@@ -6,125 +6,40 @@ Xft.autohint:  false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
-*.faceName: "RobotoMono Nerd Font"
+*.faceName: RobotoMono Nerd Font
 *.faceSize: 10
 
-!! xterm
+*background: #1E1E2E
+*foreground: #CDD6F4
 
-! Allow regular colors, italics and underline
-XTerm*underLine: true
-XTerm*VT100.colorMode: True
-XTerm*VT100.colorBDMode: false
-XTerm*VT100.colorITMode: false
-XTerm*colorULMode: off
-XTerm*italicULMode: false
+! black
+*color0: #45475A
+*color8: #585B70
 
-Xterm*font:     xft:RobotoMono Nerd Font:size=11.5:antialias=true
+! red
+*color1: #F38BA8
+*color9: #F38BA8
 
-! Dont send Ctrl-H for Backspace
-XTerm.vt100.backarrowKey: false
-XTerm.ttyModes: erase ^?
+! green
+*color2: #A6E3A1
+*color10: #A6E3A1
 
-! No border
-XTerm*borderWidth: 0
-XTerm*VT100.internalBorder: 0
+! yellow
+*color3: #F9E2AF
+*color11: #F9E2AF
 
-! Locale settings
-XTerm.vt100.utf8: true
-XTerm.VT100.utf8Title: true
-XTerm*menuLocale: "C"
+! blue
+*color4: #89B4FA
+*color12: #89B4FA
 
-! Select to clipboard
-XTerm*selectToClipboard: true
-! by default, use primary to avoid overwriting what everybody uses, iff ctrl-c send to clipboard
-XTerm*VT100*translations:    #override \n\
-   Shift Ctrl <Key> C: copy-selection(CLIPBOARD, PRIMARY) \n\
-   Shift Ctrl <Key> V: insert-selection(CLIPBOARD) \n\
+! magenta
+*color5: #F5C2E7
+*color13: #F5C2E7
 
+! cyan
+*color6: #94E2D5
+*color14: #94E2D5
 
-! =========================
-! ======== COLORS =========
-! =========================
-
-! Base16 Grayscale Dark
-! Scheme: Alexandre Gavioli (https://github.com/Alexx2/)
-
-#define base00 #101010
-#define base01 #252525
-#define base02 #464646
-#define base03 #525252
-#define base04 #ababab
-#define base05 #b9b9b9
-#define base06 #e3e3e3
-#define base07 #f7f7f7
-#define base08 #7c7c7c
-#define base09 #999999
-#define base0A #a0a0a0
-#define base0B #8e8e8e
-#define base0C #868686
-#define base0D #686868
-#define base0E #747474
-#define base0F #5e5e5e
-
-*foreground:   base05
-#ifdef background_opacity
-*background:   [background_opacity]base00
-#else
-*background:   base00
-#endif
-*cursorColor:  base05
-
-*color0:       base00
-*color1:       base08
-*color2:       base0B
-*color3:       base0A
-*color4:       base0D
-*color5:       base0E
-*color6:       base0C
-*color7:       base05
-
-*color8:       base03
-*color9:       base08
-*color10:      base0B
-*color11:      base0A
-*color12:      base0D
-*color13:      base0E
-*color14:      base0C
-*color15:      base07
-
-! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
-! use 'shell' template to set these if necessary
-*color16:      base09
-*color17:      base0F
-*color18:      base01
-*color19:      base02
-*color20:      base04
-*color21:      base06
-
-
-/* ! black dark/light
-*color0:                S_base02
-*color8:                S_base03
-! red dark/light
-*color1:                S_red
-*color9:                S_orange
-! green dark/light
-*color2:                S_green
-*color10:               S_base01
-! yellow dark/light
-*color3:                S_yellow
-*color11:               S_base00
-! blue dark/light
-*color4:                S_blue
-*color12:               S_base0
-! magenta dark/light
-*color5:                S_magenta
-*color13:               S_violet
-! cyan dark/light
-*color6:                S_cyan
-*color14:               S_base1
-! white dark/light
-*color7:                S_base2
-*color15:               S_base3 */
-
-
+! white
+*color7: #BAC2DE
+*color15: #A6ADC8

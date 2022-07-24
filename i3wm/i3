@@ -307,7 +307,7 @@ bar {
     colors {
             separator  $background
             background $background
-            statusline $color1
+            statusline $color8
 
             #                  border                   background              text
             focused_workspace  $background              $background             $foreground

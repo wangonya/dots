@@ -25,6 +25,3 @@ alias gpl="git pull origin"
 alias black="darker"
 alias nv="nvim"
 alias venv="python -m venv venv --system-site-packages"
-
-# Custom Highlight syntax
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#404040,underline"

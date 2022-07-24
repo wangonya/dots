@@ -1,5 +1,30 @@
 -- plugins.lua
 
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerInstall
+  augroup end
+]])
+
+-- Use a protected call so we don't error out on first use
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+	return
+end
+
+-- Have packer use a popup window
+packer.init({
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ border = "single" })
+		end,
+	},
+})
+
+-- Install Plugins
+
 function get_setup(name)
 	return string.format('require("plugins-config/%s")', name)
 end
@@ -102,11 +127,17 @@ return require("packer").startup(function()
 	})
 
 	-- theme
-	use("RRethy/nvim-base16")
+	use({ "catppuccin/nvim", as = "catppuccin", config = get_setup("theme") })
 
 	-- terminal
 	use({
 		"akinsho/toggleterm.nvim",
 		config = get_setup("terminal"),
+	})
+
+	-- colorizer
+	use({
+		"norcalli/nvim-colorizer.lua",
+		config = get_setup("colorizer"),
 	})
 end)

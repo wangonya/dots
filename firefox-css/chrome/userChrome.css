@@ -6,21 +6,7 @@
   +-----+-----+-----+-----+-----+-----+-----+ Mouse Edition.
 
 
-    Description:    Cascade, Mouse Edition, is a Firefox Style based on the Cascade theme by Andreas Grafen
-                    What you get is a really simple one-line layout using the new Proton UI.
-
-                  The original Cascade Theme by Andreas Grafen was based on SimpleFox :
-                  > SimpleFox: https://github.com/migueravila/SimpleFox
-
-
-    Authors:        Andreas Grafen (original cascade theme)
-                    (https://andreas.grafen.info)
-
-		            Clément Rambaud (minor tweaks on the original file)
-
-
-    Repository:     https://github.com/andreasgrafen/cascade
-  		            https://github.com/crambaud/cascade
+    Description:    https://github.com/andreasgrafen/cascade with my modifications
 
 *========================================================================================================*/
 
@@ -39,9 +25,10 @@
   /* Comment the color theme you don't want to use */
 
   /* Dark Theme Colors */
-  --window-colour: #101010;
-  --secondary-colour: #252525;
-  --inverted-colour: #525252;
+  --window-colour: #131020;
+  --secondary-colour: #1e1e2e;
+  --secondary-text-colour: #585b70;
+  --inverted-colour: #cdd6f4;
 
   /* Light Theme Colors
     --window-colour:               #FAFAFC;
@@ -50,14 +37,14 @@
     */
 
   /* Containter Tab Colours */
-  --uc-identity-colour-blue: #686868;
-  --uc-identity-colour-turquoise: #868686;
-  --uc-identity-colour-green: #8e8e8e;
-  --uc-identity-colour-yellow: #a0a0a0;
-  --uc-identity-colour-orange: #a0a0a0;
-  --uc-identity-colour-red: #7c7c7c;
-  --uc-identity-colour-pink: #7c7c7c;
-  --uc-identity-colour-purple: #747474;
+  --uc-identity-colour-blue: #89b4fa;
+  --uc-identity-colour-turquoise: #94e2d5;
+  --uc-identity-colour-green: #a6e3a1;
+  --uc-identity-colour-yellow: #f9e2af;
+  --uc-identity-colour-orange: #f9e2af;
+  --uc-identity-colour-red: #f38ba8;
+  --uc-identity-colour-pink: #f38ba8;
+  --uc-identity-colour-purple: #f5c2e7;
 
   /* URL colour in URL bar suggestions */
   --urlbar-popup-url-color: var(--uc-identity-color-purple) !important;
@@ -67,7 +54,7 @@
      +---+---+---+---+---+---+---*/
 
   /* global border radius */
-  --uc-border-radius: 0;
+  --uc-border-radius: 5;
 
   /* dynamic url bar width settings */
   --uc-urlbar-width: clamp(250px, 50vw, 600px);
@@ -210,11 +197,12 @@ window,
   background: var(--uc-theme-colour) !important;
 }
 
-/* grey out ccons inside the toolbar to make it
+/* grey out icons inside the toolbar to make it
  * more aligned with the Black & White colour look */
 #PersonalToolbar toolbarbutton:not(:hover),
 #bookmarks-toolbar-button:not(:hover) {
   filter: grayscale(1) !important;
+  color: var(--secondary-text-colour) !important;
 }
 
 /* Show Window Control Button */
@@ -244,11 +232,6 @@ window,
   background: var(--uc-theme-colour) !important;
 }
 
-/* active tab background */
-.tabbrowser-tab[selected] > .tab-stack > .tab-background {
-  background: var(--uc-hover-colour) !important;
-}
-
 /* tab close button options */
 .tabbrowser-tab:not([pinned]) .tab-close-button {
   display: var(--show-tab-close-button) !important;
@@ -263,6 +246,27 @@ window,
 }
 .tabbrowser-tab[fadein]:not([selected]):not([pinned]) {
   max-width: var(--uc-inactive-tab-width) !important;
+  color: var(--secondary-text-colour) !important;
+}
+
+/* favicon when mouse over to pinned inactive tab grayscale(15%) */
+.tabbrowser-tab:hover .tab-icon-image[pinned] {
+  filter: grayscale(15%) !important;
+}
+
+/* favicon on pinned inactive tab grayscale(35%) */
+.tabbrowser-tab .tab-icon-image[pinned] {
+  filter: grayscale(35%) !important;
+}
+
+/* favicon when mouse over over inactive tab grayscale(15%) */
+.tabbrowser-tab:hover .tab-icon-image:not([selected="true"]):not([pinned]) {
+  filter: grayscale(15%) !important;
+}
+
+/* gray out the favicon icon on the inactive tab */
+.tabbrowser-tab .tab-icon-image:not([selected="true"]):not([pinned]) {
+  filter: grayscale(100%) !important;
 }
 
 /* container tabs indicator */

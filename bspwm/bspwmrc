@@ -1,0 +1,61 @@
+#! /bin/sh
+
+# keybindings
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+# autostart apps
+
+startup_lock_file=/tmp/bspwm-startup.lock
+if [ ! -f $startup_lock_file ]; then
+  echo "bspwm startup_lock_file" > $startup_lock_file
+  picom -b
+  mictray &
+  unclutter &
+  clipit &
+  flameshot &
+fi
+
+# set wallpaper
+hsetroot -solid "#1E1E2E"
+
+# wm config
+
+bspc monitor -d 1 2 3
+bspc monitor HDMI-1 -d 4 5 
+
+bspc config border_width         0
+bspc config focused_border_color   "#131020"
+bspc config active_border_color   "#1e1e2e"
+bspc config normal_border_color   "#1e1e2e"
+bspc config window_gap           8
+
+bspc config split_ratio           0.52
+bspc config borderless_monocle    true
+bspc config gapless_monocle       true
+bspc config focus_follows_pointer true
+
+bspc rule -a Chromium desktop='^2'
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+
+# floating apps
+
+FLOATING_APPS=(Zoom Slack Spotify Alacritty:ncmpcpp Nm-connection-editor)
+
+for app in "${FLOATING_APPS[@]}"
+do
+    bspc rule -a $app state=floating center=on follow=on
+done
+
+bspc rule -a Alacritty:ncmpcpp rectangle=900x420+0+0
+bspc rule -a Nm-connection-editor rectangle=400x500+0+0
+# bspc rule -a zoom state=floating center=on follow=on border=off
+# bspc rule -a slack state=floating center=on follow=on border=off
+# bspc rule -a spotify state=floating center=on follow=on border=off
+
+# launch polybar
+$HOME/dots/polybar/launch.sh
+
+# external rules
+bspc config external_rules_command "$HOME/.config/bspwm/external-rules.sh"

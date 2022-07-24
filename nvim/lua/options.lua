@@ -3,13 +3,13 @@
 local g = vim.g
 local wo = vim.wo
 local opt = vim.opt
-local exec = vim.api.nvim_exec
 local cmd = vim.cmd
+local exec = vim.api.nvim_exec
 
 g.mapleader = " "
 g.autoread = true
 
-cmd("colorscheme base16-grayscale-dark")
+cmd("colorscheme catppuccin")
 
 wo.number = true
 wo.cursorline = true

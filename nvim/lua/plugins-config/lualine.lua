@@ -5,6 +5,7 @@ require("lualine").setup({
 		component_separators = "|",
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = { "NvimTree" },
+		theme = "catppuccin",
 	},
 	sections = {
 		lualine_a = {

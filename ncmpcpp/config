@@ -1,0 +1,33 @@
+[mpd]
+mpd_music_dir = "~/Music"
+mpd_crossfade_time = 1
+
+[header]
+header_visibility = "yes"
+header_window_color = "default"
+volume_color = "default"
+state_line_color = "black"
+display_volume_level = "no"
+playlist_shorten_total_times = "yes"
+
+[playlist]
+user_interface = "alternative"
+playlist_display_mode = "classic"
+song_list_format = "{{%A - %t}|{%f}}{$R%l}"
+now_playing_prefix = "$b$5"
+now_playing_suffix = "$/b$9"
+
+[statusbar]
+progressbar_look = "─╼ "
+progressbar_color = "black"
+
+[library]
+song_library_format = "{{%A - %t}|{%f}}{$R%l}"
+empty_tag_color = "black"
+
+[global]
+colors_enabled = "yes"
+main_window_color = "default"
+centered_cursor = "yes"
+enable_window_title = "yes"
+external_editor = "nvim"
