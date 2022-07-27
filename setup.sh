@@ -10,22 +10,19 @@ sudo pacman -Syyuu
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S --needed redshift nodejs npm yarn zathura-pdf-mupdf qbittorrent hugo bat \
+sudo pacman -S --needed nodejs npm zathura-pdf-mupdf qbittorrent hugo bat \
      postgresql redis ripgrep unclutter flameshot xarchiver pulseaudio python-rope \
      fd go go-tools gopls delve mariadb python-pip pandoc pulseaudio-alsa python-poetry \
      gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-jack pavucontrol \
      python-build python-wheel python-isort python-lsp-server tela-icon-theme \
      firefox alacritty stylua python-debugpy base-devel yay prettier hsetroot \
-     mpd ncmpcpp mpc acpilight
+     mpd ncmpcpp mpc acpilight aria2 picom dunst
 echo
 
 echo "=== installing aur stuff ==="
-#gpg --recv-key 2D347EA6AA65421D
-#gpg --recv-key 2954CC8585E27A3F
-#gpg --recv-key 5E3C45D7B312C643
-yay -S ngrok slack-desktop spotify mictray zoom nvim-packer-git catppuccin-gtk-theme \
+yay -S slack-desktop nvim-packer-git catppuccin-gtk-theme \
        beekeeper-studio-bin google-cloud-sdk phinger-cursors networkmanager-dmenu-git \
-       python-darker nerd-fonts-roboto-mono ly neovim-git rofi-power-menu \
+       python-darker nerd-fonts-roboto-mono ly neovim-git rofi-power-menu ngrok zoom\
       
 echo
 
@@ -54,18 +51,9 @@ echo "=== setting up dotfiles ==="
 mv ~/.i3/config ~/.i3/config.bak
 ln -sv ~/dots/i3wm/i3 ~/.i3/config
 
-mv ~/.config/dunst/dunstrc ~/.config/dunst/dunstrc.bak
-ln -sv ~/dots/i3wm/dunstrc ~/.config/dunst
+ln -sv ~/dots/dunst ~/.config
 
 ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf
-
-# git clone https://gist.github.com/wandernauta/6800547
-# chmod +x 6800547/sp
-# sudo mv 6800547/sp /usr/local/bin
-# rm -rf 6800547
-
-mv ~/.Xresources ~/.Xresources.bak
-ln -sv ~/dots/i3wm/Xresources ~/.Xresources
 
 ln -sv ~/dots/rofi/ ~/.config/
 
@@ -106,3 +94,5 @@ echo
 # gpasswd -a kelvin video
 
 # slack theme: #1E1E2E,#2D3136,#1F2A42,#D8DCE8,#45475A,#CDD6F4,#A6E3A1,#89B4FA,#131020,#CDD6F4
+
+# .Xresources -> #include "dots/x/Xresources"

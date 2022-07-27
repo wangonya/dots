@@ -8,6 +8,7 @@ local exec = vim.api.nvim_exec
 
 g.mapleader = " "
 g.autoread = true
+g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, macchiato
 
 cmd("colorscheme catppuccin")
 
@@ -35,12 +36,34 @@ opt.completeopt = "menuone,noinsert"
 opt.signcolumn = "yes"
 opt.shortmess = "F"
 
-exec(
-	[[
+-- session save
+cmd([[
 augroup SessionSave
     autocmd!
     autocmd VimLeave * mksession! .session.vim
-augroup END
-]],
-	true
-)
+augroup end
+]])
+
+-- reload neovim when plugins config is saved
+cmd([[
+  augroup PluginsReload
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerInstall
+  augroup end
+]])
+
+-- reload bspwm when config is saved
+cmd([[
+  augroup WmReload
+    autocmd!
+    autocmd BufWritePost bspwmrc !install -Dm755 ~/dots/bspwm/bspwmrc ~/.config/bspwm/bspwmrc && bspc wm -r
+  augroup end
+]])
+
+-- reload sxhkd when config is saved
+cmd([[
+  augroup SxhkdReload
+    autocmd!
+    autocmd BufWritePost sxhkdrc !install -Dm755 ~/dots/sxhkd/sxhkdrc ~/.config/sxhkd/sxhkdrc && pkill -USR1 -x sxhkd
+  augroup end
+]])

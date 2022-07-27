@@ -11,7 +11,7 @@ super + Return
 super + @space
 	rofi -show drun
 
-super + shift + @space
+super + r
     rofi -show run
 
 alt + Tab

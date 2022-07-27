@@ -8,17 +8,7 @@ window_title="$(xwininfo -id "$window_id" | sed ' /^xwininfo/!d ; s,.*"\(.*\)".*
 
 main() {
     case "$window_class" in
-        "Spotify")
-            echo "state=floating"
-            echo "center=on"
-            echo "follow=on"
-            ;;
-        "Slack")
-            echo "state=floating"
-            echo "center=on"
-            echo "follow=on"
-            ;;
-        "Zoom")
+        "zoom ")
             echo "state=floating"
             echo "center=on"
             echo "follow=on"
