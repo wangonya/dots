@@ -74,6 +74,13 @@ return require("packer").startup(function()
 		config = get_setup("lsp"),
 	})
 
+	-- debugger
+	use({
+		"mfussenegger/nvim-dap",
+		requires = { "theHamsta/nvim-dap-virtual-text", "rcarriga/nvim-dap-ui", "mfussenegger/nvim-dap-python" },
+		config = get_setup("debugger"),
+	})
+
 	-- telescope
 	use({
 		"nvim-telescope/telescope.nvim",

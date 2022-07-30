@@ -1,40 +1,49 @@
-/*========================================================================================================*
+/*==============================================================================================*
 
   +-----+-----+-----+-----+-----+-----+-----+
   | █▀▀ | ▄▀█ | █▀▀ | █▀▀ | ▄▀█ | █▀▄ | █▀▀ |
   | █▄▄ | █▀█ | ▄▄█ | █▄▄ | █▀█ | █▄▀ | ██▄ |
-  +-----+-----+-----+-----+-----+-----+-----+ Mouse Edition.
+  +-----+-----+-----+-----+-----+-----+-----+
+
+  Description:    Cascade is a minimalstic and keyboard centered custom theme removing a lot of the
+                  subjective clutter default Firefox comes with. This theme is highly inspired by the
+                  stylistic choices of SimpleFox by Miguel Ávila. 🦊
+                  https://github.com/migueravila/SimpleFox
 
 
-    Description:    https://github.com/andreasgrafen/cascade with my modifications
+  Author:         Andreas Grafen
+                  (https://andreas.grafen.info)
 
-*========================================================================================================*/
+
+  Repository:     https://github.com/andreasgrafen/cascade
+
+
+                  Thank you Nick, Abdallah, Benyamin and Wael for all the great suggestions for improvements! ♡
+                  Nick:     https://github.com/nicksundermeyer
+                  Abdallah: https://github.com/HeiWiper
+                  Benyamin: https://github.com/benyaminl
+                  Wael:     https://github.com/wael444
+
+                  If you're looking for a **mouse-friendly** clone please check out Waterfall.
+                  https://github.com/crambaud/waterfall
+
+*==============================================================================================*/
 
 /*---+---+---+---+---+---+
  | C | O | N | F | I | G |
  +---+---+---+---+---+---*/
 
 /* Feel free to tweak the following
- * config settingsto your own liking. */
+ * config settings to your own liking. */
 
-:root {
-  /*---+---+---+---+---+---+---+
+/*---+---+---+---+---+---+---+
      | C | O | L | O | U | R | S |
      +---+---+---+---+---+---+---*/
 
-  /* Comment the color theme you don't want to use */
-
-  /* Dark Theme Colors */
+:root {
   --window-colour: #131020;
   --secondary-colour: #1e1e2e;
-  --secondary-text-colour: #585b70;
   --inverted-colour: #cdd6f4;
-
-  /* Light Theme Colors
-    --window-colour:               #FAFAFC;
-    --secondary-colour:            #EAEAEC;
-    --inverted-colour:             #1E2021;
-    */
 
   /* Containter Tab Colours */
   --uc-identity-colour-blue: #89b4fa;
@@ -46,21 +55,30 @@
   --uc-identity-colour-pink: #f38ba8;
   --uc-identity-colour-purple: #f5c2e7;
 
+  --uc-identity-colour-blue-muted: #89b4fa99;
+  --uc-identity-colour-turquoise-muted: #94e2d599;
+  --uc-identity-colour-green-muted: #a6e3a199;
+  --uc-identity-colour-yellow-muted: #f9e2afcc;
+  --uc-identity-colour-orange-muted: #f9e2afcc;
+  --uc-identity-colour-red-muted: #f38ba8ff;
+  --uc-identity-colour-pink-muted: #f38ba8ff;
+  --uc-identity-colour-purple-muted: #f5c2e7ff;
+
   /* URL colour in URL bar suggestions */
-  --urlbar-popup-url-color: var(--uc-identity-color-purple) !important;
+  --urlbar-popup-url-color: var(--uc-identity-colour-purple) !important;
 
   /*---+---+---+---+---+---+---+
      | V | I | S | U | A | L | S |
      +---+---+---+---+---+---+---*/
 
   /* global border radius */
-  --uc-border-radius: 5;
+  --uc-border-radius: 0;
 
   /* dynamic url bar width settings */
-  --uc-urlbar-width: clamp(250px, 50vw, 600px);
+  --uc-urlbar-width: clamp(200px, 40vw, 500px);
 
   /* dynamic tab width settings */
-  --uc-active-tab-width: clamp(50px, 18vw, 220px);
+  --uc-active-tab-width: clamp(100px, 20vw, 300px);
   --uc-inactive-tab-width: clamp(50px, 15vw, 200px);
 
   /* if active always shows the tab close button */
@@ -70,24 +88,15 @@
   --show-tab-close-button-hover: -moz-inline-box; /* DEFAULT: -moz-inline-box; */
 
   /* adds left and right margin to the container-tabs indicator */
-  --container-tabs-indicator-margin: 0px;
+  --container-tabs-indicator-margin: 10px;
 }
 
 /*---+---+---+---+---+---+---+
      | B | U | T | T | O | N | S |
      +---+---+---+---+---+---+---*/
 
-/* showing only the back button */
-#back-button {
-  display: -moz-inline-box !important;
-}
+#back-button,
 #forward-button {
-  display: none !important;
-}
-#stop-button {
-  display: none !important;
-}
-#reload-button {
   display: none !important;
 }
 
@@ -101,9 +110,24 @@
   display: none !important;
 }
 
-/* Show Hamburger Menu */
+/* Make button small as Possible, hidden out of sight */
 #PanelUI-button {
-  display: -moz-inline-box !important;
+  margin-top: -5px;
+  margin-bottom: 44px;
+}
+
+#PanelUI-menu-button {
+  padding: 0px !important;
+  max-height: 1px;
+
+  list-style-image: none !important;
+}
+
+#PanelUI-menu-button .toolbarbutton-icon {
+  width: 1px !important;
+}
+#PanelUI-menu-button .toolbarbutton-badge-stack {
+  padding: 0px !important;
 }
 
 #reader-mode-button {
@@ -132,6 +156,10 @@
   display: none !important;
 }
 
+#urlbar-go-button {
+  display: none !important;
+}
+
 /*=============================================================================================*/
 
 /*---+---+---+---+---+---+
@@ -142,42 +170,21 @@
  * Just tweak it if you want to tweak the overall layout. c: */
 
 :root {
-  --uc-theme-colour: var(--window-colour);
-  --uc-hover-colour: var(--secondary-colour);
-  --uc-inverted-colour: var(--inverted-colour);
+  --uc-theme-colour: var(--window-colour, var(--toolbar-bgcolor));
+  --uc-hover-colour: var(--secondary-colour, rgba(0, 0, 0, 0.2));
+  --uc-inverted-colour: var(--inverted-colour, var(--toolbar-color));
 
   --button-bgcolor: var(--uc-theme-colour) !important;
   --button-hover-bgcolor: var(--uc-hover-colour) !important;
   --button-active-bgcolor: var(--uc-hover-colour) !important;
 
-  --toolbar-bgcolor: var(--uc-theme-colour) !important;
-  --toolbarbutton-hover-background: var(--uc-hover-colour) !important;
-  --toolbarbutton-active-background: var(--uc-hover-colour) !important;
   --toolbarbutton-border-radius: var(--uc-border-radius) !important;
-  --lwt-toolbar-field-focus: var(--uc-theme-colour) !important;
-  --toolbarbutton-icon-fill: var(--uc-inverted-colour) !important;
-  --toolbar-field-focus-background-color: var(--secondary-colour) !important;
-  --toolbar-field-color: var(--uc-inverted-colour) !important;
-  --toolbar-field-focus-color: var(--uc-inverted-colour) !important;
 
-  --tabs-border-color: var(--uc-theme-colour) !important;
   --tab-border-radius: var(--uc-border-radius) !important;
   --lwt-text-color: var(--uc-inverted-colour) !important;
   --lwt-tab-text: var(--uc-inverted-colour) !important;
 
-  --lwt-sidebar-background-color: var(--uc-hover-colour) !important;
-  --lwt-sidebar-text-color: var(--uc-inverted-colour) !important;
-
-  --arrowpanel-border-color: var(--uc-theme-colour) !important;
   --arrowpanel-border-radius: var(--uc-border-radius) !important;
-  --arrowpanel-background: var(--uc-theme-colour) !important;
-  --arrowpanel-color: var(--inverted-colour) !important;
-
-  --autocomplete-popup-highlight-background: var(
-    --uc-inverted-colour
-  ) !important;
-  --autocomplete-popup-highlight-color: var(--uc-inverted-colour) !important;
-  --autocomplete-popup-hover-background: var(--uc-inverted-colour) !important;
 
   --tab-block-margin: 2px !important;
 }
@@ -197,17 +204,16 @@ window,
   background: var(--uc-theme-colour) !important;
 }
 
-/* grey out icons inside the toolbar to make it
+/* grey out ccons inside the toolbar to make it
  * more aligned with the Black & White colour look */
 #PersonalToolbar toolbarbutton:not(:hover),
 #bookmarks-toolbar-button:not(:hover) {
   filter: grayscale(1) !important;
-  color: var(--secondary-text-colour) !important;
 }
 
-/* Show Window Control Button */
+/* remove window control buttons */
 .titlebar-buttonbox-container {
-  display: -moz-inline-box !important;
+  display: none !important;
 }
 
 /* remove "padding" left and right from tabs */
@@ -232,6 +238,19 @@ window,
   background: var(--uc-theme-colour) !important;
 }
 
+/* active tab background */
+.tabbrowser-tab[selected] > .tab-stack > .tab-background {
+  background: var(--uc-hover-colour) !important;
+}
+
+/* multi tab selection */
+#tabbrowser-tabs:not([noshadowfortests])
+  .tabbrowser-tab:is([visuallyselected="true"], [multiselected])
+  > .tab-stack
+  > .tab-background:-moz-lwtheme {
+  background: var(--uc-hover-colour) !important;
+}
+
 /* tab close button options */
 .tabbrowser-tab:not([pinned]) .tab-close-button {
   display: var(--show-tab-close-button) !important;
@@ -246,27 +265,6 @@ window,
 }
 .tabbrowser-tab[fadein]:not([selected]):not([pinned]) {
   max-width: var(--uc-inactive-tab-width) !important;
-  color: var(--secondary-text-colour) !important;
-}
-
-/* favicon when mouse over to pinned inactive tab grayscale(15%) */
-.tabbrowser-tab:hover .tab-icon-image[pinned] {
-  filter: grayscale(15%) !important;
-}
-
-/* favicon on pinned inactive tab grayscale(35%) */
-.tabbrowser-tab .tab-icon-image[pinned] {
-  filter: grayscale(35%) !important;
-}
-
-/* favicon when mouse over over inactive tab grayscale(15%) */
-.tabbrowser-tab:hover .tab-icon-image:not([selected="true"]):not([pinned]) {
-  filter: grayscale(15%) !important;
-}
-
-/* gray out the favicon icon on the inactive tab */
-.tabbrowser-tab .tab-icon-image:not([selected="true"]):not([pinned]) {
-  filter: grayscale(100%) !important;
 }
 
 /* container tabs indicator */
@@ -276,8 +274,10 @@ window,
   > .tab-context-line {
   margin: -1px var(--container-tabs-indicator-margin) 0
     var(--container-tabs-indicator-margin) !important;
+  height: 1px !important;
 
   border-radius: var(--tab-border-radius) !important;
+  box-shadow: 0 1px 10px 1px var(--uc-identity-gradient-colour) !important;
 }
 
 /* show favicon when media is playing but tab is hovered */
@@ -378,6 +378,7 @@ window,
 
 #urlbar,
 #urlbar * {
+  outline: none !important;
   box-shadow: none !important;
 }
 
@@ -399,6 +400,18 @@ window,
   background: var(--uc-hover-colour) !important;
 }
 
+#statuspanel {
+  position: absolute !important;
+  bottom: 12px !important;
+  left: 12px !important;
+}
+
+#statuspanel #statuspanel-label {
+  border: none !important;
+  border-radius: var(--uc-border-radius) !important;
+  background: var(--uc-theme-colour) !important;
+}
+
 /* transition to oneline */
 @media (min-width: 1000px) {
   /* move tabs bar over */
@@ -415,34 +428,56 @@ window,
 
 /* Container Tabs */
 .identity-color-blue {
-  --identity-tab-color: var(--uc-identity-color-blue) !important;
-  --identity-icon-color: var(--uc-identity-color-blue) !important;
+  --identity-tab-color: var(--uc-identity-colour-blue) !important;
+  --identity-icon-color: var(--uc-identity-colour-blue) !important;
+  --uc-identity-gradient-colour: var(
+    --uc-identity-colour-blue-muted
+  ) !important;
 }
 .identity-color-turquoise {
-  --identity-tab-color: var(--uc-identity-color-turquoise) !important;
-  --identity-icon-color: var(--uc-identity-color-turquoise) !important;
+  --identity-tab-color: var(--uc-identity-colour-turquoise) !important;
+  --identity-icon-color: var(--uc-identity-colour-turquoise) !important;
+  --uc-identity-gradient-colour: var(
+    --uc-identity-colour-turquoise-muted
+  ) !important;
 }
 .identity-color-green {
-  --identity-tab-color: var(--uc-identity-color-green) !important;
-  --identity-icon-color: var(--uc-identity-color-green) !important;
+  --identity-tab-color: var(--uc-identity-colour-green) !important;
+  --identity-icon-color: var(--uc-identity-colour-green) !important;
+  --uc-identity-gradient-colour: var(
+    --uc-identity-colour-green-muted
+  ) !important;
 }
 .identity-color-yellow {
-  --identity-tab-color: var(--uc-identity-color-yellow) !important;
-  --identity-icon-color: var(--uc-identity-color-yellow) !important;
+  --identity-tab-color: var(--uc-identity-colour-yellow) !important;
+  --identity-icon-color: var(--uc-identity-colour-yellow) !important;
+  --uc-identity-gradient-colour: var(
+    --uc-identity-colour-yellow-muted
+  ) !important;
 }
 .identity-color-orange {
-  --identity-tab-color: var(--uc-identity-color-orange) !important;
-  --identity-icon-color: var(--uc-identity-color-orange) !important;
+  --identity-tab-color: var(--uc-identity-colour-orange) !important;
+  --identity-icon-color: var(--uc-identity-colour-orange) !important;
+  --uc-identity-gradient-colour: var(
+    --uc-identity-colour-orange-muted
+  ) !important;
 }
 .identity-color-red {
-  --identity-tab-color: var(--uc-identity-color-red) !important;
-  --identity-icon-color: var(--uc-identity-color-red) !important;
+  --identity-tab-color: var(--uc-identity-colour-red) !important;
+  --identity-icon-color: var(--uc-identity-colour-red) !important;
+  --uc-identity-gradient-colour: var(--uc-identity-colour-red-muted) !important;
 }
 .identity-color-pink {
-  --identity-tab-color: var(--uc-identity-color-pink) !important;
-  --identity-icon-color: var(--uc-identity-color-pink) !important;
+  --identity-tab-color: var(--uc-identity-colour-pink) !important;
+  --identity-icon-color: var(--uc-identity-colour-pink) !important;
+  --uc-identity-gradient-colour: var(
+    --uc-identity-colour-pink-muted
+  ) !important;
 }
 .identity-color-purple {
-  --identity-tab-color: var(--uc-identity-color-purple) !important;
-  --identity-icon-color: var(--uc-identity-color-purple) !important;
+  --identity-tab-color: var(--uc-identity-colour-purple) !important;
+  --identity-icon-color: var(--uc-identity-colour-purple) !important;
+  --uc-identity-gradient-colour: var(
+    --uc-identity-colour-purple-muted
+  ) !important;
 }

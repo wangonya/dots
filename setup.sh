@@ -20,7 +20,7 @@ sudo pacman -S --needed nodejs npm zathura-pdf-mupdf qbittorrent hugo bat \
 echo
 
 echo "=== installing aur stuff ==="
-yay -S slack-desktop nvim-packer-git catppuccin-gtk-theme \
+yay -S slack-desktop nvim-packer-git catppuccin-gtk-theme pulseaudio-control\
        beekeeper-studio-bin google-cloud-sdk phinger-cursors networkmanager-dmenu-git \
        python-darker nerd-fonts-roboto-mono ly neovim-git rofi-power-menu ngrok zoom\
       
