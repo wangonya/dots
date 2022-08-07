@@ -22,27 +22,6 @@ function get_setup(name)
 end
 
 return require("packer").startup(function()
-	-- file tree
-	use({
-		"kyazdani42/nvim-tree.lua",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = get_setup("nvim-tree"),
-	})
-
-	-- statusline
-	use({
-		"nvim-lualine/lualine.nvim",
-		config = get_setup("lualine"),
-	})
-
-	-- bufferline
-	use({
-		"akinsho/bufferline.nvim",
-		tag = "v2.*",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = get_setup("bufferline"),
-	})
-
 	-- wakatime
 	use({
 		"wakatime/vim-wakatime",
@@ -94,13 +73,6 @@ return require("packer").startup(function()
 		config = get_setup("treesitter"),
 	})
 
-	-- dashboard
-	use({
-		"goolord/alpha-nvim",
-		requires = { "kyazdani42/nvim-web-devicons" },
-		config = get_setup("dash"),
-	})
-
 	-- parens
 	use({
 		"windwp/nvim-autopairs",
@@ -116,9 +88,6 @@ return require("packer").startup(function()
 		config = get_setup("gitsigns"),
 	})
 
-	-- diffview
-	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-
 	-- indent guides
 	use({
 		"lukas-reineke/indent-blankline.nvim",
@@ -126,7 +95,7 @@ return require("packer").startup(function()
 	})
 
 	-- theme
-	use({ "catppuccin/nvim", as = "catppuccin", config = get_setup("theme") })
+	use({ "wangonya/mountain.nvim", config = get_setup("theme") })
 
 	-- terminal
 	use({

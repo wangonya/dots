@@ -14,16 +14,16 @@ sudo pacman -S --needed nodejs npm zathura-pdf-mupdf qbittorrent hugo bat \
      postgresql redis ripgrep unclutter flameshot xarchiver pulseaudio python-rope \
      fd go go-tools gopls delve mariadb python-pip pandoc pulseaudio-alsa python-poetry \
      gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-jack pavucontrol \
-     python-build python-wheel python-isort python-lsp-server tela-icon-theme \
+     python-build python-wheel python-isort python-lsp-server \
      firefox alacritty stylua python-debugpy base-devel yay prettier hsetroot \
      mpd ncmpcpp mpc acpilight aria2 picom dunst
 echo
 
 echo "=== installing aur stuff ==="
-yay -S slack-desktop nvim-packer-git catppuccin-gtk-theme pulseaudio-control\
-       beekeeper-studio-bin google-cloud-sdk phinger-cursors networkmanager-dmenu-git \
-       python-darker nerd-fonts-roboto-mono ly neovim-git rofi-power-menu ngrok zoom\
-      
+yay -S slack-desktop nvim-packer-git pulseaudio-control \
+       beekeeper-studio-bin google-cloud-sdk networkmanager-dmenu-git \
+       python-darker neovim-git rofi-power-menu ngrok zoom \
+       nordzy-icon-theme-git
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -67,13 +67,16 @@ mkdir -p ~/.mpd/playlists
 
 ln -sv ~/dots/ncmpcpp ~/.config/
 
-echo "source ~/dots/terminals/zshrc" >> ~/.zshrc
-echo "rounded-corners-exclude = [\"window_type = 'dock'\"];" >> ~/.config/picom.conf
-echo "corner-radius = 5" >> ~/.config/picom.conf
+ln -sv ~/dots/terminals/zshrc ~/.zshrc
+
+ln -sv ~/dots/gtk/mountain ~/.themes
 
 ln -sv ~/dots/nvim/ ~/.config/nvim
 
 ln -sv ~/dots/networkmanager-dmenu ~/.config
+
+ln -sv ~/dots/fonts ~/.local/share/fonts
+git clone https://github.com/mountain-theme/icons.git ~/.local/share/icons/mountain-icons --depth=1
 
 echo "=== setting up git configs"
 git config --global init.defaultBranch main
@@ -92,7 +95,5 @@ echo
 # install -Dm755 ~/dots/bspwm/external-rules.sh ~/.config/bspwm/external-rules.sh
 
 # gpasswd -a kelvin video
-
-# slack theme: #1E1E2E,#2D3136,#1F2A42,#D8DCE8,#45475A,#CDD6F4,#A6E3A1,#89B4FA,#131020,#CDD6F4
 
 # .Xresources -> #include "dots/x/Xresources"

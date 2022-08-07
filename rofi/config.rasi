@@ -1,7 +1,7 @@
 configuration{
     modi: "run,drun,window";
     lines: 5;
-    font: "RobotoMono Nerd Font 10";
+    font: "DM Sans 11";
     show-icons: false;
     terminal: "alacritty";
     drun-display-format: "{name}";
@@ -11,7 +11,7 @@ configuration{
     sidebar-mode: true;
 }
 
-@theme "catppuccin"
+@theme "colors"
 
 element-text, element-icon , mode-switcher {
     background-color: inherit;
@@ -20,7 +20,8 @@ element-text, element-icon , mode-switcher {
 
 window {
     height: 360px;
-    border: 0px;
+    border: 3px;
+    border-color: @border-col;
     background-color: @bg-col;
 }
 

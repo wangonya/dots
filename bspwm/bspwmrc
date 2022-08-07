@@ -11,11 +11,11 @@ if [ ! -f $startup_lock_file ]; then
   picom --config ~/dots/picom/picom.conf -b 
   unclutter &
   clipit &
-  flameshot &
+  # flameshot &
 fi
 
 # set wallpaper
-hsetroot -solid "#1E1E2E"
+hsetroot -solid "#0f0f0f"
 
 # wm config
 
@@ -23,15 +23,15 @@ EXTERNAL_MONITOR="HDMI-1"
 
 if [[ $(xrandr -q | grep "${EXTERNAL_MONITOR} connected") ]]; then
     bspc monitor -d 1 2 3
-    bspc monitor HDMI-1 -d 4 5 
+    bspc monitor HDMI-1 -d 4 5 6
 else
-    bspc monitor -d 1 2 3 4 5 
+    bspc monitor -d 1 2 3 4 5 6
 fi
 
-bspc config border_width         1
-bspc config focused_border_color   "#89B4FA"
-bspc config active_border_color   "#1e1e2e"
-bspc config normal_border_color   "#1e1e2e"
+bspc config border_width         3
+bspc config focused_border_color "#8aabac"
+bspc config active_border_color  "#262626"
+bspc config normal_border_color  "#262626"
 bspc config window_gap           8
 
 bspc config split_ratio           0.52
@@ -46,14 +46,14 @@ bspc rule -a Screenkey manage=off
 
 # floating apps
 
-FLOATING_APPS=(Alacritty:ncmpcpp Nm-connection-editor Pavucontrol)
+FLOATING_APPS=(URxvt:ncmpcpp URxvt:scratch Nm-connection-editor Pavucontrol feh)
 
 for app in "${FLOATING_APPS[@]}"
 do
     bspc rule -a $app state=floating center=on follow=on
 done
 
-bspc rule -a Alacritty:ncmpcpp rectangle=900x420+0+0
+bspc rule -a URxvt:ncmpcpp rectangle=700x300+0+0
 bspc rule -a Pavucontrol rectangle=900x420+0+0
 bspc rule -a Nm-connection-editor rectangle=400x500+0+0
 

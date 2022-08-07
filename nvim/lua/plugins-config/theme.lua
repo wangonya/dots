@@ -1,4 +1,3 @@
 -- theme config
 
-local catppuccin = require("catppuccin")
-catppuccin.setup({})
+require("mountain.util").load()

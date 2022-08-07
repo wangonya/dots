@@ -1,6 +1,6 @@
 -- mappings.lua
 
-function map(mode, lhs, rhs, opts)
+local map = function(mode, lhs, rhs, opts)
 	local options = { noremap = true }
 	if opts then
 		options = vim.tbl_extend("force", options, opts)
@@ -9,35 +9,25 @@ function map(mode, lhs, rhs, opts)
 end
 
 --
-map("n", "<C-s>", ":wa<CR>")
+map("n", "<C-s>", ":w<CR>")
 
--- nvim-tree
-map("n", "<leader>n", ":NvimTreeToggle<CR>", { silent = true })
-map("n", "<leader>r", ":NvimTreeRefresh<CR>", { silent = true })
+-- files tree
+map("n", "<leader>t", ":! rg --files | tree --fromfile<CR>", { silent = true })
 
--- diffview
-map("n", "<leader>do", ":DiffviewOpen<CR>", { silent = true })
-map("n", "<leader>dc", ":DiffviewClose<CR>", { silent = true })
+-- telescope
+map("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files()<cr>", { silent = true })
+map("n", "<leader>s", "<cmd>lua require('telescope.builtin').live_grep()<cr>", { silent = true })
+map("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", { silent = true })
+map("n", "<leader>gs", "<cmd>lua require('telescope.builtin').git_status()<cr>", { silent = true })
+map("n", "<leader>gb", "<cmd>lua require('telescope.builtin').git_branches()<cr>", { silent = true })
+map("n", "<leader>gh", "<cmd>lua require('telescope.builtin').git_stash()<cr>", { silent = true })
+map("n", "<leader>gc", "<cmd>lua require('telescope.builtin').git_commits()<cr>", { silent = true })
 
 -- debugger
-map("n", "<leader>do", ":lua require('dapui').toggle()<cr>")
+map("n", "<leader>dbt", ":lua require('dapui').toggle()<cr>")
 map("n", "<f5>", ":lua require('dap').toggle_breakpoint()<cr>")
 map("n", "<f9>", ":lua require('dap').continue()<cr>")
 
 map("n", "<F1>", ":lua require('dap').step_over()<CR>")
 map("n", "<F2>", ":lua require('dap').step_into()<CR>")
 map("n", "<F3>", ":lua require('dap').step_out()<CR>")
-
-map("n", "<Leader>dhh", ":lua require('dap.ui.variables').hover()<CR>")
-map("v", "<Leader>dhv", ":lua require('dap.ui.variables').visual_hover()<CR>")
-
-map("n", "<Leader>duh", ":lua require('dap.ui.widgets').hover()<CR>")
-map("n", "<Leader>duf", ":lua local widgets=require('dap.ui.widgets');widgets.centered_float(widgets.scopes)<CR>")
-
-map("n", "<Leader>dro", ":lua require('dap').repl.open()<CR>")
-map("n", "<Leader>drl", ":lua require('dap').repl.run_last()<CR>")
-
-map("n", "<Leader>dbc", ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
-map("n", "<Leader>dbt", ":lua require('dap').toggle_breakpoint()<CR>")
-
-map("n", "<Leader>dc", ":lua require('dap.ui.variables').scopes()<CR>")

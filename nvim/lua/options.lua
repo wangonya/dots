@@ -8,13 +8,9 @@ local exec = vim.api.nvim_exec
 
 g.mapleader = " "
 g.autoread = true
-g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, macchiato
 
-cmd("colorscheme catppuccin")
-
-wo.number = true
-wo.cursorline = true
-wo.cursorlineopt = "number"
+wo.number = false
+wo.cursorline = false
 
 opt.foldenable = true
 opt.foldlevel = 99

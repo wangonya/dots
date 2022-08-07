@@ -67,7 +67,7 @@ require("dapui").setup({
 				"scopes",
 				"breakpoints",
 				-- "stacks",
-				"watches",
+				-- "watches",
 			},
 			size = 40,
 			position = "right",
@@ -91,6 +91,12 @@ require("dapui").setup({
 	},
 	windows = { indent = 1 },
 })
+
+local sign = vim.fn.sign_define
+
+sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
 
 -- dap virtual text
 require("nvim-dap-virtual-text").setup()
