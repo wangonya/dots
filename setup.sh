@@ -24,7 +24,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 echo
 
 echo "=== starting and enabling runit services ==="
-sudo ln -s /etc/sv/{pulseaudio,iwd} /var/service
+sudo ln -s /etc/sv/{dbus,pulseaudio,iwd} /var/service
 echo
 
 echo "=== fix fonts ==="
@@ -52,6 +52,8 @@ ln -sv ~/dots/nvim/ ~/.config/nvim
 ln -sv ~/dots/networkmanager-dmenu ~/.config
 
 ln -sv ~/dots/fonts ~/.local/share/fonts
+
+cp ~/dots/x/xinitrc ~/.xinitrc
 
 git clone https://github.com/mountain-theme/icons.git ~/.local/share/icons/mountain-icons --depth=1
 
