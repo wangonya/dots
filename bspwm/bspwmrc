@@ -8,10 +8,9 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 startup_lock_file=/tmp/bspwm-startup.lock
 if [ ! -f $startup_lock_file ]; then
   echo "bspwm startup_lock_file" > $startup_lock_file
-  picom --config ~/dots/picom/picom.conf -b 
+  # picom --config ~/dots/picom/picom.conf -b 
   unclutter &
   clipit &
-  # flameshot &
 fi
 
 # set wallpaper

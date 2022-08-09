@@ -12,36 +12,29 @@ sudo xbps-install zathura-pdf-mupdf deluge-gtk hugo bat xorg \
     firefox xterm StyLua base-devel hsetroot acpilight aria2 \
     dunst void-repo-nonfree rofi bspwm sxhkd zsh-autosuggestions \
     zsh-completions zsh-history-substring-search zsh-syntax-highlighting \
-    neovim
+    neovim spacefm clipit gtk+3 iwd
 echo
 
-# echo "=== installing aur stuff ==="
-# yay -S slack-desktop nvim-packer-git pulseaudio-control \
-#        beekeeper-studio-bin google-cloud-sdk networkmanager-dmenu-git \
-#        python-darker neovim-git rofi-power-menu ngrok zoom \
-#        nordzy-icon-theme-git
-# echo
+echo "=== installing external libs ==="
+# pamac build lua-format ngrok google-cloud-sdk
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-# echo "=== starting and enabling systemd services ==="
-# systemctl enable redis.service
-# systemctl start redis.service
+# slack, zoom, etc
+echo
 
-# sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-# systemctl enable mariadb.service
-# systemctl start mariadb.service
+echo "=== starting and enabling runit services ==="
+sudo ln -s /etc/sv/{pulseaudio,iwd} /var/service
+echo
 
-# # systemctl disable lightdm.service
-# # systemctl enable ly.service
+echo "=== fix fonts ==="
+sudo ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
+sudo xbps-reconfigure -f fontconfig
+echo
 
-# systemctl enable mpd.service
-# systemctl start mpd.service
-# echo
-
-# echo "=== setting up npm system wide install config ==="
-# echo PATH="$HOME/.node_modules/bin:$PATH" >> ~/.profile
-# echo export npm_config_prefix=~/.node_modules >> ~/.profile
-# source ~/.profile
-# echo
+echo "=== installing python stuff ==="
+pip install isort darker wheel build rope
+echo
 
 echo "=== setting up dotfiles ==="
 ln -sv ~/dots/dunst ~/.config
