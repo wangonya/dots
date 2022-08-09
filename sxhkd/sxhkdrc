@@ -4,11 +4,11 @@
 
 # terminal emulator
 super + Return
-	urxvt
+	xterm
 
 # scratchpad
 super + shift + @space
-    urxvt -name "scratch" -e nvim ~/scratch.txt
+    xterm -name "scratch" -e nvim ~/scratch.txt
 
 # screenshot
 super + shift + s
@@ -30,7 +30,7 @@ alt + Tab
 # music
 
 super + n
-	urxvt -name "ncmpcpp" -e ncmpcpp
+	xterm -c "ncspot" -e ncspot
 
 super + slash
     mpc toggle
@@ -98,12 +98,8 @@ super + ctrl + {m,x,y,z}
 #
 
 # focus the node in the given direction
-# super + {_,shift + }{h,j,k,l}
-# 	bspc node -{f,s} {west,south,north,east}
-super + {h,j,k,l}
- 	bspc node -f {west,south,north,east}
-super + shift + {h,j,k,l}
-	~/dots/bspwm/bspwm_smart_move.sh {west,south,north,east}
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
 super + {p,b,comma,period}

@@ -1,71 +1,54 @@
 set -e
 
-echo "=== syncing time ==="
-sudo timedatectl set-ntp true
-echo
-
 echo "=== running updates ==="
-sudo pacman-mirrors -f 10
-sudo pacman -Syyuu
+xbps-install -Su
 echo
 
 echo "=== installing packages ==="
-sudo pacman -S --needed nodejs npm zathura-pdf-mupdf qbittorrent hugo bat \
-     postgresql redis ripgrep unclutter flameshot xarchiver pulseaudio python-rope \
-     fd go go-tools gopls delve mariadb python-pip pandoc pulseaudio-alsa python-poetry \
-     gparted dosfstools mtools unzip mpv youtube-dl pulseaudio-jack pavucontrol \
-     python-build python-wheel python-isort python-lsp-server \
-     firefox alacritty stylua python-debugpy base-devel yay prettier hsetroot \
-     mpd ncmpcpp mpc acpilight aria2 picom dunst
+sudo xbps-install zathura-pdf-mupdf deluge-gtk hugo bat xorg \
+    ripgrep unclutter maim tar p7zip pulseaudio pavucontrol \
+    fd go go-tools gopls delve python-pip pulseaudio-alsa  \
+    unzip mpv youtube-dl pulseaudio-jack python3-lsp-server \
+    firefox xterm StyLua base-devel hsetroot acpilight aria2 \
+    dunst void-repo-nonfree rofi bspwm sxhkd zsh-autosuggestions \
+    zsh-completions zsh-history-substring-search zsh-syntax-highlighting \
+    neovim
 echo
 
-echo "=== installing aur stuff ==="
-yay -S slack-desktop nvim-packer-git pulseaudio-control \
-       beekeeper-studio-bin google-cloud-sdk networkmanager-dmenu-git \
-       python-darker neovim-git rofi-power-menu ngrok zoom \
-       nordzy-icon-theme-git
-echo
+# echo "=== installing aur stuff ==="
+# yay -S slack-desktop nvim-packer-git pulseaudio-control \
+#        beekeeper-studio-bin google-cloud-sdk networkmanager-dmenu-git \
+#        python-darker neovim-git rofi-power-menu ngrok zoom \
+#        nordzy-icon-theme-git
+# echo
 
-echo "=== starting and enabling systemd services ==="
-systemctl enable redis.service
-systemctl start redis.service
+# echo "=== starting and enabling systemd services ==="
+# systemctl enable redis.service
+# systemctl start redis.service
 
-sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-systemctl enable mariadb.service
-systemctl start mariadb.service
+# sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+# systemctl enable mariadb.service
+# systemctl start mariadb.service
 
-# systemctl disable lightdm.service
-# systemctl enable ly.service
+# # systemctl disable lightdm.service
+# # systemctl enable ly.service
 
-systemctl enable mpd.service
-systemctl start mpd.service
-echo
+# systemctl enable mpd.service
+# systemctl start mpd.service
+# echo
 
-echo "=== setting up npm system wide install config ==="
-echo PATH="$HOME/.node_modules/bin:$PATH" >> ~/.profile
-echo export npm_config_prefix=~/.node_modules >> ~/.profile
-source ~/.profile
-echo
+# echo "=== setting up npm system wide install config ==="
+# echo PATH="$HOME/.node_modules/bin:$PATH" >> ~/.profile
+# echo export npm_config_prefix=~/.node_modules >> ~/.profile
+# source ~/.profile
+# echo
 
 echo "=== setting up dotfiles ==="
-mv ~/.i3/config ~/.i3/config.bak
-ln -sv ~/dots/i3wm/i3 ~/.i3/config
-
 ln -sv ~/dots/dunst ~/.config
-
-ln -sv ~/dots/i3wm/i3status.conf ~/.i3status.conf
 
 ln -sv ~/dots/rofi/ ~/.config/
 
 ln -sv ~/dots/python/pdbrc ~/.pdbrc
-
-ln -sv ~/dots/terminals/alacritty.yml ~/.config/
-
-ln -sv ~/dots/mpd/ ~/.config/
-mkdir -p ~/.mpd/playlists
-
-
-ln -sv ~/dots/ncmpcpp ~/.config/
 
 ln -sv ~/dots/terminals/zshrc ~/.zshrc
 
@@ -76,6 +59,7 @@ ln -sv ~/dots/nvim/ ~/.config/nvim
 ln -sv ~/dots/networkmanager-dmenu ~/.config
 
 ln -sv ~/dots/fonts ~/.local/share/fonts
+
 git clone https://github.com/mountain-theme/icons.git ~/.local/share/icons/mountain-icons --depth=1
 
 echo "=== setting up git configs"

@@ -39,21 +39,16 @@ bspc config borderless_monocle    true
 bspc config gapless_monocle       true
 bspc config focus_follows_pointer true
 
-bspc rule -a Chromium desktop='^2'
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
-
 # floating apps
 
-FLOATING_APPS=(URxvt:ncmpcpp URxvt:scratch Nm-connection-editor Pavucontrol feh)
+FLOATING_APPS=(ncspot xterm:scratch Nm-connection-editor Pavucontrol feh)
 
 for app in "${FLOATING_APPS[@]}"
 do
     bspc rule -a $app state=floating center=on follow=on
 done
 
-bspc rule -a URxvt:ncmpcpp rectangle=700x300+0+0
+bspc rule -a ncspot rectangle=700x300+0+0
 bspc rule -a Pavucontrol rectangle=900x420+0+0
 bspc rule -a Nm-connection-editor rectangle=400x500+0+0
 
