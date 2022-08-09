@@ -12,7 +12,7 @@ sudo xbps-install zathura-pdf-mupdf deluge-gtk hugo bat xorg \
     firefox xterm StyLua base-devel hsetroot acpilight aria2 \
     dunst void-repo-nonfree rofi bspwm sxhkd zsh-autosuggestions \
     zsh-completions zsh-history-substring-search zsh-syntax-highlighting \
-    neovim spacefm clipit gtk+3 iwd
+    neovim spacefm clipit gtk+3 iwd polybar
 echo
 
 echo "=== installing external libs ==="
