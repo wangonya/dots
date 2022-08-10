@@ -226,6 +226,8 @@ alias gpl="git pull origin"
 alias black="darker"
 alias nv="nvim"
 alias venv="python -m venv venv --system-site-packages"
+alias wifil="nmcli dev wifi list"
+alias wific="sudo nmcli --ask dev wifi connect"
 
 # Custom Highlight syntax
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#4c4c4c,underline"
@@ -233,7 +235,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#4c4c4c,underline"
 () {
   emulate -L zsh
 
-  source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+  source ~/dots/terminals/powerlevel10k.zsh-theme
   source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
   # Determine terminal capabilities.
@@ -252,6 +254,9 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#4c4c4c,underline"
   } 2>/dev/null
 
   # Use 8 colors and ASCII.
-  source /usr/share/zsh/p10k-portable.zsh
+  source ~/dots/terminals/p10k-portable.zsh
 }
 
+export PYENV_ROOT="$HOME/.pyenv" 
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH" 
+eval "$(pyenv init -)"

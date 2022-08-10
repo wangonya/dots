@@ -7,12 +7,13 @@ echo
 echo "=== installing packages ==="
 sudo xbps-install zathura-pdf-mupdf deluge-gtk hugo bat xorg \
     ripgrep unclutter maim tar p7zip pulseaudio pavucontrol \
-    fd go go-tools gopls delve python-pip pulseaudio-alsa  \
+    fd go go-tools gopls delve python3-pip pulseaudio-alsa  \
     unzip mpv youtube-dl pulseaudio-jack python3-lsp-server \
-    firefox xterm StyLua base-devel hsetroot acpilight aria2 \
+    firefox rxvt-unicode StyLua base-devel hsetroot acpilight aria2 \
     dunst void-repo-nonfree rofi bspwm sxhkd zsh-autosuggestions \
     zsh-completions zsh-history-substring-search zsh-syntax-highlighting \
-    neovim spacefm clipit gtk+3 iwd polybar
+    neovim spacefm clipit gtk+3 NetworkManager polybar \
+    zlib zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel xz libffi-devel
 echo
 
 echo "=== installing external libs ==="
@@ -24,7 +25,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 echo
 
 echo "=== starting and enabling runit services ==="
-sudo ln -s /etc/sv/{dbus,pulseaudio,iwd} /var/service
+sudo ln -s /etc/sv/{dbus,pulseaudio,NetworkManager} /var/service
 echo
 
 echo "=== fix fonts ==="
@@ -33,6 +34,7 @@ sudo xbps-reconfigure -f fontconfig
 echo
 
 echo "=== installing python stuff ==="
+curl https://pyenv.run | bash
 pip install isort darker wheel build rope
 echo
 

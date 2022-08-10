@@ -4,11 +4,11 @@
 
 # terminal emulator
 super + Return
-	xterm
+	urxvt
 
 # scratchpad
 super + shift + @space
-    xterm -name "scratch" -e nvim ~/scratch.txt
+    urxvt -c "scratch" -e nvim ~/scratch.txt
 
 # screenshot
 super + shift + s
@@ -30,7 +30,7 @@ alt + Tab
 # music
 
 super + n
-	xterm -c "ncspot" -e ncspot
+	urxvt -c "ncspot" -e ncspot
 
 super + slash
     mpc toggle

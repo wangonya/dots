@@ -9,6 +9,7 @@ startup_lock_file=/tmp/bspwm-startup.lock
 if [ ! -f $startup_lock_file ]; then
   echo "bspwm startup_lock_file" > $startup_lock_file
   # picom --config ~/dots/picom/picom.conf -b 
+  pulseaudio -D
   unclutter &
   clipit &
 fi
@@ -40,7 +41,7 @@ bspc config focus_follows_pointer true
 
 # floating apps
 
-FLOATING_APPS=(ncspot xterm:scratch Nm-connection-editor Pavucontrol feh)
+FLOATING_APPS=(ncspot URxvt:scratch Nm-connection-editor Pavucontrol feh)
 
 for app in "${FLOATING_APPS[@]}"
 do

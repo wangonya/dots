@@ -19,6 +19,5 @@ if [ -f "$userresources" ]; then
     xrdb -merge "$userresources"
 fi
 
-# echo "dbus-launch ${dbus_args[*]}"
-
-exec /bin/bspwm
+pulseaudio -D
+exec dbus-launch --exit-with-session /bin/bspwm
