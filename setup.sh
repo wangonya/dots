@@ -53,7 +53,9 @@ mkdir ~/.ncmpcpp-previews
 ln -sv ~/dots/ncmpcpp/config ~/.config/ncmpcpp/config
 sudo ln -s ~/dots/ncmpcpp/music.sh /bin/music
 
-ln -sv ~/dots/nvim/ ~/.config/nvim
+ln -sv ~/dots/nvim/ ~/.config/
+
+ln -sv ~/dots/zathura/ ~/.config/
 
 ln -sv ~/dots/networkmanager-dmenu ~/.config/networkmanager-dmenu
 
