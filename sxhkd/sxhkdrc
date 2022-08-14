@@ -4,16 +4,16 @@
 
 # terminal emulator
 super + Return
-	urxvt
+	alacritty
 
 # scratchpad
 super + shift + @space
-    urxvt -name "scratch" -e nvim ~/scratch.txt
+    alacritty --class "scratch" -e nvim ~/scratch.txt
 
 # screenshot
-super + shift + s
+alt + s
     maim -s /tmp/$(date +%s).png
-super + shift + w
+alt + shift + s
     maim -i $(xdotool getactivewindow) /tmp/$(date +%s).png
 
 # program launcher
@@ -29,8 +29,8 @@ alt + Tab
 
 # music
 
-super + n
-	urxvt -name "ncmpcpp" -e ncmpcpp
+alt + m
+	alacritty --class "ncmpcpp" -e music
 
 super + slash
     mpc toggle

@@ -5,8 +5,8 @@ scrolling:
 
 window:
   padding:
-    x: 10
-    y: 10
+    x: 5
+    y: 5
   dynamic_padding: true
 
 font:
@@ -26,37 +26,53 @@ font:
     family: DM Mono
     style: Bold Italic
 
-  size: 11.0
+  size: 7.0
 
 draw_bold_text_with_bright_colors: true
 subpixel_render: true
 
+# Base16 Black Metal (Immortal) 256 - alacritty color config
+# metalelf0 (https://github.com/metalelf0)
 colors:
+  # Default colors
   primary:
-    background: "0x0f0f0f"
-    foreground: "0xf0f0f0"
+    background: "0x000000"
+    foreground: "0xc1c1c1"
 
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: "0x000000"
+    cursor: "0xc1c1c1"
+
+  # Normal colors
   normal:
-    black: "0x262626"
-    red: "0xac8a8c"
-    green: "0x8aac8b"
-    yellow: "0xaca98a"
-    blue: "0x8f8aac"
-    magenta: "0xac8aac"
-    cyan: "0x8aabac"
-    white: "0xe7e7e7"
-    orange: "0xc6a679" #Here for reference
+    black: "0x000000"
+    red: "0x5f8787"
+    green: "0x7799bb"
+    yellow: "0x556677"
+    blue: "0x888888"
+    magenta: "0x999999"
+    cyan: "0xaaaaaa"
+    white: "0xc1c1c1"
 
+  # Bright colors
   bright:
-    black: "0x4c4c4c"
-    red: "0xc49ea0"
-    green: "0x9ec49f"
-    yellow: "0xc4c19e"
-    blue: "0xa39ec4"
-    magenta: "0xc49ec4"
-    cyan: "0x9ec3c4"
-    white: "0xf5f5f5"
-    orange: "0xceb188" #Here for reference
+    black: "0x333333"
+    red: "0x5f8787"
+    green: "0x7799bb"
+    yellow: "0x556677"
+    blue: "0x888888"
+    magenta: "0x999999"
+    cyan: "0xaaaaaa"
+    white: "0xc1c1c1"
+
+  indexed_colors:
+    - { index: 16, color: "0xaaaaaa" }
+    - { index: 17, color: "0x444444" }
+    - { index: 18, color: "0x121212" }
+    - { index: 19, color: "0x222222" }
+    - { index: 20, color: "0x999999" }
+    - { index: 21, color: "0x999999" }
 
 cursor:
   # Cursor style

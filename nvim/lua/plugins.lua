@@ -23,9 +23,9 @@ end
 
 return require("packer").startup(function()
 	-- wakatime
-	use({
-		"wakatime/vim-wakatime",
-	})
+	--use({
+	--	"wakatime/vim-wakatime",
+	--})
 
 	-- lsp
 	use({
@@ -33,7 +33,8 @@ return require("packer").startup(function()
 		requires = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" },
-			{ "williamboman/nvim-lsp-installer" },
+			{ "williamboman/mason.nvim" },
+			{ "williamboman/mason-lspconfig.nvim" },
 
 			-- Autocompletion
 			{ "hrsh7th/nvim-cmp" },
@@ -95,7 +96,12 @@ return require("packer").startup(function()
 	})
 
 	-- theme
-	use({ "wangonya/mountain.nvim", config = get_setup("theme") })
+	use({
+		-- "RRethy/nvim-base16",
+		-- "metalelf0/base16-black-metal-scheme",
+		"wangonya/base16-black-metal-immortal.vim",
+		config = get_setup("theme"),
+	})
 
 	-- terminal
 	use({

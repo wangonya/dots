@@ -1,23 +1,21 @@
 [global]
     monitor = 0
     follow = keyboard
-    geometry = "350x400-12+60"
     indicate_hidden = no
     shrink = no
     transparency = 0
-    notification_height = 0
     separator_height = 4
     padding = 12
     horizontal_padding = 12
     frame_width = 3
-    frame_color = "#262626"
+    frame_color = "#333333"
     separator_color = auto
     sort = no
     idle_threshold = 0
 
     ### Text ###
 
-    font = Google Sans 10
+    font = DM Sans 10
     line_height = 3
     markup = full
     format = "%s\n%b"
@@ -30,28 +28,22 @@
     hide_duplicate_count = true
     show_indicators = no
 
-    ### Icons ###
-    icon_position = left
-    max_icon_size = 64
-    sticky_history = yes
-
     # Maximum amount of notifications kept in history
     history_length = 1
     title = Dunst
     class = Dunst
-    startup_notification = false
 
 [urgency_low]
-    background = "#0f0f0f"
-    foreground = "#f0f0f0"
+    background = "#000000"
+    foreground = "#c1c1c1"
     timeout = 5
 
 [urgency_normal]
-    background = "#0f0f0f"
-    foreground = "#f0f0f0"
+    background = "#000000"
+    foreground = "#c1c1c1"
     timeout = 5
 
 [urgency_critical]
-    background = "#0f0f0f"
-    foreground = "#f0f0f0"
+    background = "#000000"
+    foreground = "#c1c1c1"
     timeout = 10

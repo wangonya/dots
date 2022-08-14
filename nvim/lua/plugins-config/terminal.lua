@@ -7,7 +7,7 @@ end
 
 term.setup({
 	shade_terminals = false,
-	direction = "float",
+	direction = "vertical",
 	float_opts = {
 		border = "curved",
 		width = 70,

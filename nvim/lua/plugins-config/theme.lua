@@ -1,3 +1,4 @@
 -- theme config
 
-require("mountain.util").load()
+vim.o.termguicolors = true
+vim.cmd("colorscheme base16-black-metal-immortal")

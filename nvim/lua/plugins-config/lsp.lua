@@ -9,12 +9,12 @@ lsp.set_preferences({
 	cmp_capabilities = true,
 	manage_nvim_cmp = true,
 	call_servers = "local",
-	sign_icons = {
+	--[[ sign_icons = {
 		error = ">",
 		warn = ">",
 		hint = ">",
 		info = ">",
-	},
+	}, ]]
 })
 
 local lsp_formatting = function(bufnr)

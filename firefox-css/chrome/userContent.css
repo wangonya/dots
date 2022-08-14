@@ -1,10 +1,10 @@
 @-moz-document url("about:home"), url("about:newtab") {
   body {
-    background-color: #0f0f0f !important;
+    background-color: #000000 !important;
   }
 }
 @-moz-document url-prefix("about:blank"), url("about:home"), url("about:newtab") {
   html > body:empty {
-    background-color: #0f0f0f !important;
+    background-color: #000000 !important;
   }
 }

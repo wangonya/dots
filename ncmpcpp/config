@@ -1,5 +1,5 @@
 [mpd]
-mpd_music_dir = "/run/media/kelvin/Lexar/music"
+mpd_music_dir = "/run/media/wangonya/Lexar/music"
 mpd_crossfade_time = 1
 
 visualizer_data_source = "/tmp/mpd.fifo"
@@ -8,7 +8,7 @@ visualizer_look = "  "
 startup_screen = visualizer
 startup_slave_screen = playlist
 startup_slave_screen_focus = yes
-locked_screen_width_part = 35 
+locked_screen_width_part = 45 
 
 message_delay_time = "3"
 playlist_shorten_total_times = "yes"
@@ -23,7 +23,7 @@ follow_now_playing_lyrics = "yes"
 display_bitrate = "no"
 external_editor = "vim"
 
-progressbar_elapsed_color = "white"
+progressbar_elapsed_color = "blue"
 progressbar_color = "black"
 
 progressbar_look = "▃▃▃"
@@ -33,16 +33,12 @@ header_visibility = "no"
 statusbar_visibility = "no"
 
 statusbar_color = "white"
-visualizer_color = "white"
 titles_visibility = "no"
 enable_window_title = "yes"
-main_window_color = "black"
+main_window_color = "blue"
 
 now_playing_prefix = "$b >>"
 now_playing_suffix = "$8$/b"
 
 execute_on_song_change="~/dots/ncmpcpp/art.sh"
-song_list_format = "  $5{%t}|{%f} $R$1%A "
-
-song_status_format = "$b$7♫ $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b "
-song_window_title_format = " {%a} - {%t}"
+song_list_format = " $5{%t}|{%f}"

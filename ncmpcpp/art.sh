@@ -1,41 +1,26 @@
 #!/bin/bash
 
-MUSIC_DIR=/run/media/kelvin/Lexar/music
-COVER=/tmp/cover.jpg
+previewdir="$HOME/.ncmpcpp-previews"
+previewname="$previewdir/$(mpc --format %album% current | base64).png"
 
 find_cover_image() {
-
+    music_dir=/run/media/wangonya/Lexar/music/
+    filename="$(mpc --format "$music_dir"%file% current)"
+    
     # First we check if the audio file has an embedded album art
     ext="$(mpc --format %file% current | sed 's/^.*\.//')"
     if [ "$ext" = "flac" ]; then
         # since FFMPEG cannot export embedded FLAC art we use metaflac
-        metaflac --export-picture-to="$COVER" \
-            "$(mpc --format "$MUSIC_DIR"/%file% current)" &&
-            cover_path="$COVER" && return
+        metaflac --export-picture-to="$previewname" "$filename" && return
     else
-        ffmpeg -y -i "$(mpc --format "$MUSIC_DIR"/%file% | head -n 1)" \
-            "$COVER" -vsync "vfr" &&
-            cover_path="$COVER" && return
+        ffmpeg -y -i "$filename" -an -vf "$previewname" && return
     fi
 
     # If no embedded art was found we look inside the music file's directory
-    album="$(mpc --format %album% current)"
-    file="$(mpc --format %file% current)"
-    album_dir="${file%/*}"
-    album_dir="$MUSIC_DIR/$album_dir"
-    # found_covers="$(find "$album_dir" -type d -exec find {} -maxdepth 1 -type f \
-    # -iregex ".*/.*\(${album}\|cover\|folder\|artwork\|front\).*[.]\\(jpe?g\|png\|gif\|bmp\)" \; )"
-    found_covers="$(fd .jpg "$album_dir")"
+    album_dir="${filename%/*}"
+    found_covers="$(fd .jpg --max-depth 1 --full-path "$album_dir")"
     cover_path="$(echo "$found_covers" | head -n1)"
-
-    if [[ -n "$cover_path" ]] ; then
-      #resize the image's width to 300px 
-      convert "$cover_path" -resize 300x "$COVER"
-    fi
-}
-
-reset_background() {
-    printf "\e]20;;100x100+1000+1000\a"
+    cp "$cover_path" "$previewname"
 }
 
 kill_previous_instances() {
@@ -47,12 +32,52 @@ kill_previous_instances() {
     done
 }
 
-{
-    find_cover_image >/dev/null 2>&1
-    if [[ -f "$COVER" ]] ; then
-       # scale down to fir window
-       printf "\e]20;${COVER};70x70+4+30:op=keep-aspect\a"
-    else
-        reset_background
-    fi
-} &
+display_cover_image() {
+    send_to_ueberzug \
+        action "add" \
+        identifier "ncmpcpp_cover" \
+        path "$previewname" \
+        x "0" \
+        y "0" \
+        width "30" \
+        height "30" \
+        synchronously_draw "True"
+}
+
+send_to_ueberzug() {
+    old_IFS="$IFS"
+
+    # Ueberzug's "simple parser" uses tab-separated
+    # keys and values so we separate words with tabs
+    # and send the result to the wrapper's FIFO
+    IFS="$(printf "\t")"
+    echo "$*" > "$FIFO_UEBERZUG"
+
+    IFS=${old_IFS}
+}
+
+kill_previous_instances >/dev/null 2>&1
+[ -f "$previewname" ] || find_cover_image >/dev/null 2>&1
+display_cover_image     2>/dev/null
+
+
+
+
+####################################
+
+# {
+#     ImageLayer::add [identifier]="ncmpcpp_cover" [x]="0" [y]="0" [max_width]="30" [path]="$previewname"
+# }  | ueberzug layer --silent --parser simple #>/dev/null 2>&1 &
+
+# display_cover_image() {
+#     ueberzug layer --parser bash 0< <(
+#         declare -Ap add_command=(
+#         [action]="add" 
+#         [identifier]="ncmpcpp_cover" 
+#         [x]="0" 
+#         [y]="0" 
+#         [max_width]="30" 
+#         [path]="$previewname")
+#         read
+#     )
+# }

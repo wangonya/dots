@@ -21,28 +21,28 @@
      +---+---+---+---+---+---+---*/
 
 :root {
-  --window-colour: #0f0f0f;
-  --secondary-colour: #262626;
-  --inverted-colour: #f0f0f0;
+  --window-colour: #000000;
+  --secondary-colour: #202020;
+  --inverted-colour: #c1c1c1;
 
   /* Containter Tab Colours */
-  --uc-identity-colour-blue: #8aabac;
-  --uc-identity-colour-turquoise: #9ec3c4;
-  --uc-identity-colour-green: #8aac8b;
-  --uc-identity-colour-yellow: #aca98a;
-  --uc-identity-colour-orange: #c4c19e;
-  --uc-identity-colour-red: #ac8a8c;
-  --uc-identity-colour-pink: #ac8aac;
-  --uc-identity-colour-purple: #8f8aac;
+  --uc-identity-colour-blue: #7ed6df;
+  --uc-identity-colour-turquoise: #55e6c1;
+  --uc-identity-colour-green: #b8e994;
+  --uc-identity-colour-yellow: #f7d794;
+  --uc-identity-colour-orange: #f19066;
+  --uc-identity-colour-red: #fc5c65;
+  --uc-identity-colour-pink: #f78fb3;
+  --uc-identity-colour-purple: #786fa6;
 
-  --uc-identity-colour-blue-muted: #8aabac99;
-  --uc-identity-colour-turquoise-muted: #9ec3c499;
-  --uc-identity-colour-green-muted: #8aac8b99;
-  --uc-identity-colour-yellow-muted: #aca98ac;
-  --uc-identity-colour-orange-muted: #c4c19ec;
-  --uc-identity-colour-red-muted: #ac8a8cff;
-  --uc-identity-colour-pink-muted: #ac8aacff;
-  --uc-identity-colour-purple-muted: #8f8aacff;
+  --uc-identity-colour-blue-muted: #7ed6df99;
+  --uc-identity-colour-turquoise-muted: #55e6c199;
+  --uc-identity-colour-green-muted: #b8e99499;
+  --uc-identity-colour-yellow-muted: #f7d794cc;
+  --uc-identity-colour-orange-muted: #f19066ff;
+  --uc-identity-colour-red-muted: #fc5c65ff;
+  --uc-identity-colour-pink-muted: #f78fb399;
+  --uc-identity-colour-purple-muted: #786fa6ff;
 
   /* URL colour in URL bar suggestions */
   --urlbar-popup-url-color: var(--uc-identity-colour-purple) !important;
@@ -461,4 +461,33 @@ window,
   --uc-identity-gradient-colour: var(
     --uc-identity-colour-purple-muted
   ) !important;
+}
+
+/* other improvements */
+
+.tabbrowser-tab:hover:not([selected]) .tab-content {
+  color: #c1c1c1 !important;
+}
+.tabbrowser-tab:not([selected="true"]):not(:hover) .tab-content {
+  color: #777777 !important;
+}
+
+/* Fabicon icon when mouse over to pinned inactive tab grayscale(15%) */
+.tabbrowser-tab:hover .tab-icon-image[pinned] {
+  filter: grayscale(15%) !important;
+}
+
+/* Fabicon icon on pinned inactive tab grayscale(35%) */
+.tabbrowser-tab .tab-icon-image[pinned] {
+  filter: grayscale(35%) !important;
+}
+
+/* Favicon icon when mouse over over inactive tab grayscale(15%) */
+.tabbrowser-tab:hover .tab-icon-image:not([selected="true"]):not([pinned]) {
+  filter: grayscale(15%) !important;
+}
+
+/* Gray out the favicon icon on the inactive tab */
+.tabbrowser-tab .tab-icon-image:not([selected="true"]):not([pinned]) {
+  filter: grayscale(100%) !important;
 }

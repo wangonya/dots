@@ -1,84 +1,56 @@
-! XTerm.xft: true
-! XTerm.xfntAntialias: true
+*.font: xft:DM Mono:style=Regular:size=11, xft:DM Sans:size=11
+*.boldFont: xft:DM Mono:style=Medium:size=11, xft:DM Sans:size=11
 
-! Enable terminal images with img2sixel
-! XTerm*decTerminalID: vt340
-! XTerm*numColorRegisters: 256
+!scheme: "Black Metal (Immortal)"
+!author: "metalelf0 (https://github.com/metalelf0)"
+#define base00 #000000
+#define base01 #121212
+#define base02 #222222
+#define base03 #333333
+#define base04 #999999
+#define base05 #c1c1c1
+#define base06 #999999
+#define base07 #c1c1c1
+#define base08 #5f8787
+#define base09 #aaaaaa
+#define base0A #556677
+#define base0B #7799bb
+#define base0C #aaaaaa
+#define base0D #888888
+#define base0E #999999
+#define base0F #444444
 
-! Xft.dpi       : 96
-! Xft.autohint  : 0
-! Xft.lcdfilter : lcddefault
-! Xft.hintstyle : hintslight
-! Xft.hinting   : 1
-! Xft.antialias : 1
+*foreground:   base05
+#ifdef background_opacity
+*background:   [background_opacity]base00
+#else
+*background:   base00
+#endif
+*cursorColor:  base05
 
-! Styling
-/* XTerm.vt100.faceName: DM Mono
-XTerm.vt100.boldMode: false
-XTerm.vt100.faceSize: 11
-XTerm.vt100.internalBorder: 16
-XTerm.borderWidth: 0 */
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
 
-! Sensible defaults
-/* XTerm.vt100.locale: false
-XTerm.vt100.utf8: true
-XTerm.vt100.metaSendsEscape: true */
+*color8:       base03
+*color9:       base08
+*color10:      base0B
+*color11:      base0A
+*color12:      base0D
+*color13:      base0E
+*color14:      base0C
+*color15:      base07
 
-! Nicer selection behavior regarding whitespace
-/* XTerm.vt100.highlightSelection: true
-XTerm.vt100.trimSelection: true
-XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
-XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+ */
-
-*.font: xft:DM Mono:style=Regular:size=11
-*.boldFont: xft:DM Mono:style=Medium:size=11
-
-!! URxvt Appearance
-URxvt.letterSpace: 0
-URxvt.lineSpace: 0
-/* URxvt.geometry: 92x24 */
-URxvt.internalBorder: 10
-URxvt.cursorBlink: true
-URxvt.cursorUnderline: false
-URxvt.saveline: 2048
-URxvt.scrollBar: false
-URxvt.scrollBar_right: false
-URxvt.urgentOnBell: true
-URxvt.depth: 24
-URxvt.iso14755: false
-
-! base colors
-*background: #0f0f0f
-*foreground: #f0f0f0
-
-! black
-*color0:     #262626
-*color8:     #4c4c4c
-
-! red
-*color1:     #ac8a8c
-*color9:     #c49ea0
-
-! green
-*color2:     #8aac8b
-*color10:    #9ec49f
-
-! yellow
-*color3:     #aca98a
-*color11:    #c4c19e
-
-! purple
-*color4:     #8f8aac
-*color12:    #a39ec4
-
-! pink
-*color5:     #ac8aac
-*color13:    #c49ec4
-
-! blue
-*color6:     #8aabac
-*color14:    #9ec3c4
-
-! white
-*color7:     #e7e7e7
-*color15:    #f5f5f5
+! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+! use 'shell' template to set these if necessary
+*color16:      base09
+*color17:      base0F
+*color18:      base01
+*color19:      base02
+*color20:      base04
+*color21:      base06
