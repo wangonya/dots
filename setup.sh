@@ -15,12 +15,12 @@ yay -S --needed zathura-pdf-mupdf deluge-gtk hugo bat polybar udiskie \
     dosfstools mtools unzip mpv youtube-dl pulseaudio-jack pavucontrol \
     python-build python-wheel python-isort python-lsp-server bspwm sxhkd \
     firefox alacritty stylua python-debugpy base-devel prettier xorg \
-    acpilight aria2 dunst xorg-xinit lxappearance htop rofi xdotool ly \
+    acpilight aria2 dunst xorg-xinit lxappearance htop rofi xdotool \
     pcmanfm zsh zsh-completions tree zsh-theme-powerlevel10k zoom mime \
     zsh-syntax-highlighting zsh-history-substring-search zsh-autosuggestions \
     slack-desktop nvim-packer-git pulseaudio-control clipit lsof nodejs \
-    beekeeper-studio-bin google-cloud-sdk networkmanager-dmenu-git \
-    mpd ncmpcpp mpc python-darker neovim-git rofi-power-menu \
+    beekeeper-studio-bin google-cloud-sdk networkmanager-dmenu-git emptty \
+    mpd ncmpcpp mpc python-darker neovim-git \
 echo
 
 echo "=== starting and enabling systemd services ==="
@@ -31,7 +31,9 @@ systemctl enable mariadb
 
 systemctl enable --user mpd
 
-systemctl enable ly
+systemctl enable emptty
+sudo mv /etc/emptty/conf /etc/emptty/conf.bak
+sudo cp ~/dots/emptty/conf /etc/emptty/conf
 echo
 
 echo "=== setting up dotfiles ==="

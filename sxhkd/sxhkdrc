@@ -55,7 +55,9 @@ super + Escape
 
 # power menu
 super + 0
-    rofi -show p -modi p:rofi-power-menu
+    shutdown -h now
+super + shift + 0
+    reboot
 
 #
 # bspwm hotkeys
