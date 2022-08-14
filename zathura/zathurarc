@@ -3,48 +3,39 @@ set window-title-home-tilde true
 set statusbar-home-tilde true
 set adjust-open "best-fit"
 
-set font "Google Sans 11"
-# Light/Default mode settings:
-# 
-#
-set notification-error-bg       "#ac8a8c" # Red
-set notification-error-fg       "#f8f8f2" # Foreground
-set notification-warning-bg     "#c6a679" # Orange
-set notification-warning-fg     "#191919" # Selection
-set notification-bg             "#0f0f0f" # Background
-set notification-fg             "#f8f8f2" # Foreground
+set font "DM Mono 10"
 
-set completion-bg               "#0f0f0f" # Background
+set completion-bg               "#000000" # Background
 set completion-fg               "#4c4c4c" # Comment
-set completion-group-bg         "#0f0f0f" # Background
+set completion-group-bg         "#000000" # Background
 set completion-group-fg         "#4c4c4c" # Comment
 set completion-highlight-bg     "#191919" # Selection
 set completion-highlight-fg     "#f8f8f2" # Foreground
 
-set index-bg                    "#0f0f0f" # Background
+set index-bg                    "#000000" # Background
 set index-fg                    "#f8f8f2" # Foreground
 set index-active-bg             "#191919" # Current Line
 set index-active-fg             "#f8f8f2" # Foreground
 
-set inputbar-bg                 "#0f0f0f" # Background
+set inputbar-bg                 "#000000" # Background
 set inputbar-fg                 "#f8f8f2" # Foreground
-set statusbar-bg                "#0f0f0f" # Background
+set statusbar-bg                "#000000" # Background
 set statusbar-fg                "#f8f8f2" # Foreground
 
 set highlight-color             "#8aac8b" # Orange
 set highlight-active-color      "#aca98a" # Pink
 
-set default-bg                  "#0f0f0f" # Background
+set default-bg                  "#000000" # Background
 set default-fg                  "#f8f8f2" # Foreground
 
 set render-loading              true
-set render-loading-fg           "#0f0f0f" # Background
+set render-loading-fg           "#000000" # Background
 set render-loading-bg           "#f8f8f2" # Foreground
 
 # Recolor mode settings
 #
 #
-set recolor-lightcolor          "#0f0f0f" # Background
+set recolor-lightcolor          "#000000" # Background
 set recolor-darkcolor           "#f8f8f2" # Foreground
 
 # Startup options
