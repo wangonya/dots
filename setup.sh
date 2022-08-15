@@ -20,7 +20,7 @@ yay -S --needed zathura-pdf-mupdf deluge-gtk hugo bat polybar udiskie \
     zsh-syntax-highlighting zsh-history-substring-search zsh-autosuggestions \
     slack-desktop nvim-packer-git pulseaudio-control clipit lsof nodejs \
     beekeeper-studio-bin google-cloud-sdk networkmanager-dmenu-git emptty \
-    mpd ncmpcpp mpc python-darker neovim-git \
+    mpd ncmpcpp mpc python-darker neovim xclip \
 echo
 
 echo "=== starting and enabling systemd services ==="

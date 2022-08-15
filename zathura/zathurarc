@@ -10,33 +10,33 @@ set completion-fg               "#4c4c4c" # Comment
 set completion-group-bg         "#000000" # Background
 set completion-group-fg         "#4c4c4c" # Comment
 set completion-highlight-bg     "#191919" # Selection
-set completion-highlight-fg     "#f8f8f2" # Foreground
+set completion-highlight-fg     "#c1c1c1" # Foreground
 
 set index-bg                    "#000000" # Background
-set index-fg                    "#f8f8f2" # Foreground
+set index-fg                    "#c1c1c1" # Foreground
 set index-active-bg             "#191919" # Current Line
-set index-active-fg             "#f8f8f2" # Foreground
+set index-active-fg             "#c1c1c1" # Foreground
 
 set inputbar-bg                 "#000000" # Background
-set inputbar-fg                 "#f8f8f2" # Foreground
+set inputbar-fg                 "#c1c1c1" # Foreground
 set statusbar-bg                "#000000" # Background
-set statusbar-fg                "#f8f8f2" # Foreground
+set statusbar-fg                "#c1c1c1" # Foreground
 
 set highlight-color             "#8aac8b" # Orange
 set highlight-active-color      "#aca98a" # Pink
 
 set default-bg                  "#000000" # Background
-set default-fg                  "#f8f8f2" # Foreground
+set default-fg                  "#c1c1c1" # Foreground
 
 set render-loading              true
 set render-loading-fg           "#000000" # Background
-set render-loading-bg           "#f8f8f2" # Foreground
+set render-loading-bg           "#c1c1c1" # Foreground
 
 # Recolor mode settings
 #
 #
 set recolor-lightcolor          "#000000" # Background
-set recolor-darkcolor           "#f8f8f2" # Foreground
+set recolor-darkcolor           "#c1c1c1" # Foreground
 
 # Startup options
 #
