@@ -1,7 +1,7 @@
 #!/bin/bash
 
 previewdir="$HOME/.ncmpcpp-previews"
-previewname="$previewdir/$(mpc --format %album% current | base64).png"
+previewname="$previewdir/$(mpc --format %album% current | base64 | sed -e 's:/::g').png"
 
 find_cover_image() {
     music_dir=/run/media/wangonya/Lexar/music/
@@ -20,6 +20,8 @@ find_cover_image() {
     album_dir="${filename%/*}"
     found_covers="$(fd .jpg --max-depth 1 --full-path "$album_dir")"
     cover_path="$(echo "$found_covers" | head -n1)"
+    echo "$cover_path"
+    echo "$previewname"
     cp "$cover_path" "$previewname"
 }
 
