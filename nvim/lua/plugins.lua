@@ -22,11 +22,6 @@ function get_setup(name)
 end
 
 return require("packer").startup(function()
-	-- wakatime
-	--use({
-	--	"wakatime/vim-wakatime",
-	--})
-
 	-- lsp
 	use({
 		"VonHeikemen/lsp-zero.nvim",
