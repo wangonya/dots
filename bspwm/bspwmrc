@@ -8,9 +8,9 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 EXTERNAL_MONITOR="HDMI-1"
 
 if [[ $(xrandr -q | grep "${EXTERNAL_MONITOR} connected") ]]; then
-    bspc monitor HDMI-1 -d 1 2 3 4 5
+    bspc monitor HDMI-1 -d 1 2 3 4
 else
-    bspc monitor -d 1 2 3 4 5
+    bspc monitor -d 1 2 3 4
 fi
 
 bspc config border_width         3

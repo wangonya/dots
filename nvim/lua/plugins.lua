@@ -52,8 +52,12 @@ return require("packer").startup(function()
 	-- debugger
 	use({
 		"mfussenegger/nvim-dap",
-		requires = { "theHamsta/nvim-dap-virtual-text", "rcarriga/nvim-dap-ui", "mfussenegger/nvim-dap-python" },
+		requires = { "theHamsta/nvim-dap-virtual-text", "rcarriga/nvim-dap-ui" },
 		config = get_setup("debugger"),
+	})
+	use({
+		"mfussenegger/nvim-dap-python",
+		branch = "multi-session", -- https://github.com/mfussenegger/nvim-dap-python/pull/21
 	})
 
 	-- telescope
@@ -92,17 +96,17 @@ return require("packer").startup(function()
 
 	-- theme
 	use({
-		-- "RRethy/nvim-base16",
-		-- "metalelf0/base16-black-metal-scheme",
 		"wangonya/base16-black-metal-immortal.vim",
 		config = get_setup("theme"),
 	})
 
-	-- terminal
+	-- highlight todos
 	use({
-		"akinsho/toggleterm.nvim",
-		config = get_setup("terminal"),
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = get_setup("todos"),
 	})
+	-- TODO: fix this
 
 	-- colorizer
 	use({

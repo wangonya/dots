@@ -15,16 +15,16 @@ font:
     style: Regular
 
   bold:
-    family: DM Mono
-    style: Bold
+    family: DM Mono Medium
+    style: Medium
 
   italic:
     family: DM Mono
     style: Italic
 
   bold_italic:
-    family: DM Mono
-    style: Bold Italic
+    family: DM Mono Medium
+    style: Medium Italic
 
   size: 7.0
 

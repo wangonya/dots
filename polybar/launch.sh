@@ -4,4 +4,4 @@ killall -q polybar
 
 CONFIG_DIR=$HOME/dots/polybar/config.ini
 
-polybar --reload main -c $CONFIG_DIR &
+polybar main -c $CONFIG_DIR &
