@@ -1,3 +1,5 @@
+Xft.dpi:       96
+
 *.font: xft:DM Mono:style=Regular:size=11, xft:DM Sans:size=11
 *.boldFont: xft:DM Mono:style=Medium:size=11, xft:DM Sans:size=11
 

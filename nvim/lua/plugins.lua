@@ -94,19 +94,12 @@ return require("packer").startup(function()
 		config = get_setup("indent-blankline"),
 	})
 
-	-- theme
-	use({
-		"wangonya/base16-black-metal-immortal.vim",
-		config = get_setup("theme"),
-	})
-
 	-- highlight todos
 	use({
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		config = get_setup("todos"),
 	})
-	-- TODO: fix this
 
 	-- colorizer
 	use({
