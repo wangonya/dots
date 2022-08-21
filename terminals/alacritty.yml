@@ -26,7 +26,7 @@ font:
     family: DM Mono Medium
     style: Medium Italic
 
-  size: 11.0
+  size: 7.0
 
 draw_bold_text_with_bright_colors: true
 subpixel_render: true
