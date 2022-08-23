@@ -30,14 +30,14 @@ bspc rule -a Deluge-gtk desktop='^4'
 
 # floating apps
 
-FLOATING_APPS=(Alacritty:ncmpcpp Alacritty:scratch Nm-connection-editor Pavucontrol feh)
+FLOATING_APPS=(ncmpcpp scratch Nm-connection-editor Pavucontrol feh)
 
 for app in "${FLOATING_APPS[@]}"
 do
     bspc rule -a $app state=floating center=on follow=on
 done
 
-bspc rule -a Alacritty:ncmpcpp rectangle=650x310+0+0
+bspc rule -a ncmpcpp rectangle=650x310+0+0
 bspc rule -a Pavucontrol rectangle=900x420+0+0
 bspc rule -a Nm-connection-editor rectangle=400x500+0+0
 

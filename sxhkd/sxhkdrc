@@ -4,11 +4,11 @@
 
 # terminal emulator
 super + Return
-	alacritty
+	kitty
 
 # scratchpad
 super + shift + @space
-    alacritty --class "scratch" -e nvim ~/scratch.txt
+    kitty --class "scratch" -e nvim ~/scratch.txt
 
 # screenshot
 alt + s
@@ -30,7 +30,7 @@ alt + Tab
 # music
 
 alt + m
-	alacritty --class "ncmpcpp" -e music
+	kitty --class "ncmpcpp" -e music
 
 super + slash
     mpc toggle

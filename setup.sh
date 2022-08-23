@@ -14,7 +14,7 @@ yay -S --needed zathura-pdf-mupdf deluge-gtk hugo bat polybar udiskie \
     fd go go-tools gopls delve mariadb python-pip pulseaudio-alsa p7zip \
     dosfstools mtools unzip mpv youtube-dl pulseaudio-jack pavucontrol \
     python-build python-wheel python-isort python-lsp-server bspwm sxhkd \
-    firefox alacritty stylua python-debugpy base-devel prettier xorg \
+    firefox kitty stylua python-debugpy base-devel prettier xorg \
     acpilight aria2 dunst xorg-xinit lxappearance htop rofi xdotool \
     pcmanfm zsh zsh-completions tree zsh-theme-powerlevel10k zoom mime \
     zsh-syntax-highlighting zsh-history-substring-search zsh-autosuggestions \
@@ -63,7 +63,8 @@ ln -sv ~/dots/python/pdbrc ~/.pdbrc
 
 ln -sv ~/dots/terminals/zshrc ~/.zshrc
 
-ln -sv ~/dots/terminals/alacritty.yml ~/.alacritty.yml
+mkdir ~/.config/kitty
+ln -sv ~/dots/kitty/kitty.conf ~/.config/kitty/kitty.conf
 
 cp ~/dots/fonts ~/.local/share
 
