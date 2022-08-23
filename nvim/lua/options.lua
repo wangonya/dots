@@ -31,7 +31,7 @@ opt.clipboard = "unnamedplus"
 opt.completeopt = "menuone,noinsert"
 opt.signcolumn = "yes"
 opt.shortmess = "F"
-opt.cmdheight = 0
+opt.laststatus = 3
 
 -- session save
 cmd([[

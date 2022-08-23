@@ -1,5 +1,5 @@
-*.font: xft:DM Mono:style=Regular:size=11, xft:DM Sans:size=11
-*.boldFont: xft:DM Mono:style=Medium:size=11, xft:DM Sans:size=11
+*.font: xft:DMMono Nerd Font:style=Regular:size=11, xft:DM Sans:size=11
+*.boldFont: xft:DMMono Nerd Font:style=Medium:size=11, xft:DM Sans:size=11
 
 !scheme: "Black Metal (Immortal)"
 !author: "metalelf0 (https://github.com/metalelf0)"

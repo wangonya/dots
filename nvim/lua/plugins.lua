@@ -23,7 +23,7 @@ end
 
 return require("packer").startup(function()
 	-- lsp
-	use({
+	--[[ use({
 		"VonHeikemen/lsp-zero.nvim",
 		requires = {
 			-- LSP Support
@@ -45,6 +45,22 @@ return require("packer").startup(function()
 
 			-- Formatting
 			{ "jose-elias-alvarez/null-ls.nvim" },
+		},
+		config = get_setup("lsp"),
+	}) ]]
+	use({
+		"neovim/nvim-lspconfig",
+		requires = {
+			"hrsh7th/nvim-cmp",
+			"hrsh7th/cmp-vsnip",
+			"hrsh7th/vim-vsnip",
+			"hrsh7th/vim-vsnip-integ",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"rafamadriz/friendly-snippets",
+			"SmiteshP/nvim-navic",
 		},
 		config = get_setup("lsp"),
 	})
@@ -105,5 +121,11 @@ return require("packer").startup(function()
 	use({
 		"norcalli/nvim-colorizer.lua",
 		config = get_setup("colorizer"),
+	})
+
+	-- statusline
+	use({
+		"nvim-lualine/lualine.nvim",
+		config = get_setup("statusline"),
 	})
 end)

@@ -1,5 +1,4 @@
 require("plugins")
 require("options")
 require("mappings")
-require("statusline")
 require("theme")

@@ -8,45 +8,6 @@ local dap = require("dap")
 
 require("dap-python").setup("/usr/bin/python")
 
---[[ function get_venv()
-	local cwd = vim.fn.getcwd()
-	if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-		return cwd .. "/venv/bin/python"
-	elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-		return cwd .. "/.venv/bin/python"
-	else
-		return "/usr/bin/python"
-	end
-end
-
-dap.adapters.python = {
-	type = "executable",
-	command = "python",
-	args = { "-m", "debugpy.adapter" },
-}
-
-dap.configurations.python = {
-	{
-		name = "Launch file",
-		type = "python",
-		request = "launch",
-		program = "${file}",
-		pythonPath = get_venv(),
-		subProcess = false,
-	},
-	{
-		name = "Attach",
-		type = "python",
-		request = "attach",
-		port = function()
-			local val = tonumber(vim.fn.input("Port: ", "5005"))
-			assert(val, "Please provide a port number")
-			return val
-		end,
-		pythonPath = get_venv(),
-	},
-} ]]
-
 -- processId = require("dap.utils").pick_process,
 -- go setup: https://pepa.holla.cz/2022/02/02/debugging-go-in-neovim/
 
@@ -70,7 +31,7 @@ require("dapui").setup({
 				-- "watches",
 			},
 			size = 40,
-			position = "right",
+			position = "left",
 		},
 		{
 			elements = {

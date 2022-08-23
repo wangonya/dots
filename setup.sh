@@ -13,15 +13,16 @@ yay -S --needed zathura-pdf-mupdf deluge-gtk hugo bat polybar udiskie \
     postgresql redis ripgrep unclutter xarchiver pulseaudio python-rope \
     fd go go-tools gopls delve mariadb python-pip pulseaudio-alsa p7zip \
     dosfstools mtools unzip mpv youtube-dl pulseaudio-jack pavucontrol \
-    python-build python-wheel python-isort python-lsp-server bspwm sxhkd \
+    python-build python-wheel python-isort pyright bspwm sxhkd \
     firefox kitty stylua python-debugpy base-devel prettier xorg \
     acpilight aria2 dunst xorg-xinit lxappearance htop rofi xdotool \
     pcmanfm zsh zsh-completions tree zsh-theme-powerlevel10k zoom mime \
     zsh-syntax-highlighting zsh-history-substring-search zsh-autosuggestions \
     slack-desktop nvim-packer-git pulseaudio-control clipit lsof nodejs \
     beekeeper-studio-bin google-cloud-sdk networkmanager-dmenu-git emptty \
-    mpd ncmpcpp mpc python-darker neovim xclip \
+    mpd ncmpcpp mpc python-darker neovim xclip nerd-fonts-dm-mono \
 echo
+# replace neovim -> visual-studio-code-bin gnome-keyring
 
 echo "=== starting and enabling systemd services ==="
 systemctl enable redis
